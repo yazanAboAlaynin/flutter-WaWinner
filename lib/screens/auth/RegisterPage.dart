@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -21,25 +21,33 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Welcome',
+                'Register',
                 style: TextStyle(
-                    color: Color.fromRGBO(53, 9, 100, 1.0),
+                    color: Color.fromRGBO(127, 25, 168, 1),
                     fontSize: 30,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: sizeAware.height * 0.01,
-              ),
-              Text(
-                'Sign in to continue',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: sizeAware.height * 0.01,
+                height: sizeAware.height * 0.02,
               ),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Username',
+                  labelText: 'First name',
+                ),
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Last name',
+                ),
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                ),
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Mobile number',
                 ),
               ),
               TextFormField(
@@ -69,64 +77,13 @@ class _LoginPageState extends State<LoginPage> {
                       color: Color.fromRGBO(127, 25, 168, 1),
                       textColor: Colors.white,
                       child: new Text(
-                        'Login',
+                        'Register',
                         style: TextStyle(fontSize: 20.0),
                       ),
                       splashColor: Color.fromRGBO(53, 9, 100, 1.0),
                     ),
                     SizedBox(
-                      height: sizeAware.height * 0.02,
-                    ),
-                    Text(
-                      'or',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                    SizedBox(
-                      height: sizeAware.height * 0.02,
-                    ),
-                    Container(
-                      width: sizeAware.width * 0.85,
-                      height: 45.0,
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.horizontal(
-                          left: Radius.circular(40),
-                          right: Radius.circular(40),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Login with Facebook',
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.grey[600],
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
                       height: sizeAware.height * 0.03,
-                    ),
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                    SizedBox(
-                      height: sizeAware.height * 0.02,
                     ),
                     Container(
                       width: sizeAware.width,
@@ -134,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Don\'t have an account? ',
+                            'Already have an account? ',
                             style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
@@ -142,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           Text(
-                            'Sign Up',
+                            'Login',
                             style: TextStyle(
                               fontSize: 17,
                               color: Color.fromRGBO(53, 9, 100, 1.0),
@@ -156,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(
-                height: sizeAware.height * 0.05,
+                height: sizeAware.height * 0.1,
               ),
             ],
           ),
