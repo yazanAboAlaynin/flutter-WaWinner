@@ -9,11 +9,9 @@ class ProductCard extends StatelessWidget {
     return Container(
       width: sizeAware.width,
       height: 400,
-      color: Colors.amber,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 28),
         child: Card(
-          color: Colors.red,
           child: Stack(
             overflow: Overflow.visible,
             children: [
@@ -31,7 +29,13 @@ class ProductCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Buy a'),
+                              Text(
+                                'Buy a',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
@@ -50,7 +54,21 @@ class ProductCard extends StatelessWidget {
                             height: 1,
                             width: 20,
                           ),
-                          Icon(Icons.lock_outline),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: Color.fromRGBO(127, 25, 168, 1.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Icon(
+                                Icons.favorite,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                           Container(
                             color: Colors.grey,
                             height: 1,
@@ -100,7 +118,21 @@ class ProductCard extends StatelessWidget {
                             height: 1,
                             width: 20,
                           ),
-                          Icon(Icons.lock_outline),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: Color.fromRGBO(127, 25, 168, 1.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Icon(
+                                Icons.shopping_cart,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                           Container(
                             color: Colors.grey,
                             height: 1,
@@ -110,11 +142,36 @@ class ProductCard extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('here'),
-                        ],
+                      child: Container(
+                        width: sizeAware.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Get a chance to win:',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: sizeAware.width / 2,
+                                    child: Text(
+                                      'blah blah blahblah blah ahblahblah blah blah',
+                                      style: TextStyle(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -122,34 +179,105 @@ class ProductCard extends StatelessWidget {
               ),
               Positioned(
                 left: -20,
-                top: 30,
-                child: Image.asset(
-                  'assets/shopping.jpg',
-                  width: 120,
-                  height: 130,
-                  fit: BoxFit.cover,
+                top: 25,
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      'assets/shopping.jpg',
+                      width: 120,
+                      height: 125,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
               Positioned(
                 right: -20,
                 bottom: 10,
-                child: Image.asset(
-                  'assets/shopping.jpg',
-                  width: 120,
-                  height: 130,
-                  fit: BoxFit.cover,
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Container(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        'assets/shopping.jpg',
+                        width: 120,
+                        height: 125,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
               ),
               Positioned(
                 right: -20,
                 top: 50,
-                child: Card(
-                  child: Column(
-                    children: [
-                      Icon(Icons.pie_chart_outlined),
-                      Icon(Icons.pie_chart_outlined),
-                      Icon(Icons.pie_chart_outlined),
-                    ],
+                child: Container(
+                  height: 135,
+                  child: Card(
+                    shape: ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.circular(60),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 4, vertical: 4),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: 28,
+                            height: 28,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: Color.fromRGBO(127, 25, 168, 1.0),
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 28,
+                            ),
+                          ),
+                          Text(
+                            '1',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          Container(
+                            width: 28,
+                            height: 28,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: Color.fromRGBO(127, 25, 168, 1.0),
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 28,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),

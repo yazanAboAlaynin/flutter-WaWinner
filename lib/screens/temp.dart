@@ -10,6 +10,7 @@ class _TempState extends State<Temp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
