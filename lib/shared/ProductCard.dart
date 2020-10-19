@@ -8,7 +8,7 @@ class ProductCard extends StatelessWidget {
 
     return Container(
       width: sizeAware.width,
-      height: 400,
+      height: 420,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 28),
         child: Card(
@@ -77,8 +77,8 @@ class ProductCard extends StatelessWidget {
                           Container(
                             width: 110,
                             child: CircularStepProgressIndicator(
-                              totalSteps: 100,
-                              currentStep: 74,
+                              totalSteps: 975,
+                              currentStep: 400,
                               stepSize: 10,
                               selectedColor: Color.fromRGBO(127, 25, 168, 1.0),
                               unselectedColor: Color.fromRGBO(217, 200, 236, 1),
@@ -97,7 +97,7 @@ class ProductCard extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      '383',
+                                      '400',
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -231,9 +231,19 @@ class ProductCard extends StatelessWidget {
               ),
               Positioned(
                 right: -20,
-                top: 50,
+                top: 70,
                 child: Container(
                   height: 135,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 9,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
                   child: Card(
                     shape: ContinuousRectangleBorder(
                       borderRadius: BorderRadius.circular(60),
@@ -281,10 +291,88 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
               ),
+              Positioned(
+                top: 0,
+                right: -54,
+                child: RawMaterialButton(
+                  onPressed: () {},
+                  child: CustomPaint(
+                    painter: TrianglePainter(
+                      strokeColor: Color.fromRGBO(127, 25, 168, 1.0),
+                      strokeWidth: 10,
+                      paintingStyle: PaintingStyle.fill,
+                    ),
+                    child: Container(
+                      height: 16,
+                      width: 20,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 32,
+                right: -20,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromRGBO(53, 9, 100, 1.0),
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                  ),
+                  width: 120,
+                  height: 35,
+                  child: Center(
+                      child: Text(
+                    'AED 822.000',
+                    style: TextStyle(color: Colors.white),
+                  )),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class TrianglePainter extends CustomPainter {
+  final Color strokeColor;
+  final PaintingStyle paintingStyle;
+  final double strokeWidth;
+
+  TrianglePainter(
+      {this.strokeColor = Colors.black,
+      this.strokeWidth = 3,
+      this.paintingStyle = PaintingStyle.stroke});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = strokeColor
+      ..strokeWidth = strokeWidth
+      ..style = paintingStyle;
+
+    canvas.drawPath(getTrianglePath(size.width, size.height), paint);
+  }
+
+  Path getTrianglePath(double x, double y) {
+    return Path()
+      ..moveTo(x, y)
+      ..lineTo(0, 0)
+      ..lineTo(0, 0)
+      ..lineTo(0, y);
+  }
+
+  @override
+  bool shouldRepaint(TrianglePainter oldDelegate) {
+    return oldDelegate.strokeColor != strokeColor ||
+        oldDelegate.paintingStyle != paintingStyle ||
+        oldDelegate.strokeWidth != strokeWidth;
   }
 }
