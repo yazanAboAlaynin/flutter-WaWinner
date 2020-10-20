@@ -11,22 +11,10 @@ class Temp extends StatefulWidget {
 
 class _TempState extends State<Temp> {
   final options = LiveOptions(
-    // Start animation after (default zero)
     delay: Duration(milliseconds: 0),
-
-    // Show each item through (default 250)
     showItemInterval: Duration(milliseconds: 50),
-
-    // Animation duration (default 250)
     showItemDuration: Duration(milliseconds: 500),
-
-    // Animations starts at 0.05 visible
-    // item fraction in sight (default 0.025)
     visibleFraction: 0.05,
-
-    // Repeat the animation of the appearance
-    // when scrolling in the opposite direction (default false)
-    // To get the effect as in a showcase for ListView, set true
     reAnimateOnVisibility: false,
   );
   @override
@@ -34,10 +22,12 @@ class _TempState extends State<Temp> {
     return Scaffold(
       appBar: AppBar(),
       body: LiveList.options(
-        itemCount: 2,
+        itemCount: 8,
         options: options,
         itemBuilder: (context, index, animation) {
-          return CartItem();
+          return ProductCard(
+            animation: animation,
+          );
         },
       ),
     );

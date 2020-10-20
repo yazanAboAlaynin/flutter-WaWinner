@@ -15,6 +15,7 @@ class ProductCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 28),
         child: Card(
+          elevation: 3,
           shadowColor: Colors.grey,
           shape: ContinuousRectangleBorder(
             borderRadius: BorderRadius.circular(20),
