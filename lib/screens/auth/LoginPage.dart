@@ -6,6 +6,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isVis = true;
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -43,10 +44,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextFormField(
-                obscureText: true,
+                obscureText: isVis,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  suffixIcon: Icon(Icons.remove_red_eye),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.remove_red_eye),
+                    onPressed: () {
+                      setState(() {
+                        isVis = !isVis;
+                      });
+                    },
+                  ),
                 ),
               ),
               SizedBox(

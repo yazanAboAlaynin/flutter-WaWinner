@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class ProductCard extends StatelessWidget {
+  final animation;
+
+  const ProductCard({this.animation});
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -12,6 +15,10 @@ class ProductCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 28),
         child: Card(
+          shadowColor: Colors.grey,
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Stack(
             overflow: Overflow.visible,
             children: [
@@ -75,7 +82,8 @@ class ProductCard extends StatelessWidget {
                             width: 20,
                           ),
                           Container(
-                            width: 110,
+                            width: sizeAware.width * 0.3,
+                            height: sizeAware.width * 0.3,
                             child: CircularStepProgressIndicator(
                               totalSteps: 975,
                               currentStep: 400,
@@ -99,7 +107,7 @@ class ProductCard extends StatelessWidget {
                                     Text(
                                       '400',
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: sizeAware.width * 0.05,
                                         fontWeight: FontWeight.bold,
                                         color:
                                             Color.fromRGBO(127, 25, 168, 1.0),
@@ -128,7 +136,7 @@ class ProductCard extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: Icon(
-                                Icons.shopping_cart,
+                                Icons.add_shopping_cart,
                                 color: Colors.white,
                               ),
                             ),
@@ -156,7 +164,7 @@ class ProductCard extends StatelessWidget {
                                   Text(
                                     'Get a chance to win:',
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -180,24 +188,30 @@ class ProductCard extends StatelessWidget {
               Positioned(
                 left: -20,
                 top: 25,
-                child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: Offset(-2, 0),
+                    end: Offset.zero,
+                  ).animate(animation),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        'assets/shopping.jpg',
+                        width: sizeAware.width * 0.3,
+                        height: sizeAware.width * 0.35,
+                        fit: BoxFit.cover,
                       ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      'assets/shopping.jpg',
-                      width: 120,
-                      height: 125,
-                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -205,25 +219,31 @@ class ProductCard extends StatelessWidget {
               Positioned(
                 right: -20,
                 bottom: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: Offset(4, 0),
+                    end: Offset.zero,
+                  ).animate(animation),
                   child: Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        'assets/shopping.jpg',
-                        width: 120,
-                        height: 125,
-                        fit: BoxFit.cover,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Container(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          'assets/shopping.jpg',
+                          width: sizeAware.width * 0.3,
+                          height: sizeAware.width * 0.35,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -298,7 +318,7 @@ class ProductCard extends StatelessWidget {
                   onPressed: () {},
                   child: CustomPaint(
                     painter: TrianglePainter(
-                      strokeColor: Color.fromRGBO(127, 25, 168, 1.0),
+                      strokeColor: Color.fromRGBO(36, 9, 63, 1.0),
                       strokeWidth: 10,
                       paintingStyle: PaintingStyle.fill,
                     ),
@@ -328,7 +348,7 @@ class ProductCard extends StatelessWidget {
                   height: 35,
                   child: Center(
                       child: Text(
-                    'AED 822.000',
+                    'AED 822.00',
                     style: TextStyle(color: Colors.white),
                   )),
                 ),
