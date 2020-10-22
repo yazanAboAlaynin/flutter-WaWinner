@@ -73,22 +73,32 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    MaterialButton(
-                      onPressed: () {},
+                    Container(
+                      width: sizeAware.width * 0.85,
                       height: 45.0,
-                      minWidth: sizeAware.width * 0.85,
-                      shape: ContinuousRectangleBorder(
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(127, 25, 168, 1),
                         borderRadius: BorderRadius.horizontal(
-                            left: Radius.circular(40),
-                            right: Radius.circular(40)),
+                          left: Radius.circular(40),
+                          right: Radius.circular(40),
+                        ),
                       ),
-                      color: Color.fromRGBO(127, 25, 168, 1),
-                      textColor: Colors.white,
-                      child: new Text(
-                        'Register',
-                        style: TextStyle(fontSize: 20.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Register',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      splashColor: Color.fromRGBO(53, 9, 100, 1.0),
                     ),
                     SizedBox(
                       height: sizeAware.height * 0.03,

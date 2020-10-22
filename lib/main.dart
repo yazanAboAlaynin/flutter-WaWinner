@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'WaWinner',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -30,6 +31,6 @@ class WaWinner extends StatefulWidget {
 class _WaWinnerState extends State<WaWinner> {
   @override
   Widget build(BuildContext context) {
-    return Temp();
+    return LoginPage();
   }
 }
