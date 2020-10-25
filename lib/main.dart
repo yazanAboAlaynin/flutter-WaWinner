@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wawinner/screens/ProductDetail.dart';
 import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
 import 'package:flutter_wawinner/screens/auth/RegisterPage.dart';
 import 'package:flutter_wawinner/screens/temp.dart';
@@ -31,6 +32,6 @@ class WaWinner extends StatefulWidget {
 class _WaWinnerState extends State<WaWinner> {
   @override
   Widget build(BuildContext context) {
-    return LoginPage();
+    return ProductDetail();
   }
 }
