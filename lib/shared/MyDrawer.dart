@@ -12,6 +12,7 @@ class _MyDrawerState extends State<MyDrawer> {
     final sizeAware = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: InkWell(
             onTap: () {

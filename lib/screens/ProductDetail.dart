@@ -9,6 +9,7 @@ class ProductDetail extends StatelessWidget {
     final sizeAware = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: myAppBar('detailes', null),
       drawer: Drawer(
         child: MyDrawer(),
