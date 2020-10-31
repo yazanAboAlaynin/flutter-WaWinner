@@ -10,7 +10,7 @@ class ProductDetail extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: myAppBar('detailes', null),
+      appBar: myAppBar('Product Detailes', null),
       drawer: Drawer(
         child: MyDrawer(),
       ),
