@@ -4,12 +4,12 @@ import 'package:flutter_wawinner/shared/CartItem.dart';
 import 'package:flutter_wawinner/shared/ProductCard.dart';
 import 'package:flutter_wawinner/shared/WLCard.dart';
 
-class Temp extends StatefulWidget {
+class Campipaign extends StatefulWidget {
   @override
-  _TempState createState() => _TempState();
+  _CampipaignState createState() => _CampipaignState();
 }
 
-class _TempState extends State<Temp> {
+class _CampipaignState extends State<Campipaign> {
   final options = LiveOptions(
     delay: Duration(milliseconds: 0),
     showItemInterval: Duration(milliseconds: 50),

@@ -63,7 +63,6 @@ class ProductDetail extends StatelessWidget {
               children: [
                 SizedBox(width: sizeAware.width * 0.2),
                 Container(
-                  height: sizeAware.height * 0.1,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

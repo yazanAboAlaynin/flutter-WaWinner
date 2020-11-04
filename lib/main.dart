@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wawinner/screens/ProductDetail.dart';
-import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
-import 'package:flutter_wawinner/screens/auth/RegisterPage.dart';
-import 'package:flutter_wawinner/screens/temp.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_wawinner/screens/campaign.dart';
+
+import 'blocs/simple_bloc_observer.dart';
 
 void main() {
+  Bloc.observer = SimpleBlocObserver();
   runApp(MyApp());
 }
 
@@ -32,6 +33,6 @@ class WaWinner extends StatefulWidget {
 class _WaWinnerState extends State<WaWinner> {
   @override
   Widget build(BuildContext context) {
-    return ProductDetail();
+    return Campipaign();
   }
 }
