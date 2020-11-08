@@ -1,15 +1,14 @@
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_wawinner/shared/CartItem.dart';
-import 'package:flutter_wawinner/shared/ProductCard.dart';
-import 'package:flutter_wawinner/shared/WLCard.dart';
+import 'package:flutter_wawinner/screens/shared/AppBar.dart';
+import 'package:flutter_wawinner/screens/shared/ProductCard.dart';
 
-class Campipaign extends StatefulWidget {
+class Campaign extends StatefulWidget {
   @override
-  _CampipaignState createState() => _CampipaignState();
+  _CampaignState createState() => _CampaignState();
 }
 
-class _CampipaignState extends State<Campipaign> {
+class _CampaignState extends State<Campaign> {
   final options = LiveOptions(
     delay: Duration(milliseconds: 0),
     showItemInterval: Duration(milliseconds: 50),
@@ -20,7 +19,7 @@ class _CampipaignState extends State<Campipaign> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: myAppBar('Campaign', null),
       body: LiveList.options(
         itemCount: 8,
         options: options,

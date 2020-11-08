@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:meta/meta.dart';
 
 class Api {
-  static const baseUrl = 'https://www.';
+  static const baseUrl = 'https://wawwinner.ae/dev/public/api';
 
   Map<String, String> setHeaders() => {
         'Content-type': 'application/json',
         'Accept': 'application/json',
       };
-
+// x-www-form-urlencoded
   Future<Map<String, String>> getHeaders() async => {
-        'Content-type': 'application/x-www-form-urlencoded',
+        'Content-type': 'application/json',
         'Accept': 'application/json',
         'token': await getToken()
       };

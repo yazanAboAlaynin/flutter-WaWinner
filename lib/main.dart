@@ -33,6 +33,6 @@ class WaWinner extends StatefulWidget {
 class _WaWinnerState extends State<WaWinner> {
   @override
   Widget build(BuildContext context) {
-    return Campipaign();
+    return Campaign();
   }
 }

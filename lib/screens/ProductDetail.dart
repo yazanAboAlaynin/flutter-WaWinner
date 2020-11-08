@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wawinner/shared/AppBar.dart';
-import 'package:flutter_wawinner/shared/MyDrawer.dart';
+import 'package:flutter_wawinner/screens/shared/AppBar.dart';
+import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class ProductDetail extends StatelessWidget {
