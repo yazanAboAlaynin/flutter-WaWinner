@@ -1,14 +1,14 @@
 import 'package:flutter_wawinner/models/detail.dart';
 
 class Product {
-  final String id;
+  final int id;
   final String is_prize;
   final String image;
   final String name;
   final String description;
   final String created_at;
   final String updated_at;
-  final List<Detail> detail;
+  final List detail;
 
   Product(
       {this.id,
@@ -21,16 +21,15 @@ class Product {
       this.detail});
 
   static Product fromJson(dynamic json) {
-    var detailes = json['detail']
-        .map((dynamic i) => Detail.fromJson(i))
-        .toList() as List<Detail>;
+    var detailes =
+        json['detail'].map((dynamic i) => Detail.fromJson(i)).toList();
     return Product(
       id: json['id'],
-      description: json['id'],
+      description: json['description'],
       detail: detailes,
-      image: json['id'],
-      is_prize: json['id'],
-      name: json['id'],
+      image: json['image'],
+      is_prize: json['is_prize'],
+      name: json['name'],
       created_at: json['created_at'],
       updated_at: json['updated_at'],
     );

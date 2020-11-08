@@ -6,8 +6,7 @@ abstract class CampaignEvent extends Equatable {
 }
 
 class CampaignsRequested extends CampaignEvent {
-  final int cnt;
-  CampaignsRequested({this.cnt});
+  CampaignsRequested();
   @override
   List<Object> get props => [];
 }

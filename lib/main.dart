@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_wawinner/screens/campaign.dart';
+import 'package:flutter_wawinner/repositories/campaign_api.dart';
+import 'package:flutter_wawinner/screens/CampaignsPage.dart';
 
 import 'blocs/simple_bloc_observer.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   Bloc.observer = SimpleBlocObserver();
@@ -10,7 +12,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,6 +34,6 @@ class WaWinner extends StatefulWidget {
 class _WaWinnerState extends State<WaWinner> {
   @override
   Widget build(BuildContext context) {
-    return Campaign();
+    return CampaignsPage();
   }
 }

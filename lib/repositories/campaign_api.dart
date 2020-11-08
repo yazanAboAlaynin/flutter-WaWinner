@@ -1,24 +1,28 @@
-import 'package:http/http.dart';
+import 'dart:convert';
+
+import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:http/http.dart' as http;
 
 import 'api.dart';
 import 'package:meta/meta.dart';
 
 class CampaignApi extends Api {
-  final Client httpClient;
+  final http.Client httpClient;
 
   CampaignApi({
     @required this.httpClient,
   }) : assert(httpClient != null);
 
-  // Future<List<Medicine>> getMedicines(cnt) async {
-  //   final url = '${Api.baseUrl}/rest/medicines/$cnt';
+  Future<List<Campaign>> getCampaigns() async {
+    final url = '${Api.baseUrl}/v1/front-end/campaign';
 
-  //   final response =
-  //       await this.httpClient.get(url, headers: await getHeaders());
+    final response = await this.httpClient.get(url, headers: setHeaders());
 
-  //   var res = jsonDecode(response.body)["data"] as List;
+    var res = jsonDecode(response.body)["data"] as List;
 
-  //   List<Medicine> mds = res.map((dynamic i) => Medicine.fromJson(i)).toList();
-  //   return mds;
-// }
+    List<Campaign> campaigns =
+        res.map((dynamic i) => Campaign.fromJson(i)).toList();
+
+    return campaigns;
+  }
 }

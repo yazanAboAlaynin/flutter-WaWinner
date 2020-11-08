@@ -8,6 +8,7 @@ class Api {
   Map<String, String> setHeaders() => {
         'Content-type': 'application/json',
         'Accept': 'application/json',
+        'Accept-Language': 'en'
       };
 // x-www-form-urlencoded
   Future<Map<String, String>> getHeaders() async => {

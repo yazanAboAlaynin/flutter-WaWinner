@@ -1,5 +1,5 @@
 class Detail {
-  final String id;
+  final int id;
   final String product_id;
   final String title;
   final String value;

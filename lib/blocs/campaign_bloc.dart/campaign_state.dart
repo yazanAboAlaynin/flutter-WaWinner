@@ -1,3 +1,4 @@
+import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
@@ -10,15 +11,14 @@ abstract class CampaignState extends Equatable {
 
 class CampaignsInitial extends CampaignState {}
 
-class MedicinesLoadInProgress extends CampaignState {}
+class CampaignsLoadInProgress extends CampaignState {}
 
 class CampaignsLoadSuccess extends CampaignState {
-  // List<Medicine> mds;
-  // bool isMore;
+  List<Campaign> campaigns;
 
-  // CampaignsLoadSuccess({this.mds, this.isMore});
-  // @override
-  // List<Object> get props => [mds, isMore];
+  CampaignsLoadSuccess({this.campaigns});
+  @override
+  List<Object> get props => [campaigns];
 }
 
 // class AddToCartResponse extends CampaignState {
