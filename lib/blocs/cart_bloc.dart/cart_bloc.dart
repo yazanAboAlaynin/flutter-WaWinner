@@ -53,6 +53,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       } catch (_) {
         yield CartLoadFailure();
       }
+    } else if (event is DeleteItem) {
+      try {
+        await Cart.deleteItem(event.id);
+        List<CartItem> items = await Cart.getItems();
+
+        yield CartLoadSuccess(items: items);
+      } catch (_) {
+        yield CartLoadFailure();
+      }
     }
   }
 }

@@ -20,8 +20,8 @@ class AddItem extends CartEvent {
 }
 
 class DeleteItem extends CartEvent {
-  String idx;
-  DeleteItem({this.idx});
+  int id;
+  DeleteItem({this.id});
   @override
   List<Object> get props => [];
 }
