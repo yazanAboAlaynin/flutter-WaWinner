@@ -29,7 +29,6 @@ class _CampaignState extends State<CampaignsPage> {
     super.initState();
     campaignsBloc = CampaignsBloc(campaignApi: campaignApi);
     campaignsBloc.add(CampaignsRequested());
-    // campaignsBloc.add(ProductsRequested());
   }
 
   final options = LiveOptions(

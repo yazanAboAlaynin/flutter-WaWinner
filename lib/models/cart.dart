@@ -78,16 +78,14 @@ class Cart {
     if (!localStorage.containsKey('cart')) {
       return;
     }
-
     var cart = jsonDecode(localStorage.get('cart')) as List;
-
     List<CartItem> campaigns = cart.map((e) => CartItem.fromJson(e)).toList();
 
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].campaign.id == id) {
-        // if (medicines[i].quantity < medicines[i].distributer.max) {
+        // if (campaigns[i].qty < campaigns[i].campaign.product_quantity)
         campaigns[i].qty++;
-        // }
+
         break;
       }
     }
@@ -100,20 +98,17 @@ class Cart {
     if (!localStorage.containsKey('cart')) {
       return;
     }
-
     var cart = jsonDecode(localStorage.get('cart')) as List;
-
     List<CartItem> campaigns = cart.map((e) => CartItem.fromJson(e)).toList();
 
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].campaign.id == id) {
-        // if (campaigns[i].qty > campaigns[i].distributer.min)
-        campaigns[i].qty--;
+        if (campaigns[i].qty > 1) campaigns[i].qty--;
         break;
-        // }
       }
-      List<Map> list = CartItem.encodeCartItems(campaigns);
-      localStorage.setString('cart', jsonEncode(list));
     }
+
+    List<Map> list = CartItem.encodeCartItems(campaigns);
+    localStorage.setString('cart', jsonEncode(list));
   }
 }

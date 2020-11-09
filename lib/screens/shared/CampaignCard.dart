@@ -6,11 +6,19 @@ import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-class CampaignCard extends StatelessWidget {
+class CampaignCard extends StatefulWidget {
   final animation;
   final Campaign campaign;
 
-  const CampaignCard({this.animation, this.campaign});
+  CampaignCard({this.animation, this.campaign});
+
+  @override
+  _CampaignCardState createState() => _CampaignCardState();
+}
+
+class _CampaignCardState extends State<CampaignCard> {
+  int qty = 1;
+
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -55,7 +63,7 @@ class CampaignCard extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text(campaign.product.name),
+                              Text(widget.campaign.product.name),
                             ],
                           ),
                         ],
@@ -94,8 +102,10 @@ class CampaignCard extends StatelessWidget {
                             width: sizeAware.width * 0.3,
                             height: sizeAware.width * 0.3,
                             child: CircularStepProgressIndicator(
-                              totalSteps: int.parse(campaign.product_quantity),
-                              currentStep: int.parse(campaign.quantity_sold),
+                              totalSteps:
+                                  int.parse(widget.campaign.product_quantity),
+                              currentStep:
+                                  int.parse(widget.campaign.quantity_sold),
                               stepSize: 10,
                               selectedColor: Color.fromRGBO(127, 25, 168, 1.0),
                               unselectedColor: Color.fromRGBO(217, 200, 236, 1),
@@ -114,7 +124,7 @@ class CampaignCard extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      campaign.quantity_sold,
+                                      widget.campaign.quantity_sold,
                                       style: TextStyle(
                                         fontSize: sizeAware.width * 0.05,
                                         fontWeight: FontWeight.bold,
@@ -124,7 +134,7 @@ class CampaignCard extends StatelessWidget {
                                     ),
                                     Text('sold'),
                                     Text('out of'),
-                                    Text(campaign.product_quantity),
+                                    Text(widget.campaign.product_quantity),
                                   ],
                                 )),
                               ),
@@ -140,9 +150,11 @@ class CampaignCard extends StatelessWidget {
                               cartBloc.add(
                                 AddItem(
                                   cartItem: CartItem(
-                                    campaign: campaign,
-                                    qty: 0,
-                                    total_price: 0,
+                                    campaign: widget.campaign,
+                                    qty: qty,
+                                    total_price: qty *
+                                        double.parse(
+                                            widget.campaign.original_price),
                                   ),
                                 ),
                               );
@@ -193,7 +205,7 @@ class CampaignCard extends StatelessWidget {
                                   Container(
                                     width: sizeAware.width / 2,
                                     child: Text(
-                                      campaign.prize.name,
+                                      widget.campaign.prize.name,
                                       style: TextStyle(),
                                     ),
                                   ),
@@ -214,7 +226,7 @@ class CampaignCard extends StatelessWidget {
                   position: Tween<Offset>(
                     begin: Offset(-2, 0),
                     end: Offset.zero,
-                  ).animate(animation),
+                  ).animate(widget.animation),
                   child: Container(
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -245,7 +257,7 @@ class CampaignCard extends StatelessWidget {
                   position: Tween<Offset>(
                     begin: Offset(4, 0),
                     end: Offset.zero,
-                  ).animate(animation),
+                  ).animate(widget.animation),
                   child: Container(
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -296,35 +308,54 @@ class CampaignCard extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            width: 28,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Color.fromRGBO(127, 25, 168, 1.0),
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 28,
+                          GestureDetector(
+                            onTap: () {
+                              if (qty <
+                                  int.parse(widget.campaign.product_quantity)) {
+                                setState(() {
+                                  qty++;
+                                });
+                              }
+                            },
+                            child: Container(
+                              width: 28,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Color.fromRGBO(127, 25, 168, 1.0),
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 28,
+                              ),
                             ),
                           ),
                           Text(
-                            '1',
+                            '$qty',
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold),
                           ),
-                          Container(
-                            width: 28,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Color.fromRGBO(127, 25, 168, 1.0),
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 28,
+                          GestureDetector(
+                            onTap: () {
+                              if (qty > 1) {
+                                setState(() {
+                                  qty--;
+                                });
+                              }
+                            },
+                            child: Container(
+                              width: 28,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Color.fromRGBO(127, 25, 168, 1.0),
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 28,
+                              ),
                             ),
                           ),
                         ],
@@ -370,7 +401,7 @@ class CampaignCard extends StatelessWidget {
                   height: 35,
                   child: Center(
                       child: Text(
-                    'AED ${campaign.price_after_vat}',
+                    'AED ${widget.campaign.price_after_vat}',
                     overflow: TextOverflow.clip,
                     style: TextStyle(color: Colors.white),
                   )),

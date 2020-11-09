@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_event.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -8,6 +11,7 @@ class CartItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
+    final cartBloc = BlocProvider.of<CartBloc>(context);
 
     return Container(
       width: sizeAware.width,
@@ -181,40 +185,50 @@ class CartItemCard extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Color.fromRGBO(127, 25, 168, 1.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.white,
+                          child: GestureDetector(
+                            onTap: () {
+                              cartBloc.add(Increase(id: cartItem.campaign.id));
+                            },
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Color.fromRGBO(127, 25, 168, 1.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
                         ),
                         Text(
-                          '1',
+                          '${cartItem.qty}',
                           style: TextStyle(fontSize: 24),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Color.fromRGBO(53, 9, 100, 1.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.white,
+                          child: GestureDetector(
+                            onTap: () {
+                              cartBloc.add(Decrease(id: cartItem.campaign.id));
+                            },
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Color.fromRGBO(127, 25, 168, 1.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

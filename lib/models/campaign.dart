@@ -73,6 +73,7 @@ class Campaign {
       'description': c.description,
       'title': c.title,
       'quantity_sold': c.quantity_sold,
+      'product_quantity': c.product_quantity
     };
 
     return d;
