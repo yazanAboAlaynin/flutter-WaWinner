@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_bloc.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
+import 'package:flutter_wawinner/repositories/cart_api.dart';
 import 'package:flutter_wawinner/screens/CampaignsPage.dart';
+import 'package:flutter_wawinner/screens/CartPage.dart';
+import 'package:http/http.dart';
 
 import 'blocs/simple_bloc_observer.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
   Bloc.observer = SimpleBlocObserver();
-  runApp(MyApp());
+  CartApi cartApi = CartApi(httpClient: Client());
+  runApp(MyApp(
+    cartApi: cartApi,
+  ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  final CartApi cartApi;
+
+  const MyApp({Key key, this.cartApi}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,19 +37,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: WaWinner(),
+      home: BlocProvider(
+          create: (context) => CartBloc(cartApi: widget.cartApi),
+          child: CartPage()),
     );
-  }
-}
-
-class WaWinner extends StatefulWidget {
-  @override
-  _WaWinnerState createState() => _WaWinnerState();
-}
-
-class _WaWinnerState extends State<WaWinner> {
-  @override
-  Widget build(BuildContext context) {
-    return CampaignsPage();
   }
 }

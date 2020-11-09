@@ -55,4 +55,29 @@ class Campaign {
         title: json['title'],
         quantity_sold: json['quantity_sold']);
   }
+
+  static Map<String, dynamic> toMap(Campaign c) {
+    var d = {
+      'id': c.id,
+      'donate_ticket_count': c.donate_ticket_count,
+      'early_bird_count': c.early_bird_count,
+      'early_bird_ticket_count': c.early_bird_ticket_count,
+      'max_draw_date': c.max_draw_date,
+      'original_price': c.original_price,
+      'price_after_vat': c.price_after_vat,
+      'price_displayed_by_currency': c.price_displayed_by_currency,
+      'prize_id': Product.toMap(c.prize),
+      'product_id': Product.toMap(c.product),
+      'status': c.status,
+      'ticket_count': c.ticket_count,
+      'description': c.description,
+      'title': c.title,
+      'quantity_sold': c.quantity_sold,
+    };
+
+    return d;
+  }
+
+  static List<Map> encodeCampaigns(List<Campaign> items) =>
+      items.map<Map<String, dynamic>>((item) => Campaign.toMap(item)).toList();
 }

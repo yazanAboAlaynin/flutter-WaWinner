@@ -24,4 +24,20 @@ class Detail {
       updated_at: json['updated_at'],
     );
   }
+
+  static Map<String, dynamic> toMap(Detail c) {
+    var d = {
+      'id': c.id,
+      'product_id': c.product_id,
+      'title': c.title,
+      'value': c.value,
+      'created_at': c.created_at,
+      'updated_at': c.updated_at,
+    };
+
+    return d;
+  }
+
+  static List<Map> encodeDetailItems(List items) =>
+      items.map<Map<String, dynamic>>((item) => Detail.toMap(item)).toList();
 }

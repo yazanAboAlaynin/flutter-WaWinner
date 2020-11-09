@@ -34,4 +34,22 @@ class Product {
       updated_at: json['updated_at'],
     );
   }
+
+  static Map<String, dynamic> toMap(Product c) {
+    var d = {
+      'id': c.id,
+      'description': c.description,
+      'detail': Detail.encodeDetailItems(c.detail),
+      'image': c.image,
+      'is_prize': c.is_prize,
+      'name': c.name,
+      'created_at': c.created_at,
+      'updated_at': c.updated_at,
+    };
+
+    return d;
+  }
+
+  static List<Map> encodeCampaigns(List<Product> items) =>
+      items.map<Map<String, dynamic>>((item) => Product.toMap(item)).toList();
 }

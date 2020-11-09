@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-class CartItem extends StatelessWidget {
+class CartItemCard extends StatelessWidget {
+  CartItem cartItem;
+  CartItemCard({this.cartItem});
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -63,13 +66,13 @@ class CartItem extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          'Nike Shoe',
+                                          cartItem.campaign.product.name,
                                           style: TextStyle(
                                             fontSize: 18,
                                           ),
                                         ),
                                         Text(
-                                          'from boots category',
+                                          cartItem.campaign.product.name,
                                           style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 13,

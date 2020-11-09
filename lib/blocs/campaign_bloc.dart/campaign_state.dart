@@ -15,10 +15,11 @@ class CampaignsLoadInProgress extends CampaignState {}
 
 class CampaignsLoadSuccess extends CampaignState {
   List<Campaign> campaigns;
+  List<Campaign> products;
 
   CampaignsLoadSuccess({this.campaigns});
   @override
-  List<Object> get props => [campaigns];
+  List<Object> get props => [campaigns, products];
 }
 
 // class AddToCartResponse extends CampaignState {
