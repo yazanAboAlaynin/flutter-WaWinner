@@ -1,6 +1,6 @@
 class Detail {
   final int id;
-  final String product_id;
+  final int product_id;
   final String title;
   final String value;
   final String created_at;

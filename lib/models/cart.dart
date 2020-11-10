@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Cart {
   static Future<List<CartItem>> getItems() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
+
     if (!localStorage.containsKey('cart')) {
       return [];
     }
@@ -83,8 +84,10 @@ class Cart {
 
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].campaign.id == id) {
-        // if (campaigns[i].qty < campaigns[i].campaign.product_quantity)
-        campaigns[i].qty++;
+        if (campaigns[i].qty < campaigns[i].campaign.product_quantity)
+          campaigns[i].qty++;
+        campaigns[i].total_price =
+            campaigns[i].qty * campaigns[i].campaign.price;
 
         break;
       }
@@ -104,6 +107,8 @@ class Cart {
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].campaign.id == id) {
         if (campaigns[i].qty > 1) campaigns[i].qty--;
+        campaigns[i].total_price =
+            campaigns[i].qty * campaigns[i].campaign.price;
         break;
       }
     }

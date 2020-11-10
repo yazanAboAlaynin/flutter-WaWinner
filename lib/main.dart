@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
 import 'package:flutter_wawinner/repositories/cart_api.dart';
 import 'package:flutter_wawinner/screens/CampaignsPage.dart';
 import 'package:flutter_wawinner/screens/CartPage.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Constants.dart';
 import 'blocs/simple_bloc_observer.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,6 +30,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  isLoggedIn() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    if (preferences.containsKey('IsLoggedIn') &&
+        preferences.getBool('IsLoggedIn')) {
+      IsLoggedIn = true;
+      EMAIL = preferences.getString('email');
+      NAME = preferences.getString('name');
+      ADDRESS = preferences.getString('address');
+      TOKEN = preferences.getString('token');
+    } else {}
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    isLoggedIn();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,7 +60,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: BlocProvider(
           create: (context) => CartBloc(cartApi: widget.cartApi),
-          child: CartPage()),
+          child: CampaignsPage()),
     );
   }
 }

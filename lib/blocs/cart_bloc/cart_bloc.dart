@@ -62,6 +62,17 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       } catch (_) {
         yield CartLoadFailure();
       }
+    } else if (event is Checkout) {
+      yield CartLoadInProgress();
+
+      try {
+        cartApi.checkOut(event.items, event.is_donate);
+        await Cart.emptyCart();
+
+        yield CartLoadSuccess(items: []);
+      } catch (_) {
+        yield CartLoadFailure();
+      }
     }
   }
 }

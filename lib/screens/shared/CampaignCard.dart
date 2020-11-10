@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_bloc.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_event.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -102,10 +102,8 @@ class _CampaignCardState extends State<CampaignCard> {
                             width: sizeAware.width * 0.3,
                             height: sizeAware.width * 0.3,
                             child: CircularStepProgressIndicator(
-                              totalSteps:
-                                  int.parse(widget.campaign.product_quantity),
-                              currentStep:
-                                  int.parse(widget.campaign.quantity_sold),
+                              totalSteps: widget.campaign.product_quantity,
+                              currentStep: widget.campaign.quantity_sold,
                               stepSize: 10,
                               selectedColor: Color.fromRGBO(127, 25, 168, 1.0),
                               unselectedColor: Color.fromRGBO(217, 200, 236, 1),
@@ -124,7 +122,7 @@ class _CampaignCardState extends State<CampaignCard> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      widget.campaign.quantity_sold,
+                                      '${widget.campaign.quantity_sold}',
                                       style: TextStyle(
                                         fontSize: sizeAware.width * 0.05,
                                         fontWeight: FontWeight.bold,
@@ -134,7 +132,7 @@ class _CampaignCardState extends State<CampaignCard> {
                                     ),
                                     Text('sold'),
                                     Text('out of'),
-                                    Text(widget.campaign.product_quantity),
+                                    Text('${widget.campaign.product_quantity}'),
                                   ],
                                 )),
                               ),
@@ -152,9 +150,7 @@ class _CampaignCardState extends State<CampaignCard> {
                                   cartItem: CartItem(
                                     campaign: widget.campaign,
                                     qty: qty,
-                                    total_price: qty *
-                                        double.parse(
-                                            widget.campaign.original_price),
+                                    total_price: qty * widget.campaign.price,
                                   ),
                                 ),
                               );
@@ -229,6 +225,8 @@ class _CampaignCardState extends State<CampaignCard> {
                   ).animate(widget.animation),
                   child: Container(
                     decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -240,11 +238,11 @@ class _CampaignCardState extends State<CampaignCard> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        'assets/shopping.jpg',
+                      child: Image.network(
+                        widget.campaign.product.image,
                         width: sizeAware.width * 0.3,
-                        height: sizeAware.width * 0.35,
-                        fit: BoxFit.cover,
+                        height: sizeAware.width * 0.3,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                   ),
@@ -259,7 +257,10 @@ class _CampaignCardState extends State<CampaignCard> {
                     end: Offset.zero,
                   ).animate(widget.animation),
                   child: Container(
+                    padding: EdgeInsets.all(4),
                     decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -269,15 +270,13 @@ class _CampaignCardState extends State<CampaignCard> {
                         ),
                       ],
                     ),
-                    child: Container(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.asset(
-                          'assets/shopping.jpg',
-                          width: sizeAware.width * 0.3,
-                          height: sizeAware.width * 0.35,
-                          fit: BoxFit.cover,
-                        ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(
+                        widget.campaign.prize.image,
+                        width: sizeAware.width * 0.3,
+                        height: sizeAware.width * 0.3,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                   ),
@@ -310,8 +309,7 @@ class _CampaignCardState extends State<CampaignCard> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              if (qty <
-                                  int.parse(widget.campaign.product_quantity)) {
+                              if (qty < widget.campaign.product_quantity) {
                                 setState(() {
                                   qty++;
                                 });
@@ -401,7 +399,7 @@ class _CampaignCardState extends State<CampaignCard> {
                   height: 35,
                   child: Center(
                       child: Text(
-                    'AED ${widget.campaign.price_after_vat}',
+                    'AED ${widget.campaign.price}',
                     overflow: TextOverflow.clip,
                     style: TextStyle(color: Colors.white),
                   )),

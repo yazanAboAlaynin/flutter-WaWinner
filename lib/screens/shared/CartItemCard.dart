@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_bloc.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_event.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class CartItemCard extends StatelessWidget {
   CartItem cartItem;
@@ -44,11 +43,11 @@ class CartItemCard extends StatelessWidget {
                                 Container(
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                    child: Image.asset(
-                                      'assets/shopping.jpg',
-                                      width: sizeAware.width * 0.25,
-                                      height: sizeAware.width * 0.28,
-                                      fit: BoxFit.fill,
+                                    child: Image.network(
+                                      cartItem.campaign.product.image,
+                                      width: sizeAware.width * 0.3,
+                                      height: sizeAware.width * 0.3,
+                                      fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                 ),
@@ -94,7 +93,7 @@ class CartItemCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'AED 250',
+                              '${cartItem.total_price}',
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Color.fromRGBO(127, 25, 168, 1.0),
@@ -112,11 +111,11 @@ class CartItemCard extends StatelessWidget {
                                 Container(
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                    child: Image.asset(
-                                      'assets/shopping.jpg',
-                                      width: sizeAware.width * 0.25,
-                                      height: sizeAware.width * 0.28,
-                                      fit: BoxFit.fill,
+                                    child: Image.network(
+                                      cartItem.campaign.prize.image,
+                                      width: sizeAware.width * 0.3,
+                                      height: sizeAware.width * 0.3,
+                                      fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                 ),

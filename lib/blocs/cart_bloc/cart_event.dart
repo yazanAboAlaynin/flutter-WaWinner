@@ -39,3 +39,11 @@ class Decrease extends CartEvent {
   @override
   List<Object> get props => [];
 }
+
+class Checkout extends CartEvent {
+  List<CartItem> items;
+  bool is_donate;
+  Checkout({this.items, this.is_donate});
+  @override
+  List<Object> get props => [];
+}

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_bloc.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_event.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_state.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_state.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:flutter_wawinner/repositories/cart_api.dart';
 
@@ -19,6 +19,8 @@ class _CartPageState extends State<CartPage> {
   List<CartItem> items = [];
   CartApi cartApi = CartApi(httpClient: http.Client());
   CartBloc cartBloc;
+  bool is_donated = false;
+  int total_price = 0;
 
   @override
   void initState() {
@@ -29,6 +31,8 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final sizeAware = MediaQuery.of(context).size;
+
     return BlocBuilder(
       cubit: cartBloc,
       builder: (context, state) {
@@ -44,6 +48,10 @@ class _CartPageState extends State<CartPage> {
         }
         if (state is CartLoadSuccess) {
           items = state.items;
+          total_price = 0;
+          for (int i = 0; i < items.length; i++) {
+            total_price += items[i].total_price;
+          }
           return Scaffold(
             appBar: myAppBar('Shopping Cart', null),
             body: CustomScrollView(
@@ -57,7 +65,84 @@ class _CartPageState extends State<CartPage> {
                   child: Container(
                     height: 200,
                     width: 100,
-                    color: Colors.red,
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Total Products'),
+                            Text('${items.length}')
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [Text('Total Coupons'), Text('2')],
+                        ),
+                        Text('Donate to recieve an additional Entry'),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'I agree to donate all purchased products to charity as per " the Draw Terms and Conditions"',
+                              ),
+                            ),
+                            Switch(
+                              value: is_donated,
+                              onChanged: (value) {
+                                setState(() {
+                                  is_donated = !is_donated;
+                                });
+                              },
+                              activeTrackColor: Colors.lightGreenAccent,
+                              activeColor: Colors.green,
+                            ),
+                          ],
+                        ),
+                        Text('Total'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Price inclusive of VAT'),
+                            Text('AED $total_price'),
+                          ],
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            cartBloc.add(
+                                Checkout(items: items, is_donate: is_donated));
+                          },
+                          child: Container(
+                            width: sizeAware.width * 0.85,
+                            height: 45.0,
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(127, 25, 168, 1),
+                              borderRadius: BorderRadius.horizontal(
+                                left: Radius.circular(40),
+                                right: Radius.circular(40),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Checkout',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],

@@ -1,13 +1,15 @@
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_wawinner/blocs/campaign_bloc.dart/campaign_bloc.dart';
-import 'package:flutter_wawinner/blocs/campaign_bloc.dart/campaign_event.dart';
-import 'package:flutter_wawinner/blocs/campaign_bloc.dart/campaign_state.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_bloc.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc.dart/cart_state.dart';
+import 'package:flutter_wawinner/Constants.dart';
+import 'package:flutter_wawinner/blocs/campaign_bloc/campaign_bloc.dart';
+import 'package:flutter_wawinner/blocs/campaign_bloc/campaign_event.dart';
+import 'package:flutter_wawinner/blocs/campaign_bloc/campaign_state.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_state.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
+import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CampaignCard.dart';
 import 'package:flutter_wawinner/screens/shared/ProductCard.dart';
@@ -78,7 +80,22 @@ class _CampaignState extends State<CampaignsPage> {
             campaigns = state.campaigns;
             products = state.products;
             return Scaffold(
-              appBar: myAppBar('Campaigns', null),
+              appBar: myAppBar('Campaigns', [
+                IsLoggedIn
+                    ? Text(NAME)
+                    : GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()))
+                              .then((value) {
+                            setState(() {});
+                          });
+                        },
+                        child: Center(child: Text('Login')),
+                      )
+              ]),
               body: LiveList.options(
                 itemCount: campaigns.length + 1,
                 options: options,

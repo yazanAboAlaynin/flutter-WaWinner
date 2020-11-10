@@ -2,7 +2,7 @@ import 'package:flutter_wawinner/models/detail.dart';
 
 class Product {
   final int id;
-  final String is_prize;
+  final int is_prize;
   final String image;
   final String name;
   final String description;
