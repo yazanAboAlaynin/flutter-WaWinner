@@ -41,4 +41,29 @@ class AuthApi extends Api {
       TOKEN = res['data']['token'];
     }
   }
+
+  Future register(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/register';
+
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: setHeaders());
+
+    var res = jsonDecode(response.body);
+    if (res['status']) {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      User user = User.fromJson(res['data']);
+      preferences.setBool('IsLoggedIn', true);
+      preferences.setInt('id', user.id);
+      preferences.setString('email', user.email);
+      preferences.setString('name', user.name);
+      preferences.setString('address', user.address);
+      preferences.setString('created_at', user.created_at);
+      preferences.setString('updated_at', user.updated_at);
+      IsLoggedIn = true;
+      EMAIL = user.email;
+      NAME = user.name;
+      ADDRESS = user.address;
+    }
+  }
 }

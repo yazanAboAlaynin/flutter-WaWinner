@@ -27,6 +27,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } catch (_) {
         yield AuthLoadFailure();
       }
+    } else if (event is RegisterRequested) {
+      yield AuthLoadInProgress();
+      try {
+        var data = {
+          'email': event.email,
+          'password': event.password,
+          'phone': event.number,
+          'name:ar': event.name_ar,
+          'name:en': event.name_en,
+          'address:ar': event.address_ar,
+          'address:en': event.address_en,
+          'password_confirmation': event.password_confirmation,
+        };
+        await authApi.register(data);
+
+        yield RegisterSuccess();
+      } catch (_) {
+        yield AuthLoadFailure();
+      }
     }
   }
 }

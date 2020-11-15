@@ -5,6 +5,7 @@ import 'package:flutter_wawinner/blocs/auth_bloc/auth_bloc.dart';
 import 'package:flutter_wawinner/blocs/auth_bloc/auth_event.dart';
 import 'package:flutter_wawinner/blocs/auth_bloc/auth_state.dart';
 import 'package:flutter_wawinner/repositories/auth_api.dart';
+import 'package:flutter_wawinner/screens/auth/RegisterPage.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
@@ -187,28 +188,38 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(
                               height: sizeAware.height * 0.02,
                             ),
-                            Container(
-                              width: sizeAware.width,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Don\'t have an account? ',
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey[600],
-                                    ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RegisterPage(),
                                   ),
-                                  Text(
-                                    'Sign Up',
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      color: Color.fromRGBO(53, 9, 100, 1.0),
-                                      fontWeight: FontWeight.bold,
+                                );
+                              },
+                              child: Container(
+                                width: sizeAware.width,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Don\'t have an account? ',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey[600],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    Text(
+                                      'Sign Up',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Color.fromRGBO(53, 9, 100, 1.0),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

@@ -18,10 +18,10 @@ class CampaignsBloc extends Bloc<CampaignEvent, CampaignState> {
     if (event is CampaignsRequested) {
       yield CampaignsLoadInProgress();
       try {
-        List<Campaign> campaigns = await campaignApi.getCampaigns();
-        List<Campaign> products = await campaignApi.getProducts();
+        // List<Campaign> campaigns = await campaignApi.getCampaigns();
+        // List<Campaign> products = await campaignApi.getProducts();
 
-        yield CampaignsLoadSuccess(campaigns: campaigns);
+        yield CampaignsLoadSuccess(campaigns: []);
       } catch (_) {
         yield CampaignsLoadFailure();
       }
