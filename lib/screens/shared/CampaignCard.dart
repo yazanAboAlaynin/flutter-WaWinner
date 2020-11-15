@@ -4,6 +4,8 @@ import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
+import 'package:flutter_wawinner/models/wishlist.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class CampaignCard extends StatefulWidget {
@@ -78,18 +80,31 @@ class _CampaignCardState extends State<CampaignCard> {
                             height: 1,
                             width: 20,
                           ),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Color.fromRGBO(127, 25, 168, 1.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Icon(
-                                Icons.favorite,
-                                color: Colors.white,
+                          GestureDetector(
+                            onTap: () {
+                              WishList.addItem(widget.campaign);
+                              Fluttertoast.showToast(
+                                  msg: "This is Center Short Toast",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            },
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Color.fromRGBO(127, 25, 168, 1.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Icon(
+                                  Icons.favorite,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

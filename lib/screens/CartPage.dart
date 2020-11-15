@@ -8,6 +8,7 @@ import 'package:flutter_wawinner/repositories/cart_api.dart';
 
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CartItemCard.dart';
+import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
 import 'package:http/http.dart' as http;
 
 class CartPage extends StatefulWidget {
@@ -54,6 +55,9 @@ class _CartPageState extends State<CartPage> {
           }
           return Scaffold(
             appBar: myAppBar('Shopping Cart', null),
+            drawer: Drawer(
+              child: MyDrawer(),
+            ),
             body: CustomScrollView(
               slivers: [
                 SliverList(

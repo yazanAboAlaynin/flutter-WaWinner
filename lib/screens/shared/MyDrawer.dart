@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_wawinner/screens/WishListPage.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -119,7 +120,10 @@ class _MyDrawerState extends State<MyDrawer> {
               thickness: 0.7,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WishListPage()));
+              },
               child: Container(
                 height: sizeAware.height * 0.08,
                 child: Center(

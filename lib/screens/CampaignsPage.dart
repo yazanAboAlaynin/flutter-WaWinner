@@ -12,6 +12,7 @@ import 'package:flutter_wawinner/repositories/campaign_api.dart';
 import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CampaignCard.dart';
+import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
 import 'package:flutter_wawinner/screens/shared/ProductCard.dart';
 import 'package:http/http.dart' as http;
 
@@ -96,6 +97,9 @@ class _CampaignState extends State<CampaignsPage> {
                         child: Center(child: Text('Login')),
                       )
               ]),
+              drawer: Drawer(
+                child: MyDrawer(),
+              ),
               body: LiveList.options(
                 itemCount: campaigns.length + 1,
                 options: options,
