@@ -230,6 +230,36 @@ class _CartPageState extends State<CartPage> {
                       ],
                     ),
                   ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    width: sizeAware.width,
+                    padding: EdgeInsets.symmetric(vertical: 18, horizontal: 12),
+                    margin: EdgeInsets.symmetric(vertical: 14),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[50],
+                      border: Border.symmetric(
+                        vertical: BorderSide(
+                          color: Colors.blue[100],
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          size: 50,
+                        ),
+                        SizedBox(
+                          width: sizeAware.width * 0.02,
+                        ),
+                        Expanded(
+                          child: Text(
+                              'Safe and secure payerijgerijrijments. 100% Authentic products.'),
+                        )
+                      ],
+                    ),
+                  ),
                 )
               ],
             ),
