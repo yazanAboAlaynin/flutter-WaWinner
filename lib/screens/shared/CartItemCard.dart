@@ -93,7 +93,7 @@ class CartItemCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '${cartItem.total_price}',
+                              'AED ${cartItem.total_price}',
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Color.fromRGBO(127, 25, 168, 1.0),

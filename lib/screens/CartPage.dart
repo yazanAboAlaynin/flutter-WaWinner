@@ -195,8 +195,9 @@ class _CartPageState extends State<CartPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            cartBloc.add(
-                                Checkout(items: items, is_donate: is_donated));
+                            if (items.length > 0)
+                              cartBloc.add(Checkout(
+                                  items: items, is_donate: is_donated));
                           },
                           child: Container(
                             width: sizeAware.width * 0.85,

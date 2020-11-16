@@ -237,23 +237,36 @@ class WLCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(100),
                           ),
                           child: Center(
-                              child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                '${campaign.quantity_sold}',
-                                style: TextStyle(
-                                  fontSize: sizeAware.width * 0.05,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromRGBO(127, 25, 168, 1.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${campaign.quantity_sold}',
+                                  style: TextStyle(
+                                    fontSize: sizeAware.width * 0.05,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                  ),
                                 ),
-                              ),
-                              Text('sold'),
-                              Text('out of'),
-                              Text('${campaign.product_quantity}'),
-                            ],
-                          )),
+                                Text(
+                                  'sold',
+                                  style: TextStyle(
+                                      fontSize: sizeAware.width * 0.03),
+                                ),
+                                Text(
+                                  'out of',
+                                  style: TextStyle(
+                                      fontSize: sizeAware.width * 0.03),
+                                ),
+                                Text(
+                                  '${campaign.product_quantity}',
+                                  style: TextStyle(
+                                      fontSize: sizeAware.width * 0.03),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
