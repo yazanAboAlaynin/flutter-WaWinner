@@ -21,9 +21,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event is LoginRequested) {
       yield AuthLoadInProgress();
       try {
-        await authApi.login(event.email, event.password);
+        String status = await authApi.login(event.email, event.password);
 
-        yield LoginSuccess();
+        if (status == "the account has not been verified") {
+          yield NotVerified();
+        } else if (status == "Error") {
+          yield LoginError();
+        } else
+          yield LoginSuccess();
       } catch (_) {
         yield AuthLoadFailure();
       }
@@ -41,6 +46,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           'password_confirmation': event.password_confirmation,
         };
         await authApi.register(data);
+
+        yield RegisterSuccess();
+      } catch (_) {
+        yield AuthLoadFailure();
+      }
+    } else if (event is SendCode) {
+      yield AuthLoadInProgress();
+      try {
+        // await authApi.sendCode(data);
 
         yield RegisterSuccess();
       } catch (_) {

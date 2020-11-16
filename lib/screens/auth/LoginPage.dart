@@ -6,6 +6,8 @@ import 'package:flutter_wawinner/blocs/auth_bloc/auth_event.dart';
 import 'package:flutter_wawinner/blocs/auth_bloc/auth_state.dart';
 import 'package:flutter_wawinner/repositories/auth_api.dart';
 import 'package:flutter_wawinner/screens/auth/RegisterPage.dart';
+import 'package:flutter_wawinner/screens/auth/VerificationPage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
@@ -35,11 +37,21 @@ class _LoginPageState extends State<LoginPage> {
         if (state is LoginSuccess) {
           Navigator.pop(context);
         }
+        if (state is LoginError) {
+          Fluttertoast.showToast(msg: "Error Try Again");
+        }
+        if (state is NotVerified) {
+          Fluttertoast.showToast(msg: "You need to verify your account");
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => VerificationPage()));
+        }
       },
       child: BlocBuilder(
         cubit: authBloc,
         builder: (context, state) {
-          if (state is AuthInitial) {
+          if (state is AuthInitial ||
+              state is LoginError ||
+              state is NotVerified) {
             return Scaffold(
               backgroundColor: Colors.white,
               body: SingleChildScrollView(

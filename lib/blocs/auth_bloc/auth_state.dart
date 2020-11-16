@@ -16,6 +16,10 @@ class AuthLoadInProgress extends AuthState {}
 
 class LoginSuccess extends AuthState {}
 
+class NotVerified extends AuthState {}
+
+class LoginError extends AuthState {}
+
 class RegisterSuccess extends AuthState {}
 
 class CodeVerified extends AuthState {}

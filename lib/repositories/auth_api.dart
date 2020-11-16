@@ -15,7 +15,7 @@ class AuthApi extends Api {
     @required this.httpClient,
   }) : assert(httpClient != null);
 
-  Future login(email, password) async {
+  Future<String> login(email, password) async {
     final url = '${Api.baseUrl}/v1/front-end/login';
     var data = {'email': email, 'password': password};
     final response = await this
@@ -39,6 +39,12 @@ class AuthApi extends Api {
       NAME = user.name;
       ADDRESS = user.address;
       TOKEN = res['data']['token'];
+      ID = user.id;
+      return "Success";
+    } else if (res['message'] == "the account has not been verified") {
+      return res['message'];
+    } else {
+      return "Error";
     }
   }
 
@@ -64,6 +70,33 @@ class AuthApi extends Api {
       EMAIL = user.email;
       NAME = user.name;
       ADDRESS = user.address;
+      ID = user.id;
+    }
+  }
+
+  Future sendCode(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/verificationForCode';
+
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: setHeaders());
+
+    var res = jsonDecode(response.body);
+    if (res['status']) {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      User user = User.fromJson(res['data']);
+      preferences.setBool('IsLoggedIn', true);
+      preferences.setInt('id', user.id);
+      preferences.setString('email', user.email);
+      preferences.setString('name', user.name);
+      preferences.setString('address', user.address);
+      preferences.setString('created_at', user.created_at);
+      preferences.setString('updated_at', user.updated_at);
+      IsLoggedIn = true;
+      EMAIL = user.email;
+      NAME = user.name;
+      ADDRESS = user.address;
+      ID = user.id;
     }
   }
 }

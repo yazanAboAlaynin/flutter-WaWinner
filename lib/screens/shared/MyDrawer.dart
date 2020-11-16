@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_wawinner/screens/WishListPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_wawinner/Constants.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -278,7 +280,13 @@ class _MyDrawerState extends State<MyDrawer> {
               thickness: 0.7,
             ),
             InkWell(
-              onTap: () async {},
+              onTap: () async {
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+
+                sharedPreferences.clear();
+                IsLoggedIn = false;
+              },
               child: Container(
                 height: sizeAware.height * 0.08,
                 child: Center(
