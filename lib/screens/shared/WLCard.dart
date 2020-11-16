@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
+import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
+import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_event.dart' as wl;
+import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class WLCard extends StatelessWidget {
+  Campaign campaign;
+  WLBloc wlBloc;
+  WLCard({this.campaign, this.wlBloc});
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
+    final cartBloc = BlocProvider.of<CartBloc>(context);
 
     return Container(
       width: sizeAware.width,
@@ -37,11 +48,11 @@ class WLCard extends StatelessWidget {
                                 Container(
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                    child: Image.asset(
-                                      'assets/shopping.jpg',
-                                      width: sizeAware.width * 0.25,
-                                      height: sizeAware.width * 0.28,
-                                      fit: BoxFit.fill,
+                                    child: Image.network(
+                                      campaign.product.image,
+                                      width: sizeAware.width * 0.3,
+                                      height: sizeAware.width * 0.3,
+                                      fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                 ),
@@ -63,7 +74,7 @@ class WLCard extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          'Nike Shoe',
+                                          campaign.product.name,
                                           style: TextStyle(
                                             fontSize: 18,
                                           ),
@@ -87,7 +98,7 @@ class WLCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'AED 250',
+                              'AED ${campaign.price}',
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Color.fromRGBO(127, 25, 168, 1.0),
@@ -105,11 +116,11 @@ class WLCard extends StatelessWidget {
                                 Container(
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                    child: Image.asset(
-                                      'assets/shopping.jpg',
-                                      width: sizeAware.width * 0.25,
-                                      height: sizeAware.width * 0.28,
-                                      fit: BoxFit.fill,
+                                    child: Image.network(
+                                      campaign.prize.image,
+                                      width: sizeAware.width * 0.3,
+                                      height: sizeAware.width * 0.3,
+                                      fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                 ),
@@ -131,7 +142,7 @@ class WLCard extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          'Nike Shoe',
+                                          campaign.prize.name,
                                           style: TextStyle(
                                             fontSize: 18,
                                           ),
@@ -159,33 +170,51 @@ class WLCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Color.fromRGBO(127, 25, 168, 1.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Icon(
-                          Icons.add_shopping_cart,
-                          color: Colors.white,
+                    GestureDetector(
+                      onTap: () {
+                        cartBloc.add(
+                          AddItem(
+                            cartItem: CartItem(
+                              campaign: campaign,
+                              qty: 1,
+                              total_price: 1 * campaign.price,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Color.fromRGBO(127, 25, 168, 1.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Icon(
+                            Icons.add_shopping_cart,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.red,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.white,
+                    GestureDetector(
+                      onTap: () {
+                        wlBloc.add(wl.DeleteItem(id: campaign.id));
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.red,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -193,8 +222,8 @@ class WLCard extends StatelessWidget {
                       width: sizeAware.width * 0.25,
                       height: sizeAware.width * 0.25,
                       child: CircularStepProgressIndicator(
-                        totalSteps: 975,
-                        currentStep: 400,
+                        totalSteps: campaign.product_quantity,
+                        currentStep: campaign.quantity_sold,
                         stepSize: 10,
                         selectedColor: Color.fromRGBO(127, 25, 168, 1.0),
                         unselectedColor: Color.fromRGBO(217, 200, 236, 1),
@@ -213,31 +242,16 @@ class WLCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                '400',
+                                '${campaign.quantity_sold}',
                                 style: TextStyle(
-                                  fontSize: sizeAware.width * 0.035,
+                                  fontSize: sizeAware.width * 0.05,
                                   fontWeight: FontWeight.bold,
                                   color: Color.fromRGBO(127, 25, 168, 1.0),
                                 ),
                               ),
-                              Text(
-                                'sold',
-                                style: TextStyle(
-                                  fontSize: sizeAware.width * 0.03,
-                                ),
-                              ),
-                              Text(
-                                'out of',
-                                style: TextStyle(
-                                  fontSize: sizeAware.width * 0.03,
-                                ),
-                              ),
-                              Text(
-                                '975',
-                                style: TextStyle(
-                                  fontSize: sizeAware.width * 0.03,
-                                ),
-                              ),
+                              Text('sold'),
+                              Text('out of'),
+                              Text('${campaign.product_quantity}'),
                             ],
                           )),
                         ),

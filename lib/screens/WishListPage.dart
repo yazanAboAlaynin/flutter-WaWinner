@@ -61,7 +61,10 @@ class _WishListPageState extends State<WishListPage> {
   wlItems() {
     List<WLCard> itms = [];
     for (int i = 0; i < items.length; i++) {
-      itms.add(WLCard());
+      itms.add(WLCard(
+        wlBloc: wlBloc,
+        campaign: items[i],
+      ));
     }
     return Column(
       children: itms,

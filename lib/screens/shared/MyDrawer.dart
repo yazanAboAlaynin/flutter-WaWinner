@@ -133,8 +133,11 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WishListPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BlocProvider.value(
+                            value: cartBloc, child: WishListPage())));
               },
               child: Container(
                 height: sizeAware.height * 0.08,
