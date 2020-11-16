@@ -55,9 +55,6 @@ class _CartPageState extends State<CartPage> {
           }
           return Scaffold(
             appBar: myAppBar('Shopping Cart', null),
-            drawer: Drawer(
-              child: MyDrawer(),
-            ),
             body: CustomScrollView(
               slivers: [
                 SliverList(
@@ -67,7 +64,6 @@ class _CartPageState extends State<CartPage> {
                 ),
                 SliverToBoxAdapter(
                   child: Container(
-                    height: 200,
                     width: 100,
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Column(
@@ -76,20 +72,71 @@ class _CartPageState extends State<CartPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Total Products'),
-                            Text('${items.length}')
+                            Text(
+                              'Total Products',
+                              style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              '${items.length}',
+                              style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
+                        ),
+                        SizedBox(
+                          height: sizeAware.height * 0.02,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text('Total Coupons'), Text('2')],
+                          children: [
+                            Text(
+                              'Total Coupons',
+                              style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              '2',
+                              style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text('Donate to recieve an additional Entry'),
+                        SizedBox(
+                          height: sizeAware.height * 0.02,
+                        ),
+                        Text(
+                          'Donate to recieve an additional Entry',
+                          style: TextStyle(
+                            color: Color.fromRGBO(127, 25, 168, 1.0),
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(
+                          height: sizeAware.height * 0.01,
+                        ),
                         Row(
                           children: [
                             Expanded(
                               child: Text(
                                 'I agree to donate all purchased products to charity as per " the Draw Terms and Conditions"',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             Switch(
@@ -104,13 +151,39 @@ class _CartPageState extends State<CartPage> {
                             ),
                           ],
                         ),
-                        Text('Total'),
+                        SizedBox(
+                          height: sizeAware.height * 0.02,
+                        ),
+                        Text(
+                          'Total',
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Price inclusive of VAT'),
-                            Text('AED $total_price'),
+                            Text(
+                              'Price inclusive of VAT',
+                              style: TextStyle(
+                                color: Colors.grey[700],
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              'AED $total_price',
+                              style: TextStyle(
+                                color: Color.fromRGBO(127, 25, 168, 1.0),
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
+                        ),
+                        SizedBox(
+                          height: sizeAware.height * 0.03,
                         ),
                         GestureDetector(
                           onTap: () {

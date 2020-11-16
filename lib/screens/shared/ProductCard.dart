@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wawinner/models/product.dart';
 
 class ProductCard extends StatelessWidget {
+  Product product;
+  ProductCard({this.product});
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -15,14 +18,14 @@ class ProductCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                'assets/shopping.jpg',
+              child: Image.network(
+                product.image,
                 width: sizeAware.width * 0.4,
                 height: sizeAware.width * 0.4,
                 fit: BoxFit.fill,
               ),
             ),
-            Text('name here'),
+            Text(product.name),
           ],
         ),
       ),

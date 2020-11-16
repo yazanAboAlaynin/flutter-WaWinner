@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/models/product.dart';
 import 'package:http/http.dart' as http;
 
 import 'api.dart';
@@ -26,7 +27,7 @@ class CampaignApi extends Api {
     return campaigns;
   }
 
-  Future<List<Campaign>> getProducts() async {
+  Future<List<Product>> getProducts() async {
     final url = '${Api.baseUrl}/v1/front-end/campaign';
 
     final response = await this.httpClient.get(url, headers: setHeaders());
@@ -36,6 +37,6 @@ class CampaignApi extends Api {
     List<Campaign> campaigns =
         res.map((dynamic i) => Campaign.fromJson(i)).toList();
 
-    return campaigns;
+    // return campaigns;
   }
 }

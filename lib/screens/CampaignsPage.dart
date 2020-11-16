@@ -8,12 +8,14 @@ import 'package:flutter_wawinner/blocs/campaign_bloc/campaign_state.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_state.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
 import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CampaignCard.dart';
 import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
-import 'package:flutter_wawinner/screens/shared/ProductCard.dart';
+import 'package:flutter_wawinner/screens/shared/productCard.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class CampaignsPage extends StatefulWidget {
@@ -25,7 +27,7 @@ class _CampaignState extends State<CampaignsPage> {
   CampaignApi campaignApi = CampaignApi(httpClient: http.Client());
   CampaignsBloc campaignsBloc;
   List<Campaign> campaigns = [];
-  List<Campaign> products = [];
+  List<Product> products = [];
 
   @override
   void initState() {
@@ -50,23 +52,13 @@ class _CampaignState extends State<CampaignsPage> {
       cubit: cartBloc,
       listener: (context, state) {
         if (state is ItemAdded) {
-          Navigator.of(context).pop();
-          print('Cart Item Added');
-        }
-        if (state is CartLoadFailure) {
-          Navigator.of(context).pop();
-          print('Fail');
-        }
-        if (state is CartLoadInProgress) {
-          showDialog<void>(
-            context: context,
-            barrierDismissible: true, // user must tap button!
-            builder: (BuildContext context) {
-              return Container(
-                child: Center(child: CircularProgressIndicator()),
-              );
-            },
-          );
+          Fluttertoast.showToast(
+              msg: "Item added to Cart",
+              toastLength: Toast.LENGTH_SHORT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
+              textColor: Colors.white,
+              fontSize: 16.0);
         }
       },
       child: BlocBuilder(
@@ -79,7 +71,7 @@ class _CampaignState extends State<CampaignsPage> {
           }
           if (state is CampaignsLoadSuccess) {
             campaigns = state.campaigns;
-            products = state.products;
+            // products = state.products;
             return Scaffold(
               appBar: myAppBar('Campaigns', [
                 IsLoggedIn
@@ -131,15 +123,7 @@ class _CampaignState extends State<CampaignsPage> {
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                ProductCard(),
-                                ProductCard(),
-                                ProductCard(),
-                                ProductCard(),
-                                ProductCard(),
-                              ],
-                            ),
+                            child: productsList(),
                           )
                         ],
                       ),
@@ -158,6 +142,18 @@ class _CampaignState extends State<CampaignsPage> {
           }
         },
       ),
+    );
+  }
+
+  productsList() {
+    List<ProductCard> prs = [];
+    for (int i = 0; i < products.length; i++) {
+      prs.add(ProductCard(
+        product: products[i],
+      ));
+    }
+    return Row(
+      children: prs,
     );
   }
 }

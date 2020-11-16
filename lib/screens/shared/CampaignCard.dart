@@ -84,11 +84,11 @@ class _CampaignCardState extends State<CampaignCard> {
                             onTap: () {
                               WishList.addItem(widget.campaign);
                               Fluttertoast.showToast(
-                                  msg: "This is Center Short Toast",
+                                  msg: "Item added to Wishlist",
                                   toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.CENTER,
                                   timeInSecForIosWeb: 1,
-                                  backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
+                                  backgroundColor:
+                                      Color.fromRGBO(127, 25, 168, 1.0),
                                   textColor: Colors.white,
                                   fontSize: 16.0);
                             },

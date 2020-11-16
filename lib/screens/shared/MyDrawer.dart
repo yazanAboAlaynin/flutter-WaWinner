@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
+import 'package:flutter_wawinner/screens/CartPage.dart';
 import 'package:flutter_wawinner/screens/WishListPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_wawinner/Constants.dart';
@@ -13,6 +16,7 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
+    final cartBloc = BlocProvider.of<CartBloc>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -91,7 +95,13 @@ class _MyDrawerState extends State<MyDrawer> {
               thickness: 0.7,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BlocProvider.value(
+                            value: cartBloc, child: CartPage())));
+              },
               child: Container(
                 height: sizeAware.height * 0.08,
                 child: Center(

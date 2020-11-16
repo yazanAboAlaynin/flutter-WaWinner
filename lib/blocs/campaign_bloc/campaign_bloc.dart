@@ -1,4 +1,5 @@
 import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
@@ -19,7 +20,7 @@ class CampaignsBloc extends Bloc<CampaignEvent, CampaignState> {
       yield CampaignsLoadInProgress();
       try {
         List<Campaign> campaigns = await campaignApi.getCampaigns();
-        List<Campaign> products = await campaignApi.getProducts();
+        List<Product> products = await campaignApi.getProducts();
 
         yield CampaignsLoadSuccess(campaigns: campaigns, products: products);
       } catch (_) {
