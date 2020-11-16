@@ -22,6 +22,7 @@ class _CartPageState extends State<CartPage> {
   CartBloc cartBloc;
   bool is_donated = false;
   int total_price = 0;
+  int total_tickets = 0;
 
   @override
   void initState() {
@@ -50,8 +51,12 @@ class _CartPageState extends State<CartPage> {
         if (state is CartLoadSuccess) {
           items = state.items;
           total_price = 0;
+          total_tickets = 0;
           for (int i = 0; i < items.length; i++) {
             total_price += items[i].total_price;
+          }
+          for (int i = 0; i < items.length; i++) {
+            total_tickets += items[i].campaign.ticket_count * items[i].qty;
           }
           return Scaffold(
             appBar: myAppBar('Shopping Cart', null),
@@ -105,7 +110,7 @@ class _CartPageState extends State<CartPage> {
                               ),
                             ),
                             Text(
-                              '2',
+                              '$total_tickets',
                               style: TextStyle(
                                 color: Colors.grey[700],
                                 fontSize: 18,
@@ -139,15 +144,18 @@ class _CartPageState extends State<CartPage> {
                                 ),
                               ),
                             ),
-                            Switch(
-                              value: is_donated,
-                              onChanged: (value) {
-                                setState(() {
-                                  is_donated = !is_donated;
-                                });
-                              },
-                              activeTrackColor: Colors.lightGreenAccent,
-                              activeColor: Colors.green,
+                            Transform.scale(
+                              scale: 2.0,
+                              child: Switch(
+                                value: is_donated,
+                                onChanged: (value) {
+                                  setState(() {
+                                    is_donated = !is_donated;
+                                  });
+                                },
+                                activeTrackColor: Colors.lightGreenAccent,
+                                activeColor: Colors.green,
+                              ),
                             ),
                           ],
                         ),

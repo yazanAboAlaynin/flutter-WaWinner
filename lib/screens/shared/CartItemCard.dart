@@ -230,7 +230,7 @@ class CartItemCard extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: Icon(
-                                  Icons.add,
+                                  Icons.remove,
                                   color: Colors.white,
                                 ),
                               ),

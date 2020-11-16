@@ -365,7 +365,7 @@ class _CampaignCardState extends State<CampaignCard> {
                                 color: Color.fromRGBO(127, 25, 168, 1.0),
                               ),
                               child: Icon(
-                                Icons.add,
+                                Icons.remove,
                                 color: Colors.white,
                                 size: 28,
                               ),
