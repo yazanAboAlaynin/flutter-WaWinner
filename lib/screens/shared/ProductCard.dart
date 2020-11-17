@@ -16,16 +16,22 @@ class ProductCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.network(
-                product.image,
-                width: sizeAware.width * 0.4,
-                height: sizeAware.width * 0.4,
-                fit: BoxFit.fill,
+            Container(
+              color: Colors.white,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.network(
+                  product.image,
+                  width: sizeAware.width * 0.4,
+                  height: sizeAware.width * 0.4,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ),
-            Text(product.name),
+            Text(
+              product.name,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
           ],
         ),
       ),

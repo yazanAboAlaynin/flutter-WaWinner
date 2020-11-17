@@ -28,15 +28,15 @@ class CampaignApi extends Api {
   }
 
   Future<List<Product>> getProducts() async {
-    final url = '${Api.baseUrl}/v1/front-end/campaign';
+    final url = '${Api.baseUrl}/v1/front-end/product';
 
     final response = await this.httpClient.get(url, headers: setHeaders());
 
     var res = jsonDecode(response.body)["data"] as List;
 
-    List<Campaign> campaigns =
-        res.map((dynamic i) => Campaign.fromJson(i)).toList();
+    List<Product> products =
+        res.map((dynamic i) => Product.fromJson(i)).toList();
 
-    // return campaigns;
+    return products;
   }
 }

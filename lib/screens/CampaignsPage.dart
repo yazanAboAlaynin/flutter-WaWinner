@@ -71,7 +71,7 @@ class _CampaignState extends State<CampaignsPage> {
           }
           if (state is CampaignsLoadSuccess) {
             campaigns = state.campaigns;
-            // products = state.products;
+            products = state.products;
             return Scaffold(
               appBar: myAppBar('Campaigns', null),
               drawer: Drawer(
