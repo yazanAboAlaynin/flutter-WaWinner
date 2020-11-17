@@ -249,13 +249,14 @@ class _CartPageState extends State<CartPage> {
                         Icon(
                           Icons.check_circle,
                           size: 50,
+                          color: Colors.grey,
                         ),
                         SizedBox(
                           width: sizeAware.width * 0.02,
                         ),
                         Expanded(
                           child: Text(
-                              'Safe and secure payerijgerijrijments. 100% Authentic products.'),
+                              'Safe and secure payments. 100% Authentic products.'),
                         )
                       ],
                     ),

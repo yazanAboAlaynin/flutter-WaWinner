@@ -42,6 +42,8 @@ class AuthApi extends Api {
       ID = user.id;
       return "Success";
     } else if (res['message'] == "the account has not been verified") {
+      User user = User.fromJson(res['data']);
+      ID = user.id;
       return res['message'];
     } else {
       return "Error";
@@ -84,7 +86,7 @@ class AuthApi extends Api {
     var res = jsonDecode(response.body);
     if (res['status']) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      User user = User.fromJson(res['data']);
+      User user = User.fromJson(res['data']['user']);
       preferences.setBool('IsLoggedIn', true);
       preferences.setInt('id', user.id);
       preferences.setString('email', user.email);
@@ -97,6 +99,21 @@ class AuthApi extends Api {
       NAME = user.name;
       ADDRESS = user.address;
       ID = user.id;
+    }
+  }
+
+  Future<bool> resendCode(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/reSendCode';
+
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: setHeaders());
+
+    var res = jsonDecode(response.body);
+    if (res['status']) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

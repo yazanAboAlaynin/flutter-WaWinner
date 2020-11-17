@@ -35,7 +35,8 @@ class _LoginPageState extends State<LoginPage> {
       cubit: authBloc,
       listener: (context, state) {
         if (state is LoginSuccess) {
-          Navigator.pop(context);
+          Navigator.popUntil(context, (route) => route.isFirst);
+          Navigator.pushReplacementNamed(context, 'Campaignes');
         }
         if (state is LoginError) {
           Fluttertoast.showToast(msg: "Error Try Again");

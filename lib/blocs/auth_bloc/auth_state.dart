@@ -20,8 +20,12 @@ class NotVerified extends AuthState {}
 
 class LoginError extends AuthState {}
 
+class Error extends AuthState {}
+
 class RegisterSuccess extends AuthState {}
 
 class CodeVerified extends AuthState {}
+
+class CodeSent extends AuthState {}
 
 class AuthLoadFailure extends AuthState {}

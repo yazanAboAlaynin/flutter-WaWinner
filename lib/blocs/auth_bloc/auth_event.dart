@@ -39,11 +39,18 @@ class RegisterRequested extends AuthEvent {
 }
 
 class SendCode extends AuthEvent {
+  int id;
   String code;
 
-  SendCode({
-    this.code,
-  });
+  SendCode({this.code, this.id});
   @override
-  List<Object> get props => [code];
+  List<Object> get props => [code, id];
+}
+
+class ResendCode extends AuthEvent {
+  int id;
+
+  ResendCode({this.id});
+  @override
+  List<Object> get props => [id];
 }

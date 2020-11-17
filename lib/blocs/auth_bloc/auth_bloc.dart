@@ -54,9 +54,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else if (event is SendCode) {
       yield AuthLoadInProgress();
       try {
-        // await authApi.sendCode(data);
+        var data = {
+          'user_id': event.id,
+          'code': event.code,
+        };
+        await authApi.sendCode(data);
 
-        yield RegisterSuccess();
+        yield CodeVerified();
+      } catch (_) {
+        yield AuthLoadFailure();
+      }
+    } else if (event is ResendCode) {
+      yield AuthLoadInProgress();
+      try {
+        var data = {'user_id': event.id};
+        bool tr = await authApi.resendCode(data);
+        if (tr) {
+          yield CodeSent();
+        } else {
+          yield Error();
+        }
       } catch (_) {
         yield AuthLoadFailure();
       }

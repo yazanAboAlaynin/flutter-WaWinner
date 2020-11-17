@@ -73,22 +73,7 @@ class _CampaignState extends State<CampaignsPage> {
             campaigns = state.campaigns;
             // products = state.products;
             return Scaffold(
-              appBar: myAppBar('Campaigns', [
-                IsLoggedIn
-                    ? Text(NAME)
-                    : GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()))
-                              .then((value) {
-                            setState(() {});
-                          });
-                        },
-                        child: Center(child: Text('Login')),
-                      )
-              ]),
+              appBar: myAppBar('Campaigns', null),
               drawer: Drawer(
                 child: MyDrawer(),
               ),

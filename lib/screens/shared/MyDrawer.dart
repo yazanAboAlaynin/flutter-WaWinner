@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
-import 'package:flutter_wawinner/screens/CartPage.dart';
-import 'package:flutter_wawinner/screens/WishListPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_wawinner/Constants.dart';
 
@@ -51,7 +49,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                     SizedBox(width: sizeAware.width * 0.04),
                     Text(
-                      'BigBang Its',
+                      IsLoggedIn ? NAME : 'WaWinner',
                       style: TextStyle(fontSize: 20),
                     ),
                   ],
@@ -63,44 +61,112 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.black26,
               thickness: 0.7,
             ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: sizeAware.height * 0.08,
-                child: Center(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        height: sizeAware.height * 0.04,
-                        width: sizeAware.width * 0.1,
-                        child: SvgPicture.asset('assets/home.svg'),
-                      ),
-                      SizedBox(
-                        width: sizeAware.width * 0.04,
-                      ),
-                      Text(
-                        'Home',
-                        style: TextStyle(
-                          fontSize: 18,
+            !IsLoggedIn
+                ? Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'Login');
+                        },
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child: SvgPicture.asset('assets/home.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'Register');
+                        },
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child: SvgPicture.asset('assets/home.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'Register',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
+                      ),
                     ],
-                  ),
-                ),
-              ),
-            ),
-            Divider(
-              height: sizeAware.height * 0.01,
-              color: Colors.black26,
-              thickness: 0.7,
-            ),
+                  )
+                : Container(),
+            // InkWell(
+            //   onTap: () {},
+            //   child: Container(
+            //     height: sizeAware.height * 0.08,
+            //     child: Center(
+            //       child: Row(
+            //         children: <Widget>[
+            //           Container(
+            //             height: sizeAware.height * 0.04,
+            //             width: sizeAware.width * 0.1,
+            //             child: SvgPicture.asset('assets/home.svg'),
+            //           ),
+            //           SizedBox(
+            //             width: sizeAware.width * 0.04,
+            //           ),
+            //           Text(
+            //             'Home',
+            //             style: TextStyle(
+            //               fontSize: 18,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Divider(
+            //   height: sizeAware.height * 0.01,
+            //   color: Colors.black26,
+            //   thickness: 0.7,
+            // ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BlocProvider.value(
-                            value: cartBloc, child: CartPage())));
+                Navigator.pushNamed(context, 'Cart');
               },
               child: Container(
                 height: sizeAware.height * 0.08,
@@ -133,11 +199,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BlocProvider.value(
-                            value: cartBloc, child: WishListPage())));
+                Navigator.pushNamed(context, 'Wishlist');
               },
               child: Container(
                 height: sizeAware.height * 0.08,
@@ -168,162 +230,172 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.black26,
               thickness: 0.7,
             ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: sizeAware.height * 0.08,
-                child: Center(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        height: sizeAware.height * 0.04,
-                        width: sizeAware.width * 0.1,
-                        child: SvgPicture.asset('assets/coupon.svg'),
-                      ),
-                      SizedBox(
-                        width: sizeAware.width * 0.04,
-                      ),
-                      Text(
-                        'Active Coupones',
-                        style: TextStyle(
-                          fontSize: 18,
+            IsLoggedIn
+                ? Column(
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child: SvgPicture.asset('assets/coupon.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'Active Coupones',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Divider(
-              height: sizeAware.height * 0.01,
-              color: Colors.black26,
-              thickness: 0.7,
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: sizeAware.height * 0.08,
-                child: Center(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        height: sizeAware.height * 0.04,
-                        width: sizeAware.width * 0.1,
-                        child: SvgPicture.asset('assets/credit-card.svg'),
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
                       ),
-                      SizedBox(
-                        width: sizeAware.width * 0.04,
-                      ),
-                      Text(
-                        'Payment Options',
-                        style: TextStyle(
-                          fontSize: 18,
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child: SvgPicture.asset(
+                                      'assets/credit-card.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'Payment Options',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Divider(
-              height: sizeAware.height * 0.01,
-              color: Colors.black26,
-              thickness: 0.7,
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: sizeAware.height * 0.08,
-                child: Center(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        height: sizeAware.height * 0.04,
-                        width: sizeAware.width * 0.1,
-                        child: SvgPicture.asset('assets/user.svg'),
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
                       ),
-                      SizedBox(
-                        width: sizeAware.width * 0.04,
-                      ),
-                      Text(
-                        'Personal Details',
-                        style: TextStyle(
-                          fontSize: 18,
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child: SvgPicture.asset('assets/user.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'Personal Details',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Divider(
-              height: sizeAware.height * 0.01,
-              color: Colors.black26,
-              thickness: 0.7,
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: sizeAware.height * 0.08,
-                child: Center(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        height: sizeAware.height * 0.04,
-                        width: sizeAware.width * 0.1,
-                        child: SvgPicture.asset('assets/phone-call.svg'),
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
                       ),
-                      SizedBox(
-                        width: sizeAware.width * 0.04,
-                      ),
-                      Text(
-                        'Contact us',
-                        style: TextStyle(
-                          fontSize: 18,
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child:
+                                      SvgPicture.asset('assets/phone-call.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'Contact us',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Divider(
-              height: sizeAware.height * 0.01,
-              color: Colors.black26,
-              thickness: 0.7,
-            ),
-            InkWell(
-              onTap: () async {
-                SharedPreferences sharedPreferences =
-                    await SharedPreferences.getInstance();
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
 
-                sharedPreferences.clear();
-                IsLoggedIn = false;
-              },
-              child: Container(
-                height: sizeAware.height * 0.08,
-                child: Center(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        height: sizeAware.height * 0.04,
-                        width: sizeAware.width * 0.1,
-                        child: SvgPicture.asset("assets/logout.svg"),
-                      ),
-                      SizedBox(
-                        width: sizeAware.width * 0.04,
-                      ),
-                      Text(
-                        'Logout',
-                        style: TextStyle(
-                          fontSize: 18,
+                          sharedPreferences.setBool('IsLoggedIn', false);
+                          setState(() {
+                            IsLoggedIn = false;
+                          });
+                        },
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child: SvgPicture.asset("assets/logout.svg"),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'Logout',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
+                      )
                     ],
-                  ),
-                ),
-              ),
-            ),
+                  )
+                : Container(),
           ],
         ),
       ),

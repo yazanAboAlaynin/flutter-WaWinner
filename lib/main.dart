@@ -5,6 +5,9 @@ import 'package:flutter_wawinner/repositories/campaign_api.dart';
 import 'package:flutter_wawinner/repositories/cart_api.dart';
 import 'package:flutter_wawinner/screens/CampaignsPage.dart';
 import 'package:flutter_wawinner/screens/CartPage.dart';
+import 'package:flutter_wawinner/screens/WishListPage.dart';
+import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
+import 'package:flutter_wawinner/screens/auth/RegisterPage.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -58,9 +61,20 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: BlocProvider(
-          create: (context) => CartBloc(cartApi: widget.cartApi),
-          child: CampaignsPage()),
+      initialRoute: 'Campaignes',
+      routes: {
+        'Campaignes': (context) => BlocProvider(
+            create: (context) => CartBloc(cartApi: widget.cartApi),
+            child: CampaignsPage()),
+        'Login': (context) => LoginPage(),
+        'Register': (context) => RegisterPage(),
+        'Cart': (context) => BlocProvider(
+            create: (context) => CartBloc(cartApi: widget.cartApi),
+            child: CartPage()),
+        'Wishlist': (context) => BlocProvider(
+            create: (context) => CartBloc(cartApi: widget.cartApi),
+            child: WishListPage()),
+      },
     );
   }
 }
