@@ -14,7 +14,6 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
-    final cartBloc = BlocProvider.of<CartBloc>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -26,7 +25,6 @@ class _MyDrawerState extends State<MyDrawer> {
             child: Icon(Icons.close)),
         title: Text(
           'Settings',
-          style: TextStyle(fontFamily: 'Gess'),
         ),
         backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
         centerTitle: true,
