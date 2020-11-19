@@ -74,7 +74,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                 Container(
                                   height: sizeAware.height * 0.04,
                                   width: sizeAware.width * 0.1,
-                                  child: SvgPicture.asset('assets/home.svg'),
+                                  child: SvgPicture.asset('assets/login.svg'),
                                 ),
                                 SizedBox(
                                   width: sizeAware.width * 0.04,
@@ -107,7 +107,8 @@ class _MyDrawerState extends State<MyDrawer> {
                                 Container(
                                   height: sizeAware.height * 0.04,
                                   width: sizeAware.width * 0.1,
-                                  child: SvgPicture.asset('assets/home.svg'),
+                                  child:
+                                      SvgPicture.asset('assets/register.svg'),
                                 ),
                                 SizedBox(
                                   width: sizeAware.width * 0.04,
