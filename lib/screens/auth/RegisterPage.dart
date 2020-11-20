@@ -18,8 +18,9 @@ class _RegisterPageState extends State<RegisterPage> {
   AuthBloc authBloc;
   AuthApi authApi = AuthApi(httpClient: http.Client());
   TextEditingController emailTextEditingController = TextEditingController();
-  TextEditingController arNameTextEditingController = TextEditingController();
-  TextEditingController enNameTextEditingController = TextEditingController();
+  TextEditingController firstNameTextEditingController =
+      TextEditingController();
+  TextEditingController lastNameTextEditingController = TextEditingController();
   TextEditingController arAddressTextEditingController =
       TextEditingController();
   TextEditingController enAddressTextEditingController =
@@ -74,15 +75,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: sizeAware.height * 0.02,
                         ),
                         TextFormField(
-                          controller: arNameTextEditingController,
+                          controller: firstNameTextEditingController,
                           decoration: InputDecoration(
-                            labelText: 'Arabic name',
+                            labelText: 'First Name',
                           ),
                         ),
                         TextFormField(
-                          controller: enNameTextEditingController,
+                          controller: lastNameTextEditingController,
                           decoration: InputDecoration(
-                            labelText: 'English name',
+                            labelText: 'Last Name',
                           ),
                         ),
                         TextFormField(
@@ -157,8 +158,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                           arAddressTextEditingController.text,
                                       address_en:
                                           enAddressTextEditingController.text,
-                                      name_ar: arNameTextEditingController.text,
-                                      name_en: enNameTextEditingController.text,
+                                      first_name_ar:
+                                          firstNameTextEditingController.text,
+                                      first_name_en:
+                                          firstNameTextEditingController.text,
+                                      last_name_ar:
+                                          lastNameTextEditingController.text,
+                                      last_name_en:
+                                          lastNameTextEditingController.text,
                                       number: numberTextEditingController.text,
                                       password_confirmation:
                                           confirmPasswordTextEditingController

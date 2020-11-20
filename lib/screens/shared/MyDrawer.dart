@@ -41,13 +41,17 @@ class _MyDrawerState extends State<MyDrawer> {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 35,
-                      backgroundImage: AssetImage(
-                        'assets/shopping.jpg',
-                      ),
+                      backgroundImage: IsLoggedIn
+                          ? NetworkImage(
+                              IMAGE,
+                            )
+                          : AssetImage(
+                              'assets/shopping.jpg',
+                            ),
                     ),
                     SizedBox(width: sizeAware.width * 0.04),
                     Text(
-                      IsLoggedIn ? NAME : 'WaWinner',
+                      IsLoggedIn ? FIRST_NAME : 'WaWinner',
                       style: TextStyle(fontSize: 20),
                     ),
                   ],

@@ -30,14 +30,18 @@ class AuthApi extends Api {
       preferences.setInt('id', user.id);
       preferences.setString('token', res['data']['token']);
       preferences.setString('email', user.email);
-      preferences.setString('name', user.name);
+      preferences.setString('first_name', user.first_name);
+      preferences.setString('last_name', user.last_name);
+      preferences.setString('image', user.image);
       preferences.setString('address', user.address);
       preferences.setString('created_at', user.created_at);
       preferences.setString('updated_at', user.updated_at);
       IsLoggedIn = true;
       EMAIL = user.email;
-      NAME = user.name;
+      FIRST_NAME = user.first_name;
+      LAST_NAME = user.last_name;
       ADDRESS = user.address;
+      IMAGE = user.image;
       TOKEN = res['data']['token'];
       ID = user.id;
       return "Success";
@@ -61,17 +65,19 @@ class AuthApi extends Api {
     if (res['status']) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       User user = User.fromJson(res['data']);
-      preferences.setBool('IsLoggedIn', true);
       preferences.setInt('id', user.id);
-      preferences.setString('email', user.email);
-      preferences.setString('name', user.name);
+      preferences.setString('first_name', user.first_name);
+      preferences.setString('last_name', user.last_name);
+      preferences.setString('image', user.image);
       preferences.setString('address', user.address);
       preferences.setString('created_at', user.created_at);
       preferences.setString('updated_at', user.updated_at);
-      IsLoggedIn = true;
+
       EMAIL = user.email;
-      NAME = user.name;
+      FIRST_NAME = user.first_name;
+      LAST_NAME = user.last_name;
       ADDRESS = user.address;
+      IMAGE = user.image;
       ID = user.id;
     }
   }
@@ -90,14 +96,18 @@ class AuthApi extends Api {
       preferences.setBool('IsLoggedIn', true);
       preferences.setInt('id', user.id);
       preferences.setString('email', user.email);
-      preferences.setString('name', user.name);
+      preferences.setString('first_name', user.first_name);
+      preferences.setString('last_name', user.last_name);
+      preferences.setString('image', user.image);
       preferences.setString('address', user.address);
       preferences.setString('created_at', user.created_at);
       preferences.setString('updated_at', user.updated_at);
       IsLoggedIn = true;
       EMAIL = user.email;
-      NAME = user.name;
+      FIRST_NAME = user.first_name;
+      LAST_NAME = user.last_name;
       ADDRESS = user.address;
+      IMAGE = user.image;
       ID = user.id;
     }
   }

@@ -18,8 +18,10 @@ class LoginRequested extends AuthEvent {
 class RegisterRequested extends AuthEvent {
   String email;
   String password;
-  String name_ar;
-  String name_en;
+  String first_name_ar;
+  String last_name_ar;
+  String last_name_en;
+  String first_name_en;
   String address_ar;
   String address_en;
   String password_confirmation;
@@ -30,12 +32,25 @@ class RegisterRequested extends AuthEvent {
       this.password,
       this.address_ar,
       this.address_en,
-      this.name_ar,
-      this.name_en,
+      this.first_name_ar,
+      this.first_name_en,
+      this.last_name_ar,
+      this.last_name_en,
       this.number,
       this.password_confirmation});
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [
+        email,
+        password,
+        address_ar,
+        address_en,
+        first_name_ar,
+        first_name_en,
+        last_name_ar,
+        last_name_en,
+        number,
+        password_confirmation,
+      ];
 }
 
 class SendCode extends AuthEvent {

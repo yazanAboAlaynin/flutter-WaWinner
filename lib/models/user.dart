@@ -1,7 +1,9 @@
 class User {
   int id;
   String email;
-  String name;
+  String first_name;
+  String last_name;
+  String image;
   String address;
   String created_at;
   String updated_at;
@@ -11,13 +13,17 @@ class User {
       this.address,
       this.created_at,
       this.email,
-      this.name,
+      this.first_name,
+      this.last_name,
+      this.image,
       this.updated_at});
 
   static User fromJson(dynamic json) {
     return User(
       id: json['id'],
-      name: json['name'],
+      first_name: json['first_name'],
+      last_name: json['last_name'],
+      image: json['image'],
       address: json['address'],
       email: json['email'],
       created_at: json['created_at'],

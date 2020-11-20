@@ -40,8 +40,10 @@ class _MyAppState extends State<MyApp> {
         preferences.getBool('IsLoggedIn')) {
       IsLoggedIn = true;
       EMAIL = preferences.getString('email');
-      NAME = preferences.getString('name');
+      FIRST_NAME = preferences.getString('first_name');
+      LAST_NAME = preferences.getString('last_name');
       ADDRESS = preferences.getString('address');
+      IMAGE = preferences.getString('image');
       TOKEN = preferences.getString('token');
     } else {}
   }
