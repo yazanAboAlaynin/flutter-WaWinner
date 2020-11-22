@@ -62,10 +62,9 @@ class WishList {
     var mds = jsonDecode(localStorage.get('wishlist')) as List;
 
     List<Campaign> campaigns = mds.map((e) => Campaign.fromJson(e)).toList();
-
+    print(campaigns.length);
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].id == id) {
-        print(id);
         return true;
       }
     }

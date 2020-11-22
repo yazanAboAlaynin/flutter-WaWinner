@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -367,7 +369,10 @@ class _MyDrawerState extends State<MyDrawer> {
                           SharedPreferences sharedPreferences =
                               await SharedPreferences.getInstance();
 
-                          sharedPreferences.setBool('IsLoggedIn', false);
+                          await sharedPreferences.setBool('IsLoggedIn', false);
+                          await sharedPreferences.remove('wishlist');
+                          await sharedPreferences.setString(
+                              'wishlist', jsonEncode([]));
                           setState(() {
                             IsLoggedIn = false;
                           });

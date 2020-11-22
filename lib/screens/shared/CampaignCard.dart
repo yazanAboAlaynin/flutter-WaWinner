@@ -10,6 +10,8 @@ import 'package:flutter_wawinner/models/wishlist.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+import '../../Constants.dart';
+
 class CampaignCard extends StatefulWidget {
   final animation;
   final Campaign campaign;
@@ -36,6 +38,10 @@ class _CampaignCardState extends State<CampaignCard> {
       setState(() {
         isAddedToWL = x;
       });
+    }
+    print(widget.campaign.added_to_wishlist);
+    if (isAddedToWL == false && widget.campaign.added_to_wishlist) {
+      // await WishList.addItem(widget.campaign);
     }
   }
 
@@ -100,8 +106,10 @@ class _CampaignCardState extends State<CampaignCard> {
                           ),
                           GestureDetector(
                             onTap: () async {
-                              widget.wlBloc
-                                  .add(wl.AddItem(item: widget.campaign));
+                              if (IsLoggedIn) {
+                                widget.wlBloc
+                                    .add(wl.AddItem(item: widget.campaign));
+                              }
                             },
                             child: Container(
                               width: 40,
