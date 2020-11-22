@@ -7,9 +7,11 @@ import 'package:flutter_wawinner/blocs/campaign_bloc/campaign_event.dart';
 import 'package:flutter_wawinner/blocs/campaign_bloc/campaign_state.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_state.dart';
+import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
+import 'package:flutter_wawinner/repositories/wishlist_api.dart';
 import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CampaignCard.dart';
@@ -25,7 +27,9 @@ class CampaignsPage extends StatefulWidget {
 
 class _CampaignState extends State<CampaignsPage> {
   CampaignApi campaignApi = CampaignApi(httpClient: http.Client());
+  WLApi wlApi = WLApi(httpClient: http.Client());
   CampaignsBloc campaignsBloc;
+  WLBloc wlBloc;
   List<Campaign> campaigns = [];
   List<Product> products = [];
 
@@ -33,6 +37,7 @@ class _CampaignState extends State<CampaignsPage> {
   void initState() {
     super.initState();
     campaignsBloc = CampaignsBloc(campaignApi: campaignApi);
+    wlBloc = WLBloc(wlApi: wlApi);
     campaignsBloc.add(CampaignsRequested());
   }
 
@@ -117,6 +122,7 @@ class _CampaignState extends State<CampaignsPage> {
                   return CampaignCard(
                     animation: animation,
                     campaign: campaigns[index],
+                    wlBloc: wlBloc,
                   );
                 },
               ),

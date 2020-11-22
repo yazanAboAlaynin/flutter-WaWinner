@@ -200,7 +200,7 @@ class WLCard extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        wlBloc.add(wl.DeleteItem(id: campaign.id));
+                        wlBloc.add(wl.AddItem(item: campaign));
                       },
                       child: Container(
                         width: 40,

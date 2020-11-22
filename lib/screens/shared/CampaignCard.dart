@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
+import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_event.dart' as wl;
+import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:flutter_wawinner/models/wishlist.dart';
@@ -11,8 +13,9 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 class CampaignCard extends StatefulWidget {
   final animation;
   final Campaign campaign;
+  final WLBloc wlBloc;
 
-  CampaignCard({this.animation, this.campaign});
+  CampaignCard({this.animation, this.campaign, this.wlBloc});
 
   @override
   _CampaignCardState createState() => _CampaignCardState();
@@ -20,12 +23,27 @@ class CampaignCard extends StatefulWidget {
 
 class _CampaignCardState extends State<CampaignCard> {
   int qty = 1;
+  bool isAddedToWL = false;
+  @override
+  void initState() {
+    super.initState();
+    isAddedToWL = false;
+  }
+
+  Future<void> isInWL() async {
+    bool x = await WishList.isInWL(widget.campaign.id);
+    if (mounted) {
+      setState(() {
+        isAddedToWL = x;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
     final cartBloc = BlocProvider.of<CartBloc>(context);
-
+    isInWL();
     return Container(
       width: sizeAware.width,
       margin: EdgeInsets.symmetric(vertical: 8),
@@ -81,16 +99,9 @@ class _CampaignCardState extends State<CampaignCard> {
                             width: 20,
                           ),
                           GestureDetector(
-                            onTap: () {
-                              WishList.addItem(widget.campaign);
-                              Fluttertoast.showToast(
-                                  msg: "Item added to Wishlist",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor:
-                                      Color.fromRGBO(127, 25, 168, 1.0),
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
+                            onTap: () async {
+                              widget.wlBloc
+                                  .add(wl.AddItem(item: widget.campaign));
                             },
                             child: Container(
                               width: 40,
@@ -103,7 +114,8 @@ class _CampaignCardState extends State<CampaignCard> {
                                 padding: const EdgeInsets.all(4.0),
                                 child: Icon(
                                   Icons.favorite,
-                                  color: Colors.white,
+                                  color:
+                                      isAddedToWL ? Colors.red : Colors.white,
                                 ),
                               ),
                             ),

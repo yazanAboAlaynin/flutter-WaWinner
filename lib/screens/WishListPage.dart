@@ -4,8 +4,9 @@ import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_event.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_state.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/repositories/wishlist_api.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
-import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_wawinner/screens/shared/WLCard.dart';
 
 class WishListPage extends StatefulWidget {
@@ -15,11 +16,12 @@ class WishListPage extends StatefulWidget {
 
 class _WishListPageState extends State<WishListPage> {
   WLBloc wlBloc;
+  WLApi wlApi = WLApi(httpClient: http.Client());
   List<Campaign> items = [];
   @override
   void initState() {
     super.initState();
-    wlBloc = WLBloc();
+    wlBloc = WLBloc(wlApi: wlApi);
     wlBloc.add(WlRequested());
   }
 
@@ -38,7 +40,9 @@ class _WishListPageState extends State<WishListPage> {
             child: CircularProgressIndicator(),
           );
         }
-        if (state is WlLoadSuccess) {
+        if (state is WlLoadSuccess ||
+            state is ItemDeleted ||
+            state is ItemAdded) {
           items = state.items;
 
           return Scaffold(

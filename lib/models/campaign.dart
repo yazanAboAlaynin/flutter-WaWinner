@@ -15,6 +15,7 @@ class Campaign {
   final String description;
   final Product product;
   final Product prize;
+  bool added_to_wishlist;
 
   Campaign(
       {this.id,
@@ -30,24 +31,27 @@ class Campaign {
       this.prize,
       this.description,
       this.title,
-      this.quantity_sold});
+      this.quantity_sold,
+      this.added_to_wishlist});
 
   static Campaign fromJson(dynamic json) {
     return Campaign(
-        id: json['id'],
-        donate_ticket_count: json['donate_ticket_count'],
-        early_bird_count: json['early_bird_count'],
-        early_bird_ticket_count: json['early_bird_ticket_count'],
-        max_draw_date: json['max_draw_date'],
-        price: json['price'],
-        prize: Product.fromJson(json['prize_id']),
-        product: Product.fromJson(json['product_id']),
-        product_quantity: json['product_quantity'],
-        status: json['status'],
-        ticket_count: json['ticket_count'],
-        description: json['description'],
-        title: json['title'],
-        quantity_sold: json['quantity_sold']);
+      id: json['id'],
+      donate_ticket_count: json['donate_ticket_count'],
+      early_bird_count: json['early_bird_count'],
+      early_bird_ticket_count: json['early_bird_ticket_count'],
+      max_draw_date: json['max_draw_date'],
+      price: json['price'],
+      prize: Product.fromJson(json['prize_id']),
+      product: Product.fromJson(json['product_id']),
+      product_quantity: json['product_quantity'],
+      status: json['status'],
+      ticket_count: json['ticket_count'],
+      description: json['description'],
+      title: json['title'],
+      quantity_sold: json['quantity_sold'],
+      added_to_wishlist: false,
+    );
   }
 
   static Map<String, dynamic> toMap(Campaign c) {
@@ -65,7 +69,8 @@ class Campaign {
       'description': c.description,
       'title': c.title,
       'quantity_sold': c.quantity_sold,
-      'product_quantity': c.product_quantity
+      'product_quantity': c.product_quantity,
+      'added_to_wishlist': c.added_to_wishlist,
     };
 
     return d;

@@ -24,7 +24,7 @@ class WishList {
     await localStorage.remove('wishlist');
   }
 
-  static Future<void> addItem(Campaign item) async {
+  static Future<bool> addItem(Campaign item) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     if (!localStorage.containsKey('wishlist')) {
       localStorage.setString('wishlist', jsonEncode([]));
@@ -37,17 +37,27 @@ class WishList {
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].id == item.id) {
         t = false;
+        campaigns[i].added_to_wishlist = false;
+        campaigns.removeAt(i);
       }
     }
-    if (t) campaigns.add(item);
+    if (t) {
+      campaigns.add(item);
+      campaigns.last.added_to_wishlist = true;
+    }
 
     List<Map> list = Campaign.encodeCampaigns(campaigns);
 
     localStorage.setString('wishlist', jsonEncode(list));
+
+    return t;
   }
 
-  static Future<void> deleteItem(id) async {
+  static Future<bool> isInWL(id) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
+    if (!localStorage.containsKey('wishlist')) {
+      localStorage.setString('wishlist', jsonEncode([]));
+    }
 
     var mds = jsonDecode(localStorage.get('wishlist')) as List;
 
@@ -55,12 +65,12 @@ class WishList {
 
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].id == id) {
-        campaigns.removeAt(i);
+        print(id);
+        return true;
       }
     }
 
-    List<Map> list = Campaign.encodeCampaigns(campaigns);
-    localStorage.setString('wishlist', jsonEncode(list));
+    return false;
   }
 
   static Future<void> addItemToCart(CartItem item) async {

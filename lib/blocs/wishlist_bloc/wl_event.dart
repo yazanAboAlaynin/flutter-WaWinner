@@ -21,8 +21,8 @@ class AddItem extends WlEvent {
 }
 
 class DeleteItem extends WlEvent {
-  int id;
-  DeleteItem({this.id});
+  Campaign item;
+  DeleteItem({this.item});
   @override
   List<Object> get props => [];
 }

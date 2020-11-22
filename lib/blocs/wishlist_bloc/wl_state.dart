@@ -16,6 +16,8 @@ class WlLoadInProgress extends WlState {}
 
 class ItemAdded extends WlState {}
 
+class ItemDeleted extends WlState {}
+
 class WlLoadSuccess extends WlState {
   List<Campaign> items;
 
