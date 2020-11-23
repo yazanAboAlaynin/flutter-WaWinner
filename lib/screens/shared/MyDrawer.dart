@@ -138,37 +138,6 @@ class _MyDrawerState extends State<MyDrawer> {
                     ],
                   )
                 : Container(),
-            // InkWell(
-            //   onTap: () {},
-            //   child: Container(
-            //     height: sizeAware.height * 0.08,
-            //     child: Center(
-            //       child: Row(
-            //         children: <Widget>[
-            //           Container(
-            //             height: sizeAware.height * 0.04,
-            //             width: sizeAware.width * 0.1,
-            //             child: SvgPicture.asset('assets/home.svg'),
-            //           ),
-            //           SizedBox(
-            //             width: sizeAware.width * 0.04,
-            //           ),
-            //           Text(
-            //             'Home',
-            //             style: TextStyle(
-            //               fontSize: 18,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // Divider(
-            //   height: sizeAware.height * 0.01,
-            //   color: Colors.black26,
-            //   thickness: 0.7,
-            // ),
             InkWell(
               onTap: () {
                 Navigator.pushNamed(context, 'Cart');
@@ -202,42 +171,42 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.black26,
               thickness: 0.7,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, 'Wishlist');
-              },
-              child: Container(
-                height: sizeAware.height * 0.08,
-                child: Center(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        height: sizeAware.height * 0.04,
-                        width: sizeAware.width * 0.1,
-                        child: SvgPicture.asset('assets/heart.svg'),
-                      ),
-                      SizedBox(
-                        width: sizeAware.width * 0.04,
-                      ),
-                      Text(
-                        'Wish List',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Divider(
-              height: sizeAware.height * 0.01,
-              color: Colors.black26,
-              thickness: 0.7,
-            ),
             IsLoggedIn
                 ? Column(
                     children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'Wishlist');
+                        },
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child: SvgPicture.asset('assets/heart.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'Wish List',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
+                      ),
                       InkWell(
                         onTap: () {},
                         child: Container(
@@ -335,38 +304,6 @@ class _MyDrawerState extends State<MyDrawer> {
                         thickness: 0.7,
                       ),
                       InkWell(
-                        onTap: () {},
-                        child: Container(
-                          height: sizeAware.height * 0.08,
-                          child: Center(
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                  height: sizeAware.height * 0.04,
-                                  width: sizeAware.width * 0.1,
-                                  child:
-                                      SvgPicture.asset('assets/phone-call.svg'),
-                                ),
-                                SizedBox(
-                                  width: sizeAware.width * 0.04,
-                                ),
-                                Text(
-                                  'Contact us',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Divider(
-                        height: sizeAware.height * 0.01,
-                        color: Colors.black26,
-                        thickness: 0.7,
-                      ),
-                      InkWell(
                         onTap: () async {
                           SharedPreferences sharedPreferences =
                               await SharedPreferences.getInstance();
@@ -406,6 +343,37 @@ class _MyDrawerState extends State<MyDrawer> {
                     ],
                   )
                 : Container(),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                height: sizeAware.height * 0.08,
+                child: Center(
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        height: sizeAware.height * 0.04,
+                        width: sizeAware.width * 0.1,
+                        child: SvgPicture.asset('assets/phone-call.svg'),
+                      ),
+                      SizedBox(
+                        width: sizeAware.width * 0.04,
+                      ),
+                      Text(
+                        'Contact us',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: sizeAware.height * 0.01,
+              color: Colors.black26,
+              thickness: 0.7,
+            ),
           ],
         ),
       ),

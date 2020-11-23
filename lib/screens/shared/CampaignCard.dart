@@ -7,6 +7,7 @@ import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:flutter_wawinner/models/wishlist.dart';
+import 'package:flutter_wawinner/screens/ViewImage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -118,7 +119,7 @@ class _CampaignCardState extends State<CampaignCard> {
                                 } else {
                                   Fluttertoast.showToast(
                                       msg: "You need to login first",
-                                      toastLength: Toast.LENGTH_SHORT,
+                                      toastLength: Toast.LENGTH_LONG,
                                       timeInSecForIosWeb: 1,
                                       backgroundColor:
                                           Color.fromRGBO(127, 25, 168, 1.0),
@@ -279,27 +280,39 @@ class _CampaignCardState extends State<CampaignCard> {
                     ).animate(widget.animation),
                     child: Hero(
                       tag: widget.campaign.product.image,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ViewImage(
+                                image: widget.campaign.product.image,
+                              ),
                             ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.network(
-                            widget.campaign.product.image,
-                            width: sizeAware.width * 0.3,
-                            height: sizeAware.width * 0.3,
-                            fit: BoxFit.fitWidth,
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 10,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              widget.campaign.product.image,
+                              width: sizeAware.width * 0.3,
+                              height: sizeAware.width * 0.3,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
                         ),
                       ),
@@ -316,28 +329,40 @@ class _CampaignCardState extends State<CampaignCard> {
                     ).animate(widget.animation),
                     child: Hero(
                       tag: widget.campaign.prize.image,
-                      child: Container(
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ViewImage(
+                                image: widget.campaign.prize.image,
+                              ),
                             ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.network(
-                            widget.campaign.prize.image,
-                            width: sizeAware.width * 0.3,
-                            height: sizeAware.width * 0.3,
-                            fit: BoxFit.fitWidth,
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 10,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              widget.campaign.prize.image,
+                              width: sizeAware.width * 0.3,
+                              height: sizeAware.width * 0.3,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
                         ),
                       ),

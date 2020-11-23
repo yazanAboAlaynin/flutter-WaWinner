@@ -38,6 +38,7 @@ dependencies:
   fluttertoast: ^7.1.1
   carousel_pro: ^1.0.0
   cached_network_image: ^2.3.3
+  photo_view: ^0.9.2
   
 
 dev_dependencies:

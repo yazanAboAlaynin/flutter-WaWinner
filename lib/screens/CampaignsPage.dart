@@ -96,6 +96,7 @@ class _CampaignState extends State<CampaignsPage> {
                         child: Container(
                           width: sizeAware.width,
                           height: sizeAware.height * 0.3,
+                          margin: EdgeInsets.only(bottom: 15),
                           child: ImageCarusel(
                             images: images,
                           ),
