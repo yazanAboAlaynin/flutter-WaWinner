@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
@@ -7,11 +8,15 @@ class ImageCarusel extends StatelessWidget {
   const ImageCarusel({Key key, this.images}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    List<NetworkImage> list = [];
+    List<CachedNetworkImage> list = [];
     for (int i = 0; i < images.length; i++) {
       list.add(
-        NetworkImage(
-          images[i],
+        CachedNetworkImage(
+          imageUrl: images[i],
+          progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+              child:
+                  CircularProgressIndicator(value: downloadProgress.progress)),
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       );
     }

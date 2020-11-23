@@ -1,19 +1,56 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
+import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
+import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
+import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/models/cartItem.dart';
+import 'package:flutter_wawinner/models/wishlist.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_event.dart' as wl;
 
-class ProductDetail extends StatelessWidget {
+import '../Constants.dart';
+
+class ProductDetail extends StatefulWidget {
+  @override
+  _ProductDetailState createState() => _ProductDetailState();
+}
+
+class _ProductDetailState extends State<ProductDetail> {
+  bool isAddedToWL = false;
+  @override
+  void initState() {
+    super.initState();
+    isAddedToWL = false;
+  }
+
+  Future<void> isInWL(campaign) async {
+    bool x = await WishList.isInWL(campaign.id);
+
+    setState(() {
+      isAddedToWL = x;
+    });
+
+    if (isAddedToWL == false && campaign.added_to_wishlist) {
+      // await WishList.addItem(widget.campaign);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
+    final Map args = ModalRoute.of(context).settings.arguments;
+    final cartBloc = BlocProvider.of<CartBloc>(context);
 
+    Campaign campaign = args['campaign'];
+    WLBloc wlBloc = args['wlBloc'];
+    isInWL(campaign);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: myAppBar('Product Detailes', null),
-      drawer: Drawer(
-        child: MyDrawer(),
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,24 +72,34 @@ class ProductDetail extends StatelessWidget {
             SizedBox(
               height: sizeAware.height * 0.02,
             ),
-            Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 3,
-                    blurRadius: 15,
-                    offset: Offset(0, 1), // changes position of shadow
+            Hero(
+              tag: campaign.product.image,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 15,
+                      offset: Offset(0, 1), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: CachedNetworkImage(
+                    imageUrl: campaign.product.image,
+                    width: sizeAware.width * 0.45,
+                    height: sizeAware.width * 0.45,
+                    fit: BoxFit.cover,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'assets/shopping.jpg',
-                  width: sizeAware.width * 0.45,
-                  height: sizeAware.width * 0.45,
-                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -68,14 +115,14 @@ class ProductDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'H2H Hoodie',
+                        campaign.product.name,
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.grey[600],
                         ),
                       ),
                       Text(
-                        'AED 10000',
+                        'AED ${campaign.price}',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.red,
@@ -93,24 +140,34 @@ class ProductDetail extends StatelessWidget {
             SizedBox(
               height: sizeAware.height * 0.03,
             ),
-            Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 3,
-                    blurRadius: 15,
-                    offset: Offset(0, 1), // changes position of shadow
+            Hero(
+              tag: campaign.prize.image,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 15,
+                      offset: Offset(0, 1), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: CachedNetworkImage(
+                    imageUrl: campaign.prize.image,
+                    width: sizeAware.width * 0.45,
+                    height: sizeAware.width * 0.45,
+                    fit: BoxFit.cover,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'assets/shopping.jpg',
-                  width: sizeAware.width * 0.45,
-                  height: sizeAware.width * 0.45,
-                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -119,10 +176,10 @@ class ProductDetail extends StatelessWidget {
             ),
             Row(
               children: [
-                SizedBox(width: sizeAware.width * 0.1),
+                SizedBox(width: sizeAware.width * 0.2),
                 Expanded(
                   child: Text(
-                    'blah blah blahblahblahblahbl ahbl ahblahblahblah',
+                    campaign.prize.name,
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.grey[500],
@@ -138,8 +195,8 @@ class ProductDetail extends StatelessWidget {
               width: sizeAware.width * 0.35,
               height: sizeAware.width * 0.35,
               child: CircularStepProgressIndicator(
-                totalSteps: 975,
-                currentStep: 400,
+                totalSteps: campaign.product_quantity,
+                currentStep: campaign.quantity_sold,
                 stepSize: 10,
                 selectedColor: Color.fromRGBO(127, 25, 168, 1.0),
                 unselectedColor: Color.fromRGBO(217, 200, 236, 1),
@@ -158,7 +215,7 @@ class ProductDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          '400',
+                          '${campaign.quantity_sold}',
                           style: TextStyle(
                             fontSize: sizeAware.width * 0.05,
                             fontWeight: FontWeight.bold,
@@ -167,7 +224,7 @@ class ProductDetail extends StatelessWidget {
                         ),
                         Text('sold'),
                         Text('out of'),
-                        Text('975'),
+                        Text('${campaign.product_quantity}'),
                       ],
                     ),
                   ),
@@ -180,45 +237,65 @@ class ProductDetail extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  width: sizeAware.width * 0.55,
-                  height: 45.0,
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(127, 25, 168, 1),
-                    borderRadius: BorderRadius.horizontal(
-                      left: Radius.circular(40),
-                      right: Radius.circular(40),
+                GestureDetector(
+                  onTap: () {
+                    cartBloc.add(
+                      AddItem(
+                        cartItem: CartItem(
+                          campaign: campaign,
+                          qty: 1,
+                          total_price: campaign.price,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: sizeAware.width * 0.55,
+                    height: 45.0,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(127, 25, 168, 1),
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(40),
+                        right: Radius.circular(40),
+                      ),
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'ADD TO CART',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'ADD TO CART',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Color.fromRGBO(127, 25, 168, 1.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Icon(
-                      Icons.favorite,
-                      color: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    if (IsLoggedIn) {
+                      wlBloc.add(wl.AddItem(item: campaign));
+                    }
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Color.fromRGBO(127, 25, 168, 1.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Icon(
+                        Icons.favorite,
+                        color: isAddedToWL ? Colors.red : Colors.white,
+                      ),
                     ),
                   ),
                 ),

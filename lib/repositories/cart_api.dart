@@ -15,7 +15,6 @@ class CartApi extends Api {
   }) : assert(httpClient != null);
 
   Future checkOut(List<CartItem> items, is_donated) async {
-    print(TOKEN);
     final url = '${Api.baseUrl}/v1/user/take-order';
     List ids = [];
     List qtys = [];
@@ -33,6 +32,5 @@ class CartApi extends Api {
         .post(url, body: jsonEncode(data), headers: getHeaders());
 
     var res = jsonDecode(response.body);
-    print(res);
   }
 }
