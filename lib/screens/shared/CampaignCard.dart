@@ -39,7 +39,6 @@ class _CampaignCardState extends State<CampaignCard> {
         isAddedToWL = x;
       });
     }
-    print(widget.campaign.added_to_wishlist);
     if (isAddedToWL == false && widget.campaign.added_to_wishlist) {
       // await WishList.addItem(widget.campaign);
     }

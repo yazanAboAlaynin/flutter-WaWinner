@@ -39,4 +39,16 @@ class CampaignApi extends Api {
 
     return products;
   }
+
+  Future<List<String>> getImages() async {
+    final url = '${Api.baseUrl}/v1/front-end/slider';
+
+    final response = await this.httpClient.get(url, headers: setHeaders());
+
+    var res = jsonDecode(response.body)["data"] as List;
+
+    List<String> images = res.map((dynamic i) => i['image'] as String).toList();
+
+    return images;
+  }
 }

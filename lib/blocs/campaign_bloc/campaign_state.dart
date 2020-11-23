@@ -17,10 +17,11 @@ class CampaignsLoadInProgress extends CampaignState {}
 class CampaignsLoadSuccess extends CampaignState {
   List<Campaign> campaigns;
   List<Product> products;
+  List<String> images;
 
-  CampaignsLoadSuccess({this.campaigns, this.products});
+  CampaignsLoadSuccess({this.campaigns, this.products, this.images});
   @override
-  List<Object> get props => [campaigns, products];
+  List<Object> get props => [campaigns, products,images];
 }
 
 class CampaignsLoadFailure extends CampaignState {}

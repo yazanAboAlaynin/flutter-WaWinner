@@ -21,8 +21,10 @@ class CampaignsBloc extends Bloc<CampaignEvent, CampaignState> {
       try {
         List<Campaign> campaigns = await campaignApi.getCampaigns();
         List<Product> products = await campaignApi.getProducts();
+        List<String> images = await campaignApi.getImages();
 
-        yield CampaignsLoadSuccess(campaigns: campaigns, products: products);
+        yield CampaignsLoadSuccess(
+            campaigns: campaigns, products: products, images: images);
       } catch (_) {
         yield CampaignsLoadFailure();
       }

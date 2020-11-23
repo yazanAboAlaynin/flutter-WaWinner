@@ -7,18 +7,18 @@ class ImageCarusel extends StatelessWidget {
   const ImageCarusel({Key key, this.images}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    List<AssetImage> list = [];
+    List<NetworkImage> list = [];
     for (int i = 0; i < images.length; i++) {
       list.add(
-        AssetImage(
+        NetworkImage(
           images[i],
         ),
       );
     }
     return Carousel(
-      boxFit: BoxFit.cover,
+      boxFit: BoxFit.contain,
       images: list,
-      autoplay: true,
+      autoplay: false,
       animationCurve: Curves.fastOutSlowIn,
       autoplayDuration: Duration(
         milliseconds: 10000,
@@ -28,8 +28,8 @@ class ImageCarusel extends StatelessWidget {
       ),
       dotSize: 5.0,
       indicatorBgPadding: 5.0,
-      dotBgColor: Colors.black,
-      dotIncreasedColor: Colors.red,
+      dotBgColor: Colors.transparent,
+      dotIncreasedColor: Color.fromRGBO(127, 25, 168, 1.0),
     );
   }
 }

@@ -16,6 +16,7 @@ import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CampaignCard.dart';
 import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
+import 'package:flutter_wawinner/screens/shared/image_carusel.dart';
 import 'package:flutter_wawinner/screens/shared/productCard.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -32,6 +33,7 @@ class _CampaignState extends State<CampaignsPage> {
   WLBloc wlBloc;
   List<Campaign> campaigns = [];
   List<Product> products = [];
+  List<String> images = [];
 
   @override
   void initState() {
@@ -77,56 +79,88 @@ class _CampaignState extends State<CampaignsPage> {
           if (state is CampaignsLoadSuccess) {
             campaigns = state.campaigns;
             products = state.products;
+            images = state.images;
             return Scaffold(
-              appBar: myAppBar('Campaigns', null),
-              drawer: Drawer(
-                child: MyDrawer(),
-              ),
-              body: LiveList.options(
-                itemCount: campaigns.length + 1,
-                options: options,
-                itemBuilder: (context, index, animation) {
-                  if (index == campaigns.length) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: sizeAware.height * 0.07,
+                appBar: myAppBar('Campaigns', null),
+                drawer: Drawer(
+                  child: MyDrawer(),
+                ),
+                body: RefreshIndicator(
+                  onRefresh: () {
+                    campaignsBloc.add(CampaignsRequested());
+                    return Future.delayed(Duration(milliseconds: 1500));
+                  },
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: Container(
+                          width: sizeAware.width,
+                          height: sizeAware.height * 0.3,
+                          child: ImageCarusel(
+                            images: images,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Products',
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(127, 25, 168, 1.0),
-                                  ),
-                                ),
-                              ],
+                        ),
+                      ),
+                      SliverList(
+                        delegate: SliverChildListDelegate([
+                          Container(
+                            width: sizeAware.width,
+                            child: LiveList.options(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: campaigns.length,
+                              options: options,
+                              itemBuilder: (context, index, animation) {
+                                return CampaignCard(
+                                  animation: animation,
+                                  campaign: campaigns[index],
+                                  wlBloc: wlBloc,
+                                );
+                              },
                             ),
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: productsList(),
-                          )
-                        ],
+                        ]),
                       ),
-                    );
-                  }
-                  return CampaignCard(
-                    animation: animation,
-                    campaign: campaigns[index],
-                    wlBloc: wlBloc,
-                  );
-                },
-              ),
-            );
+                      SliverList(
+                          delegate: SliverChildListDelegate([
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: sizeAware.height * 0.07,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 12),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Products',
+                                      style: TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            Color.fromRGBO(127, 25, 168, 1.0),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: productsList(),
+                              )
+                            ],
+                          ),
+                        ),
+                      ]))
+                    ],
+                  ),
+                ));
           }
           if (state is CampaignsLoadFailure) {
             return Container();
