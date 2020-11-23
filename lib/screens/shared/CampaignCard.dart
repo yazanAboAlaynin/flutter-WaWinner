@@ -112,7 +112,7 @@ class _CampaignCardState extends State<CampaignCard> {
                               width: 20,
                             ),
                             GestureDetector(
-                              onTap: () async {
+                              onTap: () {
                                 if (IsLoggedIn) {
                                   widget.wlBloc
                                       .add(wl.AddItem(item: widget.campaign));
