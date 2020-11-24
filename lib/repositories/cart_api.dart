@@ -33,4 +33,18 @@ class CartApi extends Api {
 
     var res = jsonDecode(response.body);
   }
+
+  Future<bool> checkCoupon(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/check-coupon';
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: getHeaders());
+
+    var res = jsonDecode(response.body)['status'];
+
+    if (res) {
+      return true;
+    } else
+      return false;
+  }
 }

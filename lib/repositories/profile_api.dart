@@ -18,7 +18,7 @@ class ProfileApi extends Api {
   Future<User> profile() async {
     final url = '${Api.baseUrl}/v1/user/profile';
 
-    final response = await this.httpClient.get(url, headers: setHeaders());
+    final response = await this.httpClient.get(url, headers: getHeaders());
 
     var res = jsonDecode(response.body);
     if (res['status']) {

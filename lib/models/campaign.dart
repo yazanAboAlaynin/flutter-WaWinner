@@ -1,5 +1,7 @@
 import 'package:flutter_wawinner/models/product.dart';
 
+import 'offer.dart';
+
 class Campaign {
   final int id;
   final String max_draw_date;
@@ -16,6 +18,7 @@ class Campaign {
   final Product product;
   final Product prize;
   bool added_to_wishlist;
+  List offers;
 
   Campaign(
       {this.id,
@@ -32,9 +35,11 @@ class Campaign {
       this.description,
       this.title,
       this.quantity_sold,
-      this.added_to_wishlist});
+      this.added_to_wishlist,
+      this.offers});
 
   static Campaign fromJson(dynamic json) {
+    var offers = json['offers'].map((dynamic i) => Offer.fromJson(i)).toList();
     return Campaign(
       id: json['id'],
       donate_ticket_count: json['donate_ticket_count'],
@@ -51,6 +56,7 @@ class Campaign {
       title: json['title'],
       quantity_sold: json['quantity_sold'],
       added_to_wishlist: false,
+      offers: offers,
     );
   }
 
@@ -71,6 +77,7 @@ class Campaign {
       'quantity_sold': c.quantity_sold,
       'product_quantity': c.product_quantity,
       'added_to_wishlist': c.added_to_wishlist,
+      'offers': Offer.encodeOffers(c.offers),
     };
 
     return d;

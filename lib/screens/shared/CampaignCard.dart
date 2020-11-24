@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
@@ -449,6 +451,40 @@ class _CampaignCardState extends State<CampaignCard> {
                     ),
                   ),
                 ),
+                widget.campaign.offers.length > 0
+                    ? Positioned(
+                        left: -20,
+                        bottom: 90,
+                        child: Container(
+                          height: 135,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 1,
+                                blurRadius: 9,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Card(
+                            shape: ContinuousRectangleBorder(
+                              borderRadius: BorderRadius.circular(60),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 4, vertical: 4),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: getOffers(cartBloc),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(),
                 Positioned(
                   top: 0,
                   right: -54,
@@ -498,6 +534,42 @@ class _CampaignCardState extends State<CampaignCard> {
         ),
       ),
     );
+  }
+
+  List<Widget> getOffers(cartBloc) {
+    List<Widget> wdgs = [];
+    for (int i = 0; i < min(3, widget.campaign.offers.length); i++) {
+      wdgs.add(GestureDetector(
+        onTap: () {
+          cartBloc.add(
+            AddItem(
+              cartItem: CartItem(
+                campaign: widget.campaign,
+                qty: widget.campaign.offers[i].product_limit,
+                total_price: widget.campaign.offers[i].product_limit *
+                    widget.campaign.price,
+              ),
+            ),
+          );
+        },
+        child: Container(
+          width: 28,
+          height: 28,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: Color.fromRGBO(127, 25, 168, 1.0),
+          ),
+          child: Center(
+              child: Text(
+            'x${widget.campaign.offers[i].product_limit}',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          )),
+        ),
+      ));
+    }
+    return wdgs;
   }
 }
 

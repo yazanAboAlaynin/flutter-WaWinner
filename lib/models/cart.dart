@@ -47,6 +47,7 @@ class Cart {
     bool t = true;
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].campaign.id == item.campaign.id) {
+        campaigns[i].qty += item.qty;
         t = false;
       }
     }

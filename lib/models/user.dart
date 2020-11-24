@@ -6,26 +6,27 @@ class User {
   String image;
   String address;
   String gender;
+  String phone;
   String status;
   String nationality;
   String country_of_residence;
   String created_at;
   String updated_at;
 
-  User({
-    this.id,
-    this.address,
-    this.created_at,
-    this.email,
-    this.first_name,
-    this.last_name,
-    this.image,
-    this.updated_at,
-    this.country_of_residence,
-    this.gender,
-    this.nationality,
-    this.status,
-  });
+  User(
+      {this.id,
+      this.address,
+      this.created_at,
+      this.email,
+      this.first_name,
+      this.last_name,
+      this.image,
+      this.updated_at,
+      this.country_of_residence,
+      this.gender,
+      this.nationality,
+      this.status,
+      this.phone});
 
   static User fromJson(dynamic json) {
     return User(
@@ -38,6 +39,7 @@ class User {
       status: json['status'],
       country_of_residence: json['country_of_residence'],
       gender: json['gender'],
+      phone: json['phone'],
       nationality: json['nationality'],
       created_at: json['created_at'],
       updated_at: json['updated_at'],

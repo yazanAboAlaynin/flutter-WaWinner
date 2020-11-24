@@ -47,3 +47,10 @@ class Checkout extends CartEvent {
   @override
   List<Object> get props => [];
 }
+
+class CheckCoupon extends CartEvent {
+  String coupon;
+  CheckCoupon({this.coupon});
+  @override
+  List<Object> get props => [coupon];
+}

@@ -16,6 +16,16 @@ class CartLoadInProgress extends CartState {}
 
 class ItemAdded extends CartState {}
 
+class CouponValid extends CartState {}
+
+class CouponNotValid extends CartState {
+  String code;
+
+  CouponNotValid({this.code});
+  @override
+  List<Object> get props => [code];
+}
+
 class CartLoadSuccess extends CartState {
   List<CartItem> items;
 

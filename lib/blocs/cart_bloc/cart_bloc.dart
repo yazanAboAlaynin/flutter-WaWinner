@@ -66,10 +66,25 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       yield CartLoadInProgress();
 
       try {
-        cartApi.checkOut(event.items, event.is_donate);
+        await cartApi.checkOut(event.items, event.is_donate);
         await Cart.emptyCart();
 
         yield CartLoadSuccess(items: []);
+      } catch (_) {
+        yield CartLoadFailure();
+      }
+    } else if (event is CheckCoupon) {
+      try {
+        var data = {
+          'code': event.coupon,
+        };
+        bool t = await cartApi.checkCoupon(data);
+
+        if (t) {
+          yield CouponValid();
+        } else {
+          yield CouponNotValid(code: event.coupon);
+        }
       } catch (_) {
         yield CartLoadFailure();
       }

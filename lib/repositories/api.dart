@@ -18,6 +18,7 @@ class Api {
         'Content-type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $TOKEN',
+        'Accept-Language': 'en'
       };
 
   Future<Map<String, String>> gHeaders() async => {
