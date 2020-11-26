@@ -79,6 +79,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } catch (_) {
         yield AuthLoadFailure();
       }
+    } else if (event is ChangePhone) {
+      yield AuthLoadInProgress();
+      try {
+        var data = {'user_id': event.id, 'phone': event.phone};
+        var data2 = {'user_id': event.id};
+        await authApi.changeNumber(data);
+        bool tr = await authApi.resendCode(data2);
+        yield PhoneChanged();
+      } catch (_) {
+        yield AuthLoadFailure();
+      }
     }
   }
 }

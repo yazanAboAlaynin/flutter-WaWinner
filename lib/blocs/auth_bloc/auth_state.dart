@@ -28,4 +28,6 @@ class CodeVerified extends AuthState {}
 
 class CodeSent extends AuthState {}
 
+class PhoneChanged extends AuthState {}
+
 class AuthLoadFailure extends AuthState {}

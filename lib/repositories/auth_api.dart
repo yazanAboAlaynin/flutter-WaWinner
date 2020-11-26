@@ -126,4 +126,19 @@ class AuthApi extends Api {
       return false;
     }
   }
+
+  Future<bool> changeNumber(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/change-phone-number';
+
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: setHeaders());
+
+    var res = jsonDecode(response.body);
+    if (res['status']) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

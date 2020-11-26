@@ -69,3 +69,12 @@ class ResendCode extends AuthEvent {
   @override
   List<Object> get props => [id];
 }
+
+class ChangePhone extends AuthEvent {
+  int id;
+  String phone;
+
+  ChangePhone({this.id, this.phone});
+  @override
+  List<Object> get props => [id, phone];
+}

@@ -37,13 +37,13 @@ class WishList {
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].id == item.id) {
         t = false;
-        campaigns[i].added_to_wishlist = false;
+        campaigns[i].isFavorite = false;
         campaigns.removeAt(i);
       }
     }
     if (t) {
       campaigns.add(item);
-      campaigns.last.added_to_wishlist = true;
+      campaigns.last.isFavorite = true;
     }
 
     List<Map> list = Campaign.encodeCampaigns(campaigns);
@@ -62,7 +62,7 @@ class WishList {
     var mds = jsonDecode(localStorage.get('wishlist')) as List;
 
     List<Campaign> campaigns = mds.map((e) => Campaign.fromJson(e)).toList();
-    print(campaigns.length);
+
     for (int i = 0; i < campaigns.length; i++) {
       if (campaigns[i].id == id) {
         return true;

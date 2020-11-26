@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/product.dart';
+import 'package:flutter_wawinner/models/wishlist.dart';
 import 'package:http/http.dart' as http;
 
 import 'api.dart';
@@ -17,13 +18,22 @@ class CampaignApi extends Api {
   Future<List<Campaign>> getCampaigns() async {
     final url = '${Api.baseUrl}/v1/front-end/campaign';
 
-    final response = await this.httpClient.get(url, headers: setHeaders());
+    final response = await this.httpClient.get(url, headers: getHeaders());
 
     var res = jsonDecode(response.body)["data"] as List;
 
     List<Campaign> campaigns =
         res.map((dynamic i) => Campaign.fromJson(i)).toList();
 
+    for (int i = 0; i < campaigns.length; i++) {
+      bool x = await WishList.isInWL(campaigns[i].id);
+      if (campaigns[i].isFavorite && !x) {
+        await WishList.addItem(campaigns[i]);
+      }
+      if (!campaigns[i].isFavorite && x) {
+        await WishList.addItem(campaigns[i]);
+      }
+    }
     return campaigns;
   }
 

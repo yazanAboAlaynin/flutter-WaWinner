@@ -33,13 +33,6 @@ class _ProductDetailState extends State<ProductDetail> {
     setState(() {
       isAddedToWL = x;
     });
-
-    if (isAddedToWL == false && campaign.added_to_wishlist) {
-      // await WishList.addItem(widget.campaign);
-    //   setState(() {
-    //   isAddedToWL = true;
-    // });
-    }
   }
 
   @override

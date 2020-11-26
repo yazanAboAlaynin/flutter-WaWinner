@@ -17,7 +17,7 @@ class Campaign {
   final String description;
   final Product product;
   final Product prize;
-  bool added_to_wishlist;
+  bool isFavorite;
   List offers;
 
   Campaign(
@@ -35,7 +35,7 @@ class Campaign {
       this.description,
       this.title,
       this.quantity_sold,
-      this.added_to_wishlist,
+      this.isFavorite,
       this.offers});
 
   static Campaign fromJson(dynamic json) {
@@ -55,7 +55,7 @@ class Campaign {
       description: json['description'],
       title: json['title'],
       quantity_sold: json['quantity_sold'],
-      added_to_wishlist: false,
+      isFavorite: json['isFavorite'] == 1 ? true : false,
       offers: offers,
     );
   }
@@ -76,7 +76,7 @@ class Campaign {
       'title': c.title,
       'quantity_sold': c.quantity_sold,
       'product_quantity': c.product_quantity,
-      'added_to_wishlist': c.added_to_wishlist,
+      'added_to_wishlist': c.isFavorite,
       'offers': Offer.encodeOffers(c.offers),
     };
 

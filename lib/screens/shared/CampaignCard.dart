@@ -37,13 +37,11 @@ class _CampaignCardState extends State<CampaignCard> {
 
   Future<void> isInWL() async {
     bool x = await WishList.isInWL(widget.campaign.id);
+
     if (mounted) {
       setState(() {
         isAddedToWL = x;
       });
-    }
-    if (isAddedToWL == false && widget.campaign.added_to_wishlist) {
-      // await WishList.addItem(widget.campaign);
     }
   }
 
