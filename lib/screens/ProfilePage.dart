@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_bloc.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_event.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_state.dart';
@@ -55,14 +56,44 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(
                       height: sizeAware.height * 0.02,
                     ),
-                    CircleAvatar(
-                      radius: sizeAware.height * 0.075,
-                      backgroundImage: NetworkImage(
-                        user.image,
-                      ),
+                    Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: sizeAware.height * 0.08,
+                          backgroundImage: NetworkImage(
+                            user.image,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: sizeAware.height * 0.05,
+                              height: sizeAware.height * 0.05,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey[400],
+                                      blurRadius: 5,
+                                      offset: Offset(1, 1),
+                                      spreadRadius: 2),
+                                ],
+                                color: Colors.white,
+                              ),
+                              child: Icon(
+                                Icons.edit,
+                                color: Color.fromRGBO(127, 25, 168, 1.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
-                      height: sizeAware.height * 0.02,
+                      height: sizeAware.height * 0.025,
                     ),
                     Text(
                       user.first_name + ' ' + user.last_name,
@@ -74,164 +105,561 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(
                       height: sizeAware.height * 0.05,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text('Application Settings'),
                         Container(
-                          width: sizeAware.width * 0.25,
-                          height: sizeAware.width * 0.25,
-                          padding: const EdgeInsets.all(10.0),
+                          width: sizeAware.width,
+                          height: sizeAware.height * 0.07,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Color.fromRGBO(127, 25, 168, 1.0),
+                            borderRadius: BorderRadius.circular(30.0),
                           ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Icon(
-                                  Icons.flag,
-                                  color: Colors.white,
-                                  size: sizeAware.width * 0.07,
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 22.0, vertical: 0),
+                              child: DropdownButton<String>(
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Color.fromRGBO(18, 161, 154, 1.0),
                                 ),
-                                Text(
-                                  user.nationality,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: sizeAware.width * 0.035,
+                                isExpanded: true,
+                                underline: SizedBox(),
+                                items: [
+                                  DropdownMenuItem<String>(
+                                    value: "ar",
+                                    child: Text(
+                                      "العربية",
+                                      style: TextStyle(fontFamily: 'GeSS'),
+                                    ),
                                   ),
+                                  DropdownMenuItem<String>(
+                                    value: "en",
+                                    child: Text(
+                                      "english",
+                                    ),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  if (value == "en") {
+                                    setState(() {
+                                      // prefLang = "english";
+                                    });
+                                  } else {
+                                    setState(() {
+                                      // prefLang = value;
+                                    });
+                                  }
+                                  //   Map<String, String> dataa = {
+                                  //     'ph_name_en': pharmacy.ph_name_en,
+                                  //     'ph_name_ar': pharmacy.ph_name_ar,
+                                  //     'ph_phone1': pharmacy.ph_phone1,
+                                  //     'ph_mobile': pharmacy.ph_mobile,
+                                  //     'ph_address_en': pharmacy.ph_address_en,
+                                  //     'ph_address_ar': pharmacy.ph_address_ar,
+                                  //     'region_id': pharmacy.region_id,
+                                  //     'pref_lang': prefLang
+                                  //   };
+                                  //   profileBloc
+                                  //       .add(UpdateProfileRequested(data: dataa));
+                                  //   changeLanguage(value);
+                                },
+                                hint: Text(
+                                  'pref lang',
+                                  // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
+                                  style: TextStyle(fontFamily: 'GeSS'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Text('Account Settings'),
+                        Container(
+                          height: sizeAware.height * 0.08,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: sizeAware.height,
+                                    padding: const EdgeInsets.all(4.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[400],
+                                            blurRadius: 5,
+                                            offset: Offset(1, 1),
+                                            spreadRadius: 2),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ' Email:  ',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              hintText: 'test@test.c',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: sizeAware.height,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(2, 1),
+                                          spreadRadius: 2),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: Icon(Icons.edit, color: Colors.white),
                                 ),
                               ],
                             ),
                           ),
                         ),
                         Container(
-                          width: sizeAware.width * 0.25,
-                          height: sizeAware.width * 0.25,
-                          padding: const EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Color.fromRGBO(127, 25, 168, 1.0),
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          height: sizeAware.height * 0.08,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.person_pin_circle,
-                                  color: Colors.white,
-                                  size: sizeAware.width * 0.07,
-                                ),
-                                Text(
-                                  user.country_of_residence,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: sizeAware.width * 0.035,
+                                Expanded(
+                                  child: Container(
+                                    height: sizeAware.height,
+                                    padding: const EdgeInsets.all(4.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[400],
+                                            blurRadius: 5,
+                                            offset: Offset(1, 1),
+                                            spreadRadius: 2),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ' Email:  ',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              hintText: 'test@test.c',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                                ),
+                                Container(
+                                  height: sizeAware.height,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(2, 1),
+                                          spreadRadius: 2),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: Icon(Icons.edit, color: Colors.white),
                                 ),
                               ],
                             ),
                           ),
                         ),
                         Container(
-                          width: sizeAware.width * 0.25,
-                          height: sizeAware.width * 0.25,
-                          padding: const EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Color.fromRGBO(127, 25, 168, 1.0),
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          height: sizeAware.height * 0.08,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.location_on,
-                                  color: Colors.white,
-                                  size: sizeAware.width * 0.07,
-                                ),
-                                Text(
-                                  user.address,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: sizeAware.width * 0.035,
+                                Expanded(
+                                  child: Container(
+                                    height: sizeAware.height,
+                                    padding: const EdgeInsets.all(4.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[400],
+                                            blurRadius: 5,
+                                            offset: Offset(1, 1),
+                                            spreadRadius: 2),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ' Email:  ',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              hintText: 'test@test.c',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                                ),
+                                Container(
+                                  height: sizeAware.height,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(2, 1),
+                                          spreadRadius: 2),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: Icon(Icons.edit, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Text('Account Settings'),
+                        Container(
+                          height: sizeAware.height * 0.08,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: sizeAware.height,
+                                    padding: const EdgeInsets.all(4.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[400],
+                                            blurRadius: 5,
+                                            offset: Offset(1, 1),
+                                            spreadRadius: 2),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ' Email:  ',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              hintText: 'test@test.c',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: sizeAware.height,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(2, 1),
+                                          spreadRadius: 2),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: Icon(Icons.edit, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: sizeAware.height * 0.08,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: sizeAware.height,
+                                    padding: const EdgeInsets.all(4.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[400],
+                                            blurRadius: 5,
+                                            offset: Offset(1, 1),
+                                            spreadRadius: 2),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ' Email:  ',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              hintText: 'test@test.c',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: sizeAware.height,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(2, 1),
+                                          spreadRadius: 2),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: Icon(Icons.edit, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: sizeAware.height * 0.08,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: sizeAware.height,
+                                    padding: const EdgeInsets.all(4.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[400],
+                                            blurRadius: 5,
+                                            offset: Offset(1, 1),
+                                            spreadRadius: 2),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ' Email:  ',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              hintText: 'test@test.c',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: sizeAware.height,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(2, 1),
+                                          spreadRadius: 2),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: Icon(Icons.edit, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: sizeAware.height * 0.08,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: sizeAware.height,
+                                    padding: const EdgeInsets.all(4.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[400],
+                                            blurRadius: 5,
+                                            offset: Offset(1, 1),
+                                            spreadRadius: 2),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ' Email:  ',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              hintText: 'test@test.c',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: sizeAware.height,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(2, 1),
+                                          spreadRadius: 2),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: Icon(Icons.edit, color: Colors.white),
                                 ),
                               ],
                             ),
                           ),
                         ),
                       ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(12),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.phone,
-                                color: Color.fromRGBO(18, 161, 154, 1.0),
-                              ),
-                              SizedBox(
-                                width: sizeAware.width * 0.02,
-                              ),
-                              Text(
-                                user.phone,
-                                style: TextStyle(
-                                  fontSize: sizeAware.width * 0.04,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: sizeAware.height * 0.02,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.people,
-                                color: Color.fromRGBO(18, 161, 154, 1.0),
-                              ),
-                              SizedBox(
-                                width: sizeAware.width * 0.02,
-                              ),
-                              Text(
-                                user.gender == "1" ? 'Male' : 'Female',
-                                style: TextStyle(
-                                  fontSize: sizeAware.width * 0.04,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: sizeAware.height * 0.01,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.favorite_border,
-                                color: Color.fromRGBO(18, 161, 154, 1.0),
-                              ),
-                              SizedBox(
-                                width: sizeAware.width * 0.02,
-                              ),
-                              Text(
-                                user.status,
-                                style: TextStyle(
-                                  fontSize: sizeAware.width * 0.04,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: sizeAware.height * 0.02,
-                          ),
-                        ],
-                      ),
                     ),
                   ],
                 ),

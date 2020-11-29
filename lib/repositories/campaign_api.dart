@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/models/charity.dart';
 import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/models/wishlist.dart';
 import 'package:http/http.dart' as http;
@@ -48,6 +49,19 @@ class CampaignApi extends Api {
         res.map((dynamic i) => Product.fromJson(i)).toList();
 
     return products;
+  }
+
+  Future<List<Charity>> getCharities() async {
+    final url = '${Api.baseUrl}/v1/front-end/charity';
+
+    final response = await this.httpClient.get(url, headers: setHeaders());
+
+    var res = jsonDecode(response.body)["data"] as List;
+
+    List<Charity> charity =
+        res.map((dynamic i) => Charity.fromJson(i)).toList();
+
+    return charity;
   }
 
   Future<List<String>> getImages() async {

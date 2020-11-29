@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15.151" height="15.147" viewBox="0 0 15.151 15.147">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Group_3825" data-name="Group 3825" transform="translate(0.004 0.003)">
+    <g id="Group_3812" data-name="Group 3812" transform="translate(-0.004 -0.003)">
+      <g id="Group_3811" data-name="Group 3811" transform="translate(0)">
+        <path id="Path_8707" data-name="Path 8707" class="cls-1" d="M14.257.881a3.033,3.033,0,0,0-4.28,0l-8.73,8.73a.772.772,0,0,0-.2.36L.016,14.209a.769.769,0,0,0,.2.716.754.754,0,0,0,.716.2l1.576-.383a1.085,1.085,0,0,0,.106-.027L5.171,14.1a.76.76,0,0,0,.356-.2l8.73-8.734A3.027,3.027,0,0,0,14.257.881Zm-9.65,11.79L2.6,13.16l-.617-.621.489-2L9.4,3.6,11.538,5.74Zm8.582-8.578-.579.579-2.14-2.14.579-.579a1.513,1.513,0,1,1,2.14,2.14Z" transform="translate(0.004 0.002)"/>
+      </g>
+    </g>
+    <g id="Group_3813" data-name="Group 3813" transform="translate(5.663 13.629)">
+      <path id="Path_8708" data-name="Path 8708" class="cls-1" d="M23.686,37.5H15.717a.757.757,0,0,1,0-1.515h7.969a.757.757,0,0,1,0,1.515Z" transform="translate(-14.96 -35.99)"/>
+    </g>
+  </g>
+</svg>

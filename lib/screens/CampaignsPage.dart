@@ -9,12 +9,14 @@ import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_state.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/models/charity.dart';
 import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
 import 'package:flutter_wawinner/repositories/wishlist_api.dart';
 import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CampaignCard.dart';
+import 'package:flutter_wawinner/screens/shared/CharityCard.dart';
 import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
 import 'package:flutter_wawinner/screens/shared/image_carusel.dart';
 import 'package:flutter_wawinner/screens/shared/productCard.dart';
@@ -33,6 +35,7 @@ class _CampaignState extends State<CampaignsPage> {
   WLBloc wlBloc;
   List<Campaign> campaigns = [];
   List<Product> products = [];
+  List<Charity> charities = [];
   List<String> images = [];
 
   @override
@@ -80,6 +83,7 @@ class _CampaignState extends State<CampaignsPage> {
             campaigns = state.campaigns;
             products = state.products;
             images = state.images;
+            charities = state.charities;
             return Scaffold(
                 appBar: myAppBar('Campaigns', null),
                 drawer: Drawer(
@@ -95,7 +99,7 @@ class _CampaignState extends State<CampaignsPage> {
                       SliverToBoxAdapter(
                         child: Container(
                           width: sizeAware.width,
-                          height: sizeAware.height * 0.3,
+                          height: sizeAware.height * 0.25,
                           margin: EdgeInsets.only(bottom: 15),
                           child: ImageCarusel(
                             images: images,
@@ -122,43 +126,72 @@ class _CampaignState extends State<CampaignsPage> {
                           ),
                         ]),
                       ),
+                      //products
                       SliverList(
-                          delegate: SliverChildListDelegate([
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: sizeAware.height * 0.07,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Products',
-                                      style: TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.bold,
-                                        color:
-                                            Color.fromRGBO(127, 25, 168, 1.0),
-                                      ),
-                                    ),
-                                  ],
+                        delegate: SliverChildListDelegate([
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: sizeAware.height * 0.07,
                                 ),
-                              ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: productsList(),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Products',
+                                        style: TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Color.fromRGBO(127, 25, 168, 1.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: productsList(),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ]))
+                        ]),
+                      ),
+                      //charities
+                      SliverList(
+                        delegate: SliverChildListDelegate([
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: sizeAware.height * 0.07,
+                                ),
+                                Text(
+                                  'Charities',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  child: charitiesList(),
+                                )
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ),
                     ],
                   ),
                 ));
@@ -179,6 +212,18 @@ class _CampaignState extends State<CampaignsPage> {
       ));
     }
     return Row(
+      children: prs,
+    );
+  }
+
+  charitiesList() {
+    List<CharityCard> prs = [];
+    for (int i = 0; i < charities.length; i++) {
+      prs.add(CharityCard(
+        charity: charities[i],
+      ));
+    }
+    return Column(
       children: prs,
     );
   }

@@ -13,6 +13,7 @@ class ImageCarusel extends StatelessWidget {
       list.add(
         CachedNetworkImage(
           imageUrl: images[i],
+          fit: BoxFit.fill,
           progressIndicatorBuilder: (context, url, downloadProgress) => Center(
               child:
                   CircularProgressIndicator(value: downloadProgress.progress)),
