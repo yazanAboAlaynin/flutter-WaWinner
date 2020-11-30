@@ -245,6 +245,10 @@ class _ProductDetailState extends State<ProductDetail> {
               SizedBox(
                 height: sizeAware.height * 0.03,
               ),
+              Text(
+                'Offers',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
               offers(cartBloc, campaign),
               SizedBox(
                 height: sizeAware.height * 0.03,

@@ -21,6 +21,7 @@ class ProfileApi extends Api {
     final response = await this.httpClient.get(url, headers: getHeaders());
 
     var res = jsonDecode(response.body);
+    print(res);
     if (res['status']) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       User user = User.fromJson(res['data']);

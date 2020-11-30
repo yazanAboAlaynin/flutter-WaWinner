@@ -223,8 +223,11 @@ class _CampaignState extends State<CampaignsPage> {
         charity: charities[i],
       ));
     }
-    return Column(
-      children: prs,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: prs,
+      ),
     );
   }
 }

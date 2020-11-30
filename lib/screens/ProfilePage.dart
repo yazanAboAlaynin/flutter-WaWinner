@@ -44,6 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
         }
         if (state is ProfileLoadSuccess) {
           user = state.user;
+
           return Scaffold(
             appBar: myAppBar('Profile', null),
             body: SingleChildScrollView(
@@ -108,10 +109,19 @@ class _ProfilePageState extends State<ProfilePage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Application Settings'),
+                        Text(
+                          'Application Settings',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: sizeAware.height * 0.01,
+                        ),
                         Container(
                           width: sizeAware.width,
-                          height: sizeAware.height * 0.07,
+                          height: sizeAware.height * 0.08,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
@@ -174,9 +184,21 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        Text('Account Settings'),
+                        SizedBox(
+                          height: sizeAware.height * 0.03,
+                        ),
+                        Text(
+                          'Account Settings',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: sizeAware.height * 0.01,
+                        ),
                         Container(
-                          height: sizeAware.height * 0.08,
+                          height: sizeAware.height * 0.09,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -212,6 +234,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
+                                            initialValue: user.email,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -245,7 +268,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          height: sizeAware.height * 0.08,
+                          height: sizeAware.height * 0.09,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -271,7 +294,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Email:  ',
+                                          ' Phone:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -281,6 +304,88 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
+                                            initialValue: user.phone,
+                                            decoration: InputDecoration(
+                                              hintText: 'test@test.c',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: sizeAware.height,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(2, 1),
+                                          spreadRadius: 2),
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  ),
+                                  child: Icon(Icons.edit, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: sizeAware.height * 0.03,
+                        ),
+                        Text(
+                          'Personal Settings',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: sizeAware.height * 0.01,
+                        ),
+                        Container(
+                          height: sizeAware.height * 0.09,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: sizeAware.height,
+                                    padding: const EdgeInsets.all(4.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[400],
+                                            blurRadius: 5,
+                                            offset: Offset(1, 1),
+                                            spreadRadius: 2),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ' First Name:  ',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TextFormField(
+                                            initialValue: user.first_name,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -314,7 +419,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          height: sizeAware.height * 0.08,
+                          height: sizeAware.height * 0.09,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -340,7 +445,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Email:  ',
+                                          ' Last Name:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -350,76 +455,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
-                                            decoration: InputDecoration(
-                                              hintText: 'test@test.c',
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  height: sizeAware.height,
-                                  width: 45,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromRGBO(127, 25, 168, 1.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey[400],
-                                          blurRadius: 5,
-                                          offset: Offset(2, 1),
-                                          spreadRadius: 2),
-                                    ],
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
-                                  ),
-                                  child: Icon(Icons.edit, color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Text('Account Settings'),
-                        Container(
-                          height: sizeAware.height * 0.08,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    height: sizeAware.height,
-                                    padding: const EdgeInsets.all(4.0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topLeft: Radius.circular(10),
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey[400],
-                                            blurRadius: 5,
-                                            offset: Offset(1, 1),
-                                            spreadRadius: 2),
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          ' Email:  ',
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color.fromRGBO(
-                                                127, 25, 168, 1.0),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: TextFormField(
+                                            initialValue: user.last_name,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -453,7 +489,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          height: sizeAware.height * 0.08,
+                          height: sizeAware.height * 0.09,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -479,7 +515,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Email:  ',
+                                          ' Address:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -489,6 +525,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
+                                            initialValue: user.address,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -522,7 +559,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          height: sizeAware.height * 0.08,
+                          height: sizeAware.height * 0.09,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -548,7 +585,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Email:  ',
+                                          ' Nationality:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -558,6 +595,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
+                                            initialValue: user.nationality,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -590,76 +628,164 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        Container(
-                          height: sizeAware.height * 0.08,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    height: sizeAware.height,
-                                    padding: const EdgeInsets.all(4.0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topLeft: Radius.circular(10),
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey[400],
-                                            blurRadius: 5,
-                                            offset: Offset(1, 1),
-                                            spreadRadius: 2),
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          ' Email:  ',
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color.fromRGBO(
-                                                127, 25, 168, 1.0),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: TextFormField(
-                                            decoration: InputDecoration(
-                                              hintText: 'test@test.c',
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  height: sizeAware.height,
-                                  width: 45,
+                        SizedBox(
+                          height: sizeAware.height * 0.02,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: sizeAware.height * 0.08,
                                   decoration: BoxDecoration(
                                     color: Color.fromRGBO(127, 25, 168, 1.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey[400],
-                                          blurRadius: 5,
-                                          offset: Offset(2, 1),
-                                          spreadRadius: 2),
-                                    ],
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(10),
-                                      topRight: Radius.circular(10),
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 22.0, vertical: 4),
+                                    child: DropdownButton<String>(
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down,
+                                        color: Colors.white,
+                                      ),
+                                      isExpanded: true,
+                                      underline: SizedBox(),
+                                      items: [
+                                        DropdownMenuItem<String>(
+                                          value: "ar",
+                                          child: Text(
+                                            "العربية",
+                                            style:
+                                                TextStyle(fontFamily: 'GeSS'),
+                                          ),
+                                        ),
+                                        DropdownMenuItem<String>(
+                                          value: "en",
+                                          child: Text(
+                                            "english",
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        if (value == "en") {
+                                          setState(() {
+                                            // prefLang = "english";
+                                          });
+                                        } else {
+                                          setState(() {
+                                            // prefLang = value;
+                                          });
+                                        }
+                                        //   Map<String, String> dataa = {
+                                        //     'ph_name_en': pharmacy.ph_name_en,
+                                        //     'ph_name_ar': pharmacy.ph_name_ar,
+                                        //     'ph_phone1': pharmacy.ph_phone1,
+                                        //     'ph_mobile': pharmacy.ph_mobile,
+                                        //     'ph_address_en': pharmacy.ph_address_en,
+                                        //     'ph_address_ar': pharmacy.ph_address_ar,
+                                        //     'region_id': pharmacy.region_id,
+                                        //     'pref_lang': prefLang
+                                        //   };
+                                        //   profileBloc
+                                        //       .add(UpdateProfileRequested(data: dataa));
+                                        //   changeLanguage(value);
+                                      },
+                                      hint: Text(
+                                        'Status',
+                                        // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
+                                        style: TextStyle(
+                                          fontFamily: 'GeSS',
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                  child: Icon(Icons.edit, color: Colors.white),
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
+                            SizedBox(
+                              width: sizeAware.width * 0.02,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: sizeAware.height * 0.08,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 22.0, vertical: 4),
+                                    child: DropdownButton<String>(
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down,
+                                        color: Colors.white,
+                                      ),
+                                      isExpanded: true,
+                                      underline: SizedBox(),
+                                      items: [
+                                        DropdownMenuItem<String>(
+                                          value: "ar",
+                                          child: Text(
+                                            "العربية",
+                                            style:
+                                                TextStyle(fontFamily: 'GeSS'),
+                                          ),
+                                        ),
+                                        DropdownMenuItem<String>(
+                                          value: "en",
+                                          child: Text(
+                                            "english",
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        if (value == "en") {
+                                          setState(() {
+                                            // prefLang = "english";
+                                          });
+                                        } else {
+                                          setState(() {
+                                            // prefLang = value;
+                                          });
+                                        }
+                                        //   Map<String, String> dataa = {
+                                        //     'ph_name_en': pharmacy.ph_name_en,
+                                        //     'ph_name_ar': pharmacy.ph_name_ar,
+                                        //     'ph_phone1': pharmacy.ph_phone1,
+                                        //     'ph_mobile': pharmacy.ph_mobile,
+                                        //     'ph_address_en': pharmacy.ph_address_en,
+                                        //     'ph_address_ar': pharmacy.ph_address_ar,
+                                        //     'region_id': pharmacy.region_id,
+                                        //     'pref_lang': prefLang
+                                        //   };
+                                        //   profileBloc
+                                        //       .add(UpdateProfileRequested(data: dataa));
+                                        //   changeLanguage(value);
+                                      },
+                                      hint: Text(
+                                        'Gender',
+                                        // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
+                                        style: TextStyle(
+                                          fontFamily: 'GeSS',
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
+                    ),
+                    SizedBox(
+                      height: sizeAware.height * 0.1,
                     ),
                   ],
                 ),
