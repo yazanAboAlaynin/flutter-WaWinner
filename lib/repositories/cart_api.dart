@@ -29,7 +29,7 @@ class CartApi extends Api {
     };
     final response = await this
         .httpClient
-        .post(url, body: jsonEncode(data), headers: getHeaders());
+        .post(url, body: jsonEncode(data), headers: await getHeaders());
 
     var res = jsonDecode(response.body);
   }
@@ -38,7 +38,7 @@ class CartApi extends Api {
     final url = '${Api.baseUrl}/v1/front-end/check-coupon';
     final response = await this
         .httpClient
-        .post(url, body: jsonEncode(data), headers: getHeaders());
+        .post(url, body: jsonEncode(data), headers: await getHeaders());
 
     var res = jsonDecode(response.body)['status'];
 

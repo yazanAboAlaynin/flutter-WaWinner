@@ -18,10 +18,11 @@ class ProfileApi extends Api {
   Future<User> profile() async {
     final url = '${Api.baseUrl}/v1/user/profile';
 
-    final response = await this.httpClient.get(url, headers: getHeaders());
+    final response =
+        await this.httpClient.get(url, headers: await getHeaders());
 
     var res = jsonDecode(response.body);
-    print(res);
+
     if (res['status']) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       User user = User.fromJson(res['data']);

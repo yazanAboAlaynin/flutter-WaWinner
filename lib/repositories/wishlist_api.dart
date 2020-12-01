@@ -19,7 +19,8 @@ class WLApi extends Api {
     final url =
         '${Api.baseUrl}/v1/user/toggle-campaign-in-wish-list?campaign_id=$id';
 
-    final response = await this.httpClient.get(url, headers: getHeaders());
+    final response =
+        await this.httpClient.get(url, headers: await getHeaders());
 
     var res = jsonDecode(response.body);
   }
@@ -27,7 +28,8 @@ class WLApi extends Api {
   Future<List<Campaign>> getItems() async {
     final url = '${Api.baseUrl}/v1/user/fetch-wish-list-to-user';
 
-    final response = await this.httpClient.get(url, headers: getHeaders());
+    final response =
+        await this.httpClient.get(url, headers: await getHeaders());
     if (jsonDecode(response.body)['status']) {
       var res = jsonDecode(response.body)['data'] as List;
       List<Campaign> items = res.map((e) => Campaign.fromJson(e)).toList();

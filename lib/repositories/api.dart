@@ -14,12 +14,15 @@ class Api {
         'Accept-Language': 'en'
       };
 // x-www-form-urlencoded
-  Map<String, String> getHeaders() => {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $TOKEN',
-        'Accept-Language': 'en'
-      };
+  Future<Map<String, String>> getHeaders() async {
+    String token = await getToken();
+    return {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${token}',
+      'Accept-Language': 'en'
+    };
+  }
 
   Future<Map<String, String>> gHeaders() async => {
         'Content-type': 'application/json',
@@ -30,7 +33,7 @@ class Api {
   Future<Map<String, String>> getHeaderToken() async =>
       {'token': await getToken()};
 
-  Future getToken() async {
+  Future<String> getToken() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
 
     return localStorage.getString('token');

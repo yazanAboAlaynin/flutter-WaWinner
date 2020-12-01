@@ -6,6 +6,7 @@ import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/models/wishlist.dart';
 import 'package:http/http.dart' as http;
 
+import '../Constants.dart';
 import 'api.dart';
 import 'package:meta/meta.dart';
 
@@ -19,7 +20,8 @@ class CampaignApi extends Api {
   Future<List<Campaign>> getCampaigns() async {
     final url = '${Api.baseUrl}/v1/front-end/campaign';
 
-    final response = await this.httpClient.get(url, headers: getHeaders());
+    final response =
+        await this.httpClient.get(url, headers: await getHeaders());
 
     var res = jsonDecode(response.body)["data"] as List;
 
