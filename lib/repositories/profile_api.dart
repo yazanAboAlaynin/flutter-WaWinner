@@ -100,4 +100,30 @@ class ProfileApi extends Api {
       return false;
     }
   }
+
+  Future<bool> contactUs(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/contact-us';
+
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: await getHeaders());
+
+    var res = jsonDecode(response.body);
+    if (res['status']) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<String> aboutUs() async {
+    final url = '${Api.baseUrl}/v1/front-end/about-us';
+
+    final response =
+        await this.httpClient.get(url, headers: await getHeaders());
+
+    var res = jsonDecode(response.body);
+    String text = res['data'][0]['text'];
+    return text;
+  }
 }

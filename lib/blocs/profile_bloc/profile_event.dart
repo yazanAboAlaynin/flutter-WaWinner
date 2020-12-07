@@ -25,3 +25,16 @@ class ChangePasswordRequested extends ProfileEvent {
   @override
   List<Object> get props => [data];
 }
+
+class ContactUsRequested extends ProfileEvent {
+  final Map data;
+  ContactUsRequested({this.data});
+  @override
+  List<Object> get props => [data];
+}
+
+class AboutUsRequested extends ProfileEvent {
+  AboutUsRequested();
+  @override
+  List<Object> get props => [];
+}

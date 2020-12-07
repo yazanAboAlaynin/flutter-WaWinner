@@ -304,7 +304,9 @@ class _MyDrawerState extends State<MyDrawer> {
                         thickness: 0.7,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, 'Contact Us');
+                        },
                         child: Container(
                           height: sizeAware.height * 0.08,
                           child: Center(
@@ -321,6 +323,40 @@ class _MyDrawerState extends State<MyDrawer> {
                                 ),
                                 Text(
                                   'Contact us',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'About Us');
+                        },
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child:
+                                      SvgPicture.asset('assets/phone-call.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'About us',
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),

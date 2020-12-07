@@ -86,7 +86,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           decoration: InputDecoration(
                             labelText: 'Enter New Password',
                             filled: true,
-                            labelStyle: TextStyle(fontFamily: 'Gess'),
                             border: OutlineInputBorder(),
                           ),
                           validator: (val) =>

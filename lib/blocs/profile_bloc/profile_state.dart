@@ -17,13 +17,24 @@ class ProfileLoadInProgress extends ProfileState {}
 
 class ChangePasswordSccess extends ProfileState {}
 
+class MessageSent extends ProfileState {}
+
 class ChangePasswordFaield extends ProfileState {}
 
+class MessageFaield extends ProfileState {}
+
 class ProfileLoadSuccess extends ProfileState {
-  User user;
+  final User user;
   ProfileLoadSuccess({this.user});
   @override
   List<Object> get props => [user];
+}
+
+class AboutUsLoadSuccess extends ProfileState {
+  final String text;
+  AboutUsLoadSuccess({this.text});
+  @override
+  List<Object> get props => [text];
 }
 
 class ProfileLoadFailure extends ProfileState {}

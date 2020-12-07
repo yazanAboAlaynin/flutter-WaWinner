@@ -47,6 +47,26 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       } catch (_) {
         yield ProfileLoadFailure();
       }
+    } else if (event is ContactUsRequested) {
+      yield ProfileLoadInProgress();
+      try {
+        bool st = await profileApi.contactUs(event.data);
+        if (st) {
+          yield MessageSent();
+        } else {
+          yield MessageFaield();
+        }
+      } catch (_) {
+        yield ProfileLoadFailure();
+      }
+    } else if (event is AboutUsRequested) {
+      yield ProfileLoadInProgress();
+      try {
+        String st = await profileApi.aboutUs();
+        yield AboutUsLoadSuccess(text: st);
+      } catch (_) {
+        yield ProfileLoadFailure();
+      }
     }
   }
 }

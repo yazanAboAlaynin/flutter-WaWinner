@@ -261,6 +261,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 emailTextEditingController,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
+                                              // disabledBorder: InputBorder.none,
+                                              // enabledBorder: InputBorder.none,
+                                              border: InputBorder.none,
                                             ),
                                           ),
                                         ),
@@ -331,6 +334,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             controller:
                                                 phoneTextEditingController,
                                             decoration: InputDecoration(
+                                              border: InputBorder.none,
                                               hintText: 'test@test.c',
                                             ),
                                           ),
@@ -413,6 +417,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             controller:
                                                 f_nameTextEditingController,
                                             decoration: InputDecoration(
+                                              border: InputBorder.none,
                                               hintText: 'test@test.c',
                                             ),
                                           ),
@@ -484,6 +489,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             controller:
                                                 l_nameTextEditingController,
                                             decoration: InputDecoration(
+                                              border: InputBorder.none,
                                               hintText: 'test@test.c',
                                             ),
                                           ),
@@ -555,6 +561,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             controller:
                                                 addressTextEditingController,
                                             decoration: InputDecoration(
+                                              border: InputBorder.none,
                                               hintText: 'test@test.c',
                                             ),
                                           ),
@@ -626,6 +633,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             controller:
                                                 nationalityTextEditingController,
                                             decoration: InputDecoration(
+                                              border: InputBorder.none,
                                               hintText: 'test@test.c',
                                             ),
                                           ),

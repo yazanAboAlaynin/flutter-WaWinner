@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
 import 'package:flutter_wawinner/repositories/cart_api.dart';
+import 'package:flutter_wawinner/screens/AboutUsPage.dart';
 import 'package:flutter_wawinner/screens/CampaignsPage.dart';
 import 'package:flutter_wawinner/screens/CartPage.dart';
 import 'package:flutter_wawinner/screens/ChangePasswordPage.dart';
+import 'package:flutter_wawinner/screens/ContactUsPage.dart';
 import 'package:flutter_wawinner/screens/ProductDetail.dart';
 import 'package:flutter_wawinner/screens/ProfilePage.dart';
 import 'package:flutter_wawinner/screens/WishListPage.dart';
@@ -89,6 +91,8 @@ class _MyAppState extends State<MyApp> {
             create: (context) => CartBloc(cartApi: widget.cartApi),
             child: ProductDetail()),
         'Change Password': (context) => ChangePasswordPage(),
+        'Contact Us': (context) => ContactUsPage(),
+        'About Us': (context) => AboutUsPage(),
         'Login': (context) => LoginPage(),
         'Register': (context) => RegisterPage(),
         'Profile': (context) => ProfilePage(),
