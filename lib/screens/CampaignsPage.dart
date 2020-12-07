@@ -17,6 +17,7 @@ import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CampaignCard.dart';
 import 'package:flutter_wawinner/screens/shared/CharityCard.dart';
+import 'package:flutter_wawinner/screens/shared/Loading.dart';
 import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
 import 'package:flutter_wawinner/screens/shared/image_carusel.dart';
 import 'package:flutter_wawinner/screens/shared/productCard.dart';
@@ -75,9 +76,7 @@ class _CampaignState extends State<CampaignsPage> {
         cubit: campaignsBloc,
         builder: (context, state) {
           if (state is CampaignsLoadInProgress) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Loading();
           }
           if (state is CampaignsLoadSuccess) {
             campaigns = state.campaigns;
@@ -184,9 +183,9 @@ class _CampaignState extends State<CampaignsPage> {
                                     color: Color.fromRGBO(127, 25, 168, 1.0),
                                   ),
                                 ),
-                                SingleChildScrollView(
-                                  child: charitiesList(),
-                                )
+                                // SingleChildScrollView(
+                                //   child: charitiesList(),
+                                // )
                               ],
                             ),
                           ),

@@ -8,6 +8,7 @@ import 'package:flutter_wawinner/repositories/cart_api.dart';
 
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CartItemCard.dart';
+import 'package:flutter_wawinner/screens/shared/Loading.dart';
 import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -65,9 +66,7 @@ class _CartPageState extends State<CartPage> {
         cubit: cartBloc,
         builder: (context, state) {
           if (state is CartLoadInProgress) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Loading();
           }
           if (state is CartLoadFailure) {
             return Center(

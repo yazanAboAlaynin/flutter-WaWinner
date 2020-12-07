@@ -49,4 +49,55 @@ class ProfileApi extends Api {
       return null;
     }
   }
+
+  Future updateProfile(id, data) async {
+    final url = '${Api.baseUrl}/v1/user/user/$id';
+
+    final response = await this
+        .httpClient
+        .put(url, body: jsonEncode(data), headers: await getHeaders());
+
+    var res = jsonDecode(response.body);
+
+    if (res['status']) {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      User user = User.fromJson(res['data']);
+
+      preferences.setInt('id', user.id);
+
+      preferences.setString('email', user.email);
+      preferences.setString('first_name', user.first_name);
+      preferences.setString('last_name', user.last_name);
+      preferences.setString('image', user.image);
+      preferences.setString('address', user.address);
+      preferences.setString('created_at', user.created_at);
+      preferences.setString('updated_at', user.updated_at);
+
+      EMAIL = user.email;
+      FIRST_NAME = user.first_name;
+      LAST_NAME = user.last_name;
+      ADDRESS = user.address;
+      IMAGE = user.image;
+
+      ID = user.id;
+      return user;
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool> changePassword(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/change-password';
+
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: await getHeaders());
+
+    var res = jsonDecode(response.body);
+    if (res['status']) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

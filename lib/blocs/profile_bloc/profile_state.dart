@@ -15,6 +15,10 @@ class ProfileInitial extends ProfileState {}
 
 class ProfileLoadInProgress extends ProfileState {}
 
+class ChangePasswordSccess extends ProfileState {}
+
+class ChangePasswordFaield extends ProfileState {}
+
 class ProfileLoadSuccess extends ProfileState {
   User user;
   ProfileLoadSuccess({this.user});

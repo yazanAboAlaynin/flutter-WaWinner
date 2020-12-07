@@ -7,6 +7,7 @@ import 'package:flutter_wawinner/blocs/profile_bloc/profile_state.dart';
 import 'package:flutter_wawinner/models/user.dart';
 import 'package:flutter_wawinner/repositories/profile_api.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
+import 'package:flutter_wawinner/screens/shared/Loading.dart';
 import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
@@ -18,6 +19,17 @@ class _ProfilePageState extends State<ProfilePage> {
   ProfileBloc profileBloc;
   ProfileApi profileApi = ProfileApi(httpClient: http.Client());
   User user;
+
+  TextEditingController emailTextEditingController = TextEditingController();
+  TextEditingController phoneTextEditingController = TextEditingController();
+  TextEditingController f_nameTextEditingController = TextEditingController();
+  TextEditingController l_nameTextEditingController = TextEditingController();
+  TextEditingController statusTextEditingController = TextEditingController();
+  TextEditingController genderTextEditingController = TextEditingController();
+  TextEditingController addressTextEditingController = TextEditingController();
+  TextEditingController corTextEditingController = TextEditingController();
+  TextEditingController nationalityTextEditingController =
+      TextEditingController();
 
   @override
   void initState() {
@@ -33,9 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
       cubit: profileBloc,
       builder: (context, state) {
         if (state is ProfileLoadInProgress) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return Loading();
         }
         if (state is ProfileLoadFailure) {
           return Center(
@@ -44,6 +54,19 @@ class _ProfilePageState extends State<ProfilePage> {
         }
         if (state is ProfileLoadSuccess) {
           user = state.user;
+          emailTextEditingController.text = user.email;
+
+          phoneTextEditingController.text = user.phone;
+
+          f_nameTextEditingController.text = user.first_name;
+
+          l_nameTextEditingController.text = user.last_name;
+
+          addressTextEditingController.text = user.address;
+
+          corTextEditingController.text = user.country_of_residence;
+
+          nationalityTextEditingController.text = user.nationality;
 
           return Scaffold(
             appBar: myAppBar('Profile', null),
@@ -234,7 +257,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
-                                            initialValue: user.email,
+                                            controller:
+                                                emailTextEditingController,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -304,7 +328,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
-                                            initialValue: user.phone,
+                                            controller:
+                                                phoneTextEditingController,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -385,7 +410,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
-                                            initialValue: user.first_name,
+                                            controller:
+                                                f_nameTextEditingController,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -455,7 +481,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
-                                            initialValue: user.last_name,
+                                            controller:
+                                                l_nameTextEditingController,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -525,7 +552,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
-                                            initialValue: user.address,
+                                            controller:
+                                                addressTextEditingController,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -595,7 +623,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                         Expanded(
                                           child: TextFormField(
-                                            initialValue: user.nationality,
+                                            controller:
+                                                nationalityTextEditingController,
                                             decoration: InputDecoration(
                                               hintText: 'test@test.c',
                                             ),
@@ -654,49 +683,27 @@ class _ProfilePageState extends State<ProfilePage> {
                                       underline: SizedBox(),
                                       items: [
                                         DropdownMenuItem<String>(
-                                          value: "ar",
+                                          value: "Single",
                                           child: Text(
-                                            "العربية",
-                                            style:
-                                                TextStyle(fontFamily: 'GeSS'),
+                                            "Single",
                                           ),
                                         ),
                                         DropdownMenuItem<String>(
-                                          value: "en",
+                                          value: "Married",
                                           child: Text(
-                                            "english",
+                                            "Married",
                                           ),
                                         ),
                                       ],
                                       onChanged: (value) {
-                                        if (value == "en") {
-                                          setState(() {
-                                            // prefLang = "english";
-                                          });
-                                        } else {
-                                          setState(() {
-                                            // prefLang = value;
-                                          });
-                                        }
-                                        //   Map<String, String> dataa = {
-                                        //     'ph_name_en': pharmacy.ph_name_en,
-                                        //     'ph_name_ar': pharmacy.ph_name_ar,
-                                        //     'ph_phone1': pharmacy.ph_phone1,
-                                        //     'ph_mobile': pharmacy.ph_mobile,
-                                        //     'ph_address_en': pharmacy.ph_address_en,
-                                        //     'ph_address_ar': pharmacy.ph_address_ar,
-                                        //     'region_id': pharmacy.region_id,
-                                        //     'pref_lang': prefLang
-                                        //   };
-                                        //   profileBloc
-                                        //       .add(UpdateProfileRequested(data: dataa));
-                                        //   changeLanguage(value);
+                                        setState(() {
+                                          statusTextEditingController.text =
+                                              value;
+                                        });
                                       },
                                       hint: Text(
                                         'Status',
-                                        // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
                                         style: TextStyle(
-                                          fontFamily: 'GeSS',
                                           color: Colors.white,
                                         ),
                                       ),
@@ -721,6 +728,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 22.0, vertical: 4),
                                     child: DropdownButton<String>(
+                                      // value: statusTextEditingController.text,
                                       icon: Icon(
                                         Icons.keyboard_arrow_down,
                                         color: Colors.white,
@@ -729,49 +737,27 @@ class _ProfilePageState extends State<ProfilePage> {
                                       underline: SizedBox(),
                                       items: [
                                         DropdownMenuItem<String>(
-                                          value: "ar",
+                                          value: "Male",
                                           child: Text(
-                                            "العربية",
-                                            style:
-                                                TextStyle(fontFamily: 'GeSS'),
+                                            "Male",
                                           ),
                                         ),
                                         DropdownMenuItem<String>(
-                                          value: "en",
+                                          value: "Female",
                                           child: Text(
-                                            "english",
+                                            "Female",
                                           ),
                                         ),
                                       ],
                                       onChanged: (value) {
-                                        if (value == "en") {
-                                          setState(() {
-                                            // prefLang = "english";
-                                          });
-                                        } else {
-                                          setState(() {
-                                            // prefLang = value;
-                                          });
-                                        }
-                                        //   Map<String, String> dataa = {
-                                        //     'ph_name_en': pharmacy.ph_name_en,
-                                        //     'ph_name_ar': pharmacy.ph_name_ar,
-                                        //     'ph_phone1': pharmacy.ph_phone1,
-                                        //     'ph_mobile': pharmacy.ph_mobile,
-                                        //     'ph_address_en': pharmacy.ph_address_en,
-                                        //     'ph_address_ar': pharmacy.ph_address_ar,
-                                        //     'region_id': pharmacy.region_id,
-                                        //     'pref_lang': prefLang
-                                        //   };
-                                        //   profileBloc
-                                        //       .add(UpdateProfileRequested(data: dataa));
-                                        //   changeLanguage(value);
+                                        setState(() {
+                                          genderTextEditingController.text =
+                                              value;
+                                        });
                                       },
                                       hint: Text(
                                         'Gender',
-                                        // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
                                         style: TextStyle(
-                                          fontFamily: 'GeSS',
                                           color: Colors.white,
                                         ),
                                       ),
@@ -781,7 +767,80 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        SizedBox(height: sizeAware.height * 0.03),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, 'Change Password',
+                                arguments: {'user_id': user.id});
+                          },
+                          child: Center(
+                            child: Container(
+                              width: sizeAware.width * 0.85,
+                              height: 45.0,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(127, 25, 168, 1),
+                                borderRadius: BorderRadius.horizontal(
+                                  left: Radius.circular(40),
+                                  right: Radius.circular(40),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Change Password',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: sizeAware.height * 0.03),
+                        GestureDetector(
+                          onTap: () {
+                            var data = {
+                              // '': ''
+                            };
+                          },
+                          child: Center(
+                            child: Container(
+                              width: sizeAware.width * 0.85,
+                              height: 45.0,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(127, 25, 168, 1),
+                                borderRadius: BorderRadius.horizontal(
+                                  left: Radius.circular(40),
+                                  right: Radius.circular(40),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Save',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(

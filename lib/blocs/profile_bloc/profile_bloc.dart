@@ -22,8 +22,28 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       try {
         User user = await profileApi.profile();
 
+        yield ProfileLoadSuccess(user: user);
+      } catch (_) {
+        yield ProfileLoadFailure();
+      }
+    } else if (event is UpdateProfileRequested) {
+      yield ProfileLoadInProgress();
+      try {
+        User user = await profileApi.updateProfile(event.id, event.data);
 
         yield ProfileLoadSuccess(user: user);
+      } catch (_) {
+        yield ProfileLoadFailure();
+      }
+    } else if (event is ChangePasswordRequested) {
+      yield ProfileLoadInProgress();
+      try {
+        bool st = await profileApi.changePassword(event.data);
+        if (st) {
+          yield ChangePasswordSccess();
+        } else {
+          yield ChangePasswordFaield();
+        }
       } catch (_) {
         yield ProfileLoadFailure();
       }

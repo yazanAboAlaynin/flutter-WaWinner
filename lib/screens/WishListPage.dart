@@ -6,6 +6,7 @@ import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_state.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/repositories/wishlist_api.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
+import 'package:flutter_wawinner/screens/shared/Loading.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_wawinner/screens/shared/WLCard.dart';
 
@@ -31,9 +32,7 @@ class _WishListPageState extends State<WishListPage> {
       cubit: wlBloc,
       builder: (context, state) {
         if (state is WlLoadInProgress) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return Loading();
         }
         if (state is WlLoadFailure) {
           return Center(

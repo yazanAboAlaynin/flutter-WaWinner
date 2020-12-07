@@ -5,6 +5,7 @@ import 'package:flutter_wawinner/repositories/campaign_api.dart';
 import 'package:flutter_wawinner/repositories/cart_api.dart';
 import 'package:flutter_wawinner/screens/CampaignsPage.dart';
 import 'package:flutter_wawinner/screens/CartPage.dart';
+import 'package:flutter_wawinner/screens/ChangePasswordPage.dart';
 import 'package:flutter_wawinner/screens/ProductDetail.dart';
 import 'package:flutter_wawinner/screens/ProfilePage.dart';
 import 'package:flutter_wawinner/screens/WishListPage.dart';
@@ -87,6 +88,7 @@ class _MyAppState extends State<MyApp> {
         'Campaign Detailes': (context) => BlocProvider(
             create: (context) => CartBloc(cartApi: widget.cartApi),
             child: ProductDetail()),
+        'Change Password': (context) => ChangePasswordPage(),
         'Login': (context) => LoginPage(),
         'Register': (context) => RegisterPage(),
         'Profile': (context) => ProfilePage(),
