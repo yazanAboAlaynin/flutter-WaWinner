@@ -40,10 +40,16 @@ class _AboutUsPageState extends State<AboutUsPage> {
           return Scaffold(
             appBar: myAppBar('About Us', null),
             body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text(text),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  children: [
+                    Text(
+                      text,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

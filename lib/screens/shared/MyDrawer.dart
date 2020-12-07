@@ -349,8 +349,11 @@ class _MyDrawerState extends State<MyDrawer> {
                                 Container(
                                   height: sizeAware.height * 0.04,
                                   width: sizeAware.width * 0.1,
-                                  child:
-                                      SvgPicture.asset('assets/phone-call.svg'),
+                                  child: Icon(
+                                    Icons.info,
+                                    size: 30,
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: sizeAware.width * 0.04,
