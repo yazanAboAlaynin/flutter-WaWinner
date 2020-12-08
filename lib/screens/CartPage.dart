@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_state.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:flutter_wawinner/repositories/cart_api.dart';
 
@@ -236,77 +237,94 @@ class _CartPageState extends State<CartPage> {
                           SizedBox(
                             height: sizeAware.height * 0.03,
                           ),
-                          Container(
-                            height: 45,
-                            width: sizeAware.width * 0.85,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    height: sizeAware.height,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(30),
-                                        topLeft: Radius.circular(30),
+                          Center(
+                            child: Container(
+                              height: 45,
+                              width: sizeAware.width * 0.85,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      height: sizeAware.height,
+                                      decoration: BoxDecoration(
+                                        borderRadius: LANGUAGE == 'ar'
+                                            ? BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(30),
+                                                topRight: Radius.circular(30),
+                                              )
+                                            : BorderRadius.only(
+                                                bottomLeft: Radius.circular(30),
+                                                topLeft: Radius.circular(30),
+                                              ),
+                                        color: Colors.grey[400],
                                       ),
-                                      color: Colors.grey[400],
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 2,
-                                    ),
-                                    child: TextFormField(
-                                      enabled: !is_valid,
-                                      controller: codeTextEditingController,
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter Code',
-                                        border: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        focusedErrorBorder: InputBorder.none,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 2,
+                                      ),
+                                      child: TextFormField(
+                                        enabled: !is_valid,
+                                        controller: codeTextEditingController,
+                                        decoration: InputDecoration(
+                                          hintText: 'Enter Code',
+                                          border: InputBorder.none,
+                                          disabledBorder: InputBorder.none,
+                                          enabledBorder: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          errorBorder: InputBorder.none,
+                                          focusedErrorBorder: InputBorder.none,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    if (codeTextEditingController.text.length >
-                                            0 &&
-                                        !is_valid) {
-                                      cartBloc.add(CheckCoupon(
-                                          coupon:
-                                              codeTextEditingController.text));
-                                    }
-                                  },
-                                  child: Container(
-                                    height: sizeAware.height,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                        bottomRight: Radius.circular(30),
-                                        topRight: Radius.circular(30),
+                                  GestureDetector(
+                                    onTap: () {
+                                      if (codeTextEditingController
+                                                  .text.length >
+                                              0 &&
+                                          !is_valid) {
+                                        cartBloc.add(CheckCoupon(
+                                            coupon: codeTextEditingController
+                                                .text));
+                                      }
+                                    },
+                                    child: Container(
+                                      height: sizeAware.height,
+                                      decoration: BoxDecoration(
+                                        borderRadius: LANGUAGE == 'en'
+                                            ? BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(30),
+                                                topRight: Radius.circular(30),
+                                              )
+                                            : BorderRadius.only(
+                                                bottomLeft: Radius.circular(30),
+                                                topLeft: Radius.circular(30),
+                                              ),
+                                        color: is_valid
+                                            ? Colors.green
+                                            : Colors.red,
                                       ),
-                                      color:
-                                          is_valid ? Colors.green : Colors.red,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 2,
+                                      ),
+                                      child: Center(
+                                        child: is_valid
+                                            ? Icon(Icons.check)
+                                            : Text(
+                                                'Check',
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                      ),
                                     ),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 2,
-                                    ),
-                                    child: Center(
-                                      child: is_valid
-                                          ? Icon(Icons.check)
-                                          : Text(
-                                              'Check',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                    ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -318,30 +336,32 @@ class _CartPageState extends State<CartPage> {
                                 cartBloc.add(Checkout(
                                     items: items, is_donate: is_donated));
                             },
-                            child: Container(
-                              width: sizeAware.width * 0.85,
-                              height: 45.0,
-                              decoration: BoxDecoration(
-                                color: Color.fromRGBO(127, 25, 168, 1),
-                                borderRadius: BorderRadius.horizontal(
-                                  left: Radius.circular(40),
-                                  right: Radius.circular(40),
+                            child: Center(
+                              child: Container(
+                                width: sizeAware.width * 0.85,
+                                height: 45.0,
+                                decoration: BoxDecoration(
+                                  color: Color.fromRGBO(127, 25, 168, 1),
+                                  borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(40),
+                                    right: Radius.circular(40),
+                                  ),
                                 ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Checkout',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )
-                                  ],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Checkout',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

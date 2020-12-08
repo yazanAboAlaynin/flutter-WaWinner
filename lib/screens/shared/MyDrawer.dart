@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
+
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_wawinner/Constants.dart';
+
+import '../../main.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -13,6 +15,8 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+  String prefLang = "EN";
+
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -26,7 +30,7 @@ class _MyDrawerState extends State<MyDrawer> {
             },
             child: Icon(Icons.close)),
         title: Text(
-          'Settings',
+          getTranslated(context, 'Settings'),
         ),
         backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
         centerTitle: true,
@@ -86,7 +90,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'Login',
+                                  getTranslated(context, 'Settings'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -120,7 +124,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'Register',
+                                  getTranslated(context, 'Register'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -156,7 +160,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         width: sizeAware.width * 0.04,
                       ),
                       Text(
-                        'Cart',
+                        getTranslated(context, 'Cart'),
                         style: TextStyle(
                           fontSize: 18,
                         ),
@@ -192,7 +196,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'Wish List',
+                                  getTranslated(context, 'Wish List'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -223,7 +227,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'Active Coupones',
+                                  getTranslated(context, 'Active Coupones'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -255,7 +259,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'Payment Options',
+                                  getTranslated(context, 'Payment Options'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -288,7 +292,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'Personal Details',
+                                  getTranslated(context, 'Personal Details'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -322,7 +326,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'Contact us',
+                                  getTranslated(context, 'Contact us'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -359,7 +363,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'About us',
+                                  getTranslated(context, 'About us'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -401,7 +405,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'Logout',
+                                  getTranslated(context, 'Logout'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -415,31 +419,95 @@ class _MyDrawerState extends State<MyDrawer> {
                   )
                 : Container(),
             !IsLoggedIn
-                ? InkWell(
-                    onTap: () {},
-                    child: Container(
-                      height: sizeAware.height * 0.08,
-                      child: Center(
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              height: sizeAware.height * 0.04,
-                              width: sizeAware.width * 0.1,
-                              child: SvgPicture.asset('assets/phone-call.svg'),
+                ? Column(
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child:
+                                      SvgPicture.asset('assets/phone-call.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  getTranslated(context, 'Contact us'),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: sizeAware.width * 0.04,
-                            ),
-                            Text(
-                              'Contact us',
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
+                      ),
+                      Container(
+                        width: sizeAware.width,
+                        height: sizeAware.height * 0.08,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        child: Card(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 22.0, vertical: 0),
+                            child: DropdownButton<String>(
+                              icon: Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Color.fromRGBO(18, 161, 154, 1.0),
+                              ),
+                              isExpanded: true,
+                              underline: SizedBox(),
+                              items: [
+                                DropdownMenuItem<String>(
+                                  value: "ar",
+                                  child: Text(
+                                    "العربية",
+                                    style: TextStyle(fontFamily: 'GeSS'),
+                                  ),
+                                ),
+                                DropdownMenuItem<String>(
+                                  value: "en",
+                                  child: Text(
+                                    "english",
+                                  ),
+                                ),
+                              ],
+                              onChanged: (value) {
+                                if (value == "en") {
+                                  setState(() {
+                                    prefLang = "english";
+                                  });
+                                } else {
+                                  setState(() {
+                                    prefLang = value;
+                                  });
+                                }
+
+                                changeLanguage(value);
+                              },
+                              hint: Text(
+                                'pref lang',
+                                // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
+                                style: TextStyle(fontFamily: 'GeSS'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   )
                 : Container(),
             Divider(
@@ -451,5 +519,10 @@ class _MyDrawerState extends State<MyDrawer> {
         ),
       ),
     );
+  }
+
+  void changeLanguage(languageCode) async {
+    Locale temp = await setLocale(languageCode);
+    MyApp.setLocale(context, temp);
   }
 }

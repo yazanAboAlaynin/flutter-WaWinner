@@ -4,11 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_bloc.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_event.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_state.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/user.dart';
 import 'package:flutter_wawinner/repositories/profile_api.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/Loading.dart';
 import 'package:http/http.dart' as http;
+
+import '../main.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -19,6 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
   ProfileBloc profileBloc;
   ProfileApi profileApi = ProfileApi(httpClient: http.Client());
   User user;
+  String prefLang = "EN";
 
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController phoneTextEditingController = TextEditingController();
@@ -177,26 +181,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                 onChanged: (value) {
                                   if (value == "en") {
                                     setState(() {
-                                      // prefLang = "english";
+                                      prefLang = "english";
                                     });
                                   } else {
                                     setState(() {
-                                      // prefLang = value;
+                                      prefLang = value;
                                     });
                                   }
-                                  //   Map<String, String> dataa = {
-                                  //     'ph_name_en': pharmacy.ph_name_en,
-                                  //     'ph_name_ar': pharmacy.ph_name_ar,
-                                  //     'ph_phone1': pharmacy.ph_phone1,
-                                  //     'ph_mobile': pharmacy.ph_mobile,
-                                  //     'ph_address_en': pharmacy.ph_address_en,
-                                  //     'ph_address_ar': pharmacy.ph_address_ar,
-                                  //     'region_id': pharmacy.region_id,
-                                  //     'pref_lang': prefLang
-                                  //   };
-                                  //   profileBloc
-                                  //       .add(UpdateProfileRequested(data: dataa));
-                                  //   changeLanguage(value);
+
+                                  changeLanguage(value);
                                 },
                                 hint: Text(
                                   'pref lang',
@@ -232,10 +225,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                     padding: const EdgeInsets.all(4.0),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topLeft: Radius.circular(10),
-                                      ),
+                                      borderRadius: LANGUAGE == 'en'
+                                          ? BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              topLeft: Radius.circular(10),
+                                            )
+                                          : BorderRadius.only(
+                                              bottomRight: Radius.circular(10),
+                                              topRight: Radius.circular(10),
+                                            ),
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey[400],
@@ -283,10 +281,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                           offset: Offset(2, 1),
                                           spreadRadius: 2),
                                     ],
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
+                                    borderRadius: LANGUAGE == 'ar'
+                                        ? BorderRadius.only(
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10),
+                                          )
+                                        : BorderRadius.only(
+                                            bottomRight: Radius.circular(10),
+                                            topRight: Radius.circular(10),
+                                          ),
                                   ),
                                   child: Icon(Icons.edit, color: Colors.white),
                                 ),
@@ -306,10 +309,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                     padding: const EdgeInsets.all(4.0),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topLeft: Radius.circular(10),
-                                      ),
+                                      borderRadius: LANGUAGE == 'en'
+                                          ? BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              topLeft: Radius.circular(10),
+                                            )
+                                          : BorderRadius.only(
+                                              bottomRight: Radius.circular(10),
+                                              topRight: Radius.circular(10),
+                                            ),
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey[400],
@@ -355,10 +363,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                           offset: Offset(2, 1),
                                           spreadRadius: 2),
                                     ],
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
+                                    borderRadius: LANGUAGE == 'ar'
+                                        ? BorderRadius.only(
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10),
+                                          )
+                                        : BorderRadius.only(
+                                            bottomRight: Radius.circular(10),
+                                            topRight: Radius.circular(10),
+                                          ),
                                   ),
                                   child: Icon(Icons.edit, color: Colors.white),
                                 ),
@@ -389,10 +402,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                     padding: const EdgeInsets.all(4.0),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topLeft: Radius.circular(10),
-                                      ),
+                                      borderRadius: LANGUAGE == 'en'
+                                          ? BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              topLeft: Radius.circular(10),
+                                            )
+                                          : BorderRadius.only(
+                                              bottomRight: Radius.circular(10),
+                                              topRight: Radius.circular(10),
+                                            ),
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey[400],
@@ -438,10 +456,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                           offset: Offset(2, 1),
                                           spreadRadius: 2),
                                     ],
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
+                                    borderRadius: LANGUAGE == 'ar'
+                                        ? BorderRadius.only(
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10),
+                                          )
+                                        : BorderRadius.only(
+                                            bottomRight: Radius.circular(10),
+                                            topRight: Radius.circular(10),
+                                          ),
                                   ),
                                   child: Icon(Icons.edit, color: Colors.white),
                                 ),
@@ -461,10 +484,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                     padding: const EdgeInsets.all(4.0),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topLeft: Radius.circular(10),
-                                      ),
+                                      borderRadius: LANGUAGE == 'en'
+                                          ? BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              topLeft: Radius.circular(10),
+                                            )
+                                          : BorderRadius.only(
+                                              bottomRight: Radius.circular(10),
+                                              topRight: Radius.circular(10),
+                                            ),
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey[400],
@@ -510,10 +538,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                           offset: Offset(2, 1),
                                           spreadRadius: 2),
                                     ],
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
+                                    borderRadius: LANGUAGE == 'ar'
+                                        ? BorderRadius.only(
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10),
+                                          )
+                                        : BorderRadius.only(
+                                            bottomRight: Radius.circular(10),
+                                            topRight: Radius.circular(10),
+                                          ),
                                   ),
                                   child: Icon(Icons.edit, color: Colors.white),
                                 ),
@@ -533,10 +566,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                     padding: const EdgeInsets.all(4.0),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topLeft: Radius.circular(10),
-                                      ),
+                                      borderRadius: LANGUAGE == 'en'
+                                          ? BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              topLeft: Radius.circular(10),
+                                            )
+                                          : BorderRadius.only(
+                                              bottomRight: Radius.circular(10),
+                                              topRight: Radius.circular(10),
+                                            ),
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey[400],
@@ -582,10 +620,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                           offset: Offset(2, 1),
                                           spreadRadius: 2),
                                     ],
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
+                                    borderRadius: LANGUAGE == 'ar'
+                                        ? BorderRadius.only(
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10),
+                                          )
+                                        : BorderRadius.only(
+                                            bottomRight: Radius.circular(10),
+                                            topRight: Radius.circular(10),
+                                          ),
                                   ),
                                   child: Icon(Icons.edit, color: Colors.white),
                                 ),
@@ -605,10 +648,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                     padding: const EdgeInsets.all(4.0),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topLeft: Radius.circular(10),
-                                      ),
+                                      borderRadius: LANGUAGE == 'en'
+                                          ? BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              topLeft: Radius.circular(10),
+                                            )
+                                          : BorderRadius.only(
+                                              bottomRight: Radius.circular(10),
+                                              topRight: Radius.circular(10),
+                                            ),
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey[400],
@@ -654,10 +702,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                           offset: Offset(2, 1),
                                           spreadRadius: 2),
                                     ],
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
+                                    borderRadius: LANGUAGE == 'ar'
+                                        ? BorderRadius.only(
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10),
+                                          )
+                                        : BorderRadius.only(
+                                            bottomRight: Radius.circular(10),
+                                            topRight: Radius.circular(10),
+                                          ),
                                   ),
                                   child: Icon(Icons.edit, color: Colors.white),
                                 ),
@@ -862,5 +915,10 @@ class _ProfilePageState extends State<ProfilePage> {
         }
       },
     );
+  }
+
+  void changeLanguage(languageCode) async {
+    Locale temp = await setLocale(languageCode);
+    MyApp.setLocale(context, temp);
   }
 }

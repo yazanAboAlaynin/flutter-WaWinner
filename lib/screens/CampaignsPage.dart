@@ -8,6 +8,7 @@ import 'package:flutter_wawinner/blocs/campaign_bloc/campaign_state.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_state.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/charity.dart';
 import 'package:flutter_wawinner/models/product.dart';
@@ -64,7 +65,7 @@ class _CampaignState extends State<CampaignsPage> {
       listener: (context, state) {
         if (state is ItemAdded) {
           Fluttertoast.showToast(
-              msg: "Item added to Cart",
+              msg: getTranslated(context, "Item added to Cart"),
               toastLength: Toast.LENGTH_SHORT,
               timeInSecForIosWeb: 1,
               backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
@@ -84,7 +85,7 @@ class _CampaignState extends State<CampaignsPage> {
             images = state.images;
             charities = state.charities;
             return Scaffold(
-                appBar: myAppBar('Campaigns', null),
+                appBar: myAppBar(getTranslated(context, 'Campaigns'), null),
                 drawer: Drawer(
                   child: MyDrawer(),
                 ),
@@ -144,7 +145,7 @@ class _CampaignState extends State<CampaignsPage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Products',
+                                        getTranslated(context, 'Products'),
                                         style: TextStyle(
                                           fontSize: 19,
                                           fontWeight: FontWeight.bold,
@@ -176,16 +177,16 @@ class _CampaignState extends State<CampaignsPage> {
                                   height: sizeAware.height * 0.07,
                                 ),
                                 Text(
-                                  'Charities',
+                                  getTranslated(context, 'Charities'),
                                   style: TextStyle(
                                     fontSize: 19,
                                     fontWeight: FontWeight.bold,
                                     color: Color.fromRGBO(127, 25, 168, 1.0),
                                   ),
                                 ),
-                                // SingleChildScrollView(
-                                //   child: charitiesList(),
-                                // )
+                                SingleChildScrollView(
+                                  child: charitiesList(),
+                                )
                               ],
                             ),
                           ),
@@ -198,6 +199,7 @@ class _CampaignState extends State<CampaignsPage> {
           if (state is CampaignsLoadFailure) {
             return Container();
           }
+          return Loading();
         },
       ),
     );

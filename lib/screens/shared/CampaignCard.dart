@@ -6,6 +6,7 @@ import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_event.dart' as wl;
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:flutter_wawinner/models/wishlist.dart';
@@ -87,7 +88,7 @@ class _CampaignCardState extends State<CampaignCard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Buy a',
+                                  getTranslated(context, 'Buy a'),
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -118,7 +119,8 @@ class _CampaignCardState extends State<CampaignCard> {
                                       .add(wl.AddItem(item: widget.campaign));
                                 } else {
                                   Fluttertoast.showToast(
-                                      msg: "You need to login first",
+                                      msg: getTranslated(
+                                          context, "You need to login first"),
                                       toastLength: Toast.LENGTH_LONG,
                                       timeInSecForIosWeb: 1,
                                       backgroundColor:
@@ -184,8 +186,10 @@ class _CampaignCardState extends State<CampaignCard> {
                                               Color.fromRGBO(127, 25, 168, 1.0),
                                         ),
                                       ),
-                                      Text('sold'),
-                                      Text('out of'),
+                                      Text(
+                                        getTranslated(context, "sold"),
+                                      ),
+                                      Text(getTranslated(context, "out of")),
                                       Text(
                                           '${widget.campaign.product_quantity}'),
                                     ],
@@ -240,21 +244,26 @@ class _CampaignCardState extends State<CampaignCard> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: LANGUAGE == 'en'
+                                  ? MainAxisAlignment.start
+                                  : MainAxisAlignment.end,
                               children: [
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: LANGUAGE == 'en'
+                                      ? CrossAxisAlignment.start
+                                      : CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'Get a chance to win:',
+                                      getTranslated(
+                                          context, 'Get a chance to win:'),
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Container(
-                                      width: sizeAware.width / 2,
+                                      // width: sizeAware.width / 2,
                                       child: Text(
                                         widget.campaign.prize.name,
                                         style: TextStyle(),
