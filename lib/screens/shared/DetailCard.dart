@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 
 class DetailCard extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _DetailCardState extends State<DetailCard> {
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
-                          'product(s)',
+                          getTranslated(context, 'product(s)'),
                           // widget.pending.ord_date.substring(0, 10),
                           style: TextStyle(fontSize: 16),
                         ),
@@ -49,7 +50,7 @@ class _DetailCardState extends State<DetailCard> {
                           ),
                         ),
                         Text(
-                          'Quantity',
+                          getTranslated(context, 'Quantity'),
                           style: TextStyle(
                             fontSize: sizeAware.width * 0.035,
                           ),
@@ -72,24 +73,19 @@ class _DetailCardState extends State<DetailCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Unit Price',
-                          //   style: TextStyle(fontFamily: 'Gess'),
+                          getTranslated(context, 'Unit Price'),
                         ),
                         Text(
-                          'Amount Excluding tax',
-                          //   style: TextStyle(fontFamily: 'Gess'),
+                          getTranslated(context, 'Amount Excluding tax'),
                         ),
                         Text(
-                          'Tax Rate %',
-                          //   style: TextStyle(fontFamily: 'Gess'),
+                          getTranslated(context, 'Tax Rate %'),
                         ),
                         Text(
-                          'Tax Payable',
-                          //   style: TextStyle(fontFamily: 'Gess'),
+                          getTranslated(context, 'Tax Payable'),
                         ),
                         Text(
-                          'Amount Including Tax',
-                          //   style: TextStyle(fontFamily: 'Gess'),
+                          getTranslated(context, 'Amount Including Tax'),
                         ),
                       ],
                     ),

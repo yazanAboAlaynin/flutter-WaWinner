@@ -13,22 +13,10 @@ class CharityCard extends StatelessWidget {
       width: sizeAware.width,
       height: sizeAware.height * 0.3,
       margin: const EdgeInsets.symmetric(vertical: 4),
-      child: Stack(
-        children: [
-          Image.network(
-            charity.image,
-            fit: BoxFit.cover,
-            height: sizeAware.height * 0.3,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(charity.title),
-              Text(charity.description),
-            ],
-          ),
-        ],
+      child: Image.network(
+        charity.image,
+        fit: BoxFit.cover,
+        height: sizeAware.height * 0.3,
       ),
     );
   }

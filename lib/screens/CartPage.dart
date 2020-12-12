@@ -26,6 +26,7 @@ class _CartPageState extends State<CartPage> {
   bool is_valid = false;
   double total_price = 0;
   int total_tickets = 0;
+  int total_products = 0;
 
   TextEditingController codeTextEditingController = TextEditingController();
 
@@ -43,17 +44,9 @@ class _CartPageState extends State<CartPage> {
     return BlocListener(
       cubit: cartBloc,
       listener: (context, state) {
-        if (state is CouponValid) {
-          Fluttertoast.showToast(
-              msg: "Coupon is valid",
-              toastLength: Toast.LENGTH_SHORT,
-              backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }
         if (state is CouponNotValid) {
           Fluttertoast.showToast(
-              msg: "Coupon is not valid",
+              msg: getTranslated(context, "Coupon is not valid"),
               toastLength: Toast.LENGTH_SHORT,
               timeInSecForIosWeb: 1,
               backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
@@ -80,8 +73,10 @@ class _CartPageState extends State<CartPage> {
 
             total_price = 0;
             total_tickets = 0;
+            total_products = 0;
             for (int i = 0; i < items.length; i++) {
               total_price += items[i].total_price;
+              total_products += items[i].qty;
             }
             for (int i = 0; i < items.length; i++) {
               total_tickets += items[i].campaign.ticket_count * items[i].qty;
@@ -100,7 +95,7 @@ class _CartPageState extends State<CartPage> {
             }
 
             return Scaffold(
-              appBar: myAppBar('Shopping Cart', null),
+              appBar: myAppBar(getTranslated(context, 'Shopping Cart'), null),
               body: CustomScrollView(
                 slivers: [
                   SliverList(
@@ -120,7 +115,7 @@ class _CartPageState extends State<CartPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Total Products',
+                                getTranslated(context, 'Total Products'),
                                 style: TextStyle(
                                   color: Colors.grey[700],
                                   fontSize: 18,
@@ -128,7 +123,7 @@ class _CartPageState extends State<CartPage> {
                                 ),
                               ),
                               Text(
-                                '${items.length}',
+                                '${total_products}',
                                 style: TextStyle(
                                   color: Colors.grey[700],
                                   fontSize: 18,
@@ -144,7 +139,7 @@ class _CartPageState extends State<CartPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Total Coupons',
+                                getTranslated(context, 'Total Coupons'),
                                 style: TextStyle(
                                   color: Colors.grey[700],
                                   fontSize: 18,
@@ -165,7 +160,8 @@ class _CartPageState extends State<CartPage> {
                             height: sizeAware.height * 0.02,
                           ),
                           Text(
-                            'Donate to recieve an additional Entry',
+                            getTranslated(context,
+                                'Donate to recieve an additional Entry'),
                             style: TextStyle(
                               color: Color.fromRGBO(127, 25, 168, 1.0),
                               fontSize: 18,
@@ -178,7 +174,8 @@ class _CartPageState extends State<CartPage> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  'I agree to donate all purchased products to charity as per " the Draw Terms and Conditions"',
+                                  getTranslated(context,
+                                      'I agree to donate all purchased products to charity as per  the Draw Terms and Conditions'),
                                   style: TextStyle(
                                     color: Colors.grey[700],
                                     fontSize: 16,
@@ -205,7 +202,7 @@ class _CartPageState extends State<CartPage> {
                             height: sizeAware.height * 0.02,
                           ),
                           Text(
-                            'Total',
+                            getTranslated(context, 'Total'),
                             style: TextStyle(
                               color: Colors.grey[700],
                               fontSize: 18,
@@ -216,7 +213,8 @@ class _CartPageState extends State<CartPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Price inclusive of VAT',
+                                getTranslated(
+                                    context, 'Price inclusive of VAT'),
                                 style: TextStyle(
                                   color: Colors.grey[700],
                                   fontSize: 18,
@@ -314,7 +312,7 @@ class _CartPageState extends State<CartPage> {
                                         child: is_valid
                                             ? Icon(Icons.check)
                                             : Text(
-                                                'Check',
+                                                getTranslated(context, 'Check'),
                                                 style: TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -353,7 +351,7 @@ class _CartPageState extends State<CartPage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Checkout',
+                                        getTranslated(context, 'Checkout'),
                                         style: TextStyle(
                                           fontSize: 20,
                                           color: Colors.white,
@@ -395,8 +393,10 @@ class _CartPageState extends State<CartPage> {
                             width: sizeAware.width * 0.02,
                           ),
                           Expanded(
-                            child: Text(
-                                'Safe and secure payments. 100% Authentic products.'),
+                            child: Text(getTranslated(
+                              context,
+                              'Safe and secure payments. 100% Authentic products.',
+                            )),
                           )
                         ],
                       ),

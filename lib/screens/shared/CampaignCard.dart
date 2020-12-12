@@ -529,7 +529,7 @@ class _CampaignCardState extends State<CampaignCard> {
                     height: 35,
                     child: Center(
                         child: Text(
-                      'AED ${widget.campaign.price}',
+                      '$CURRENCY ${widget.campaign.price}',
                       overflow: TextOverflow.clip,
                       style: TextStyle(color: Colors.white),
                     )),

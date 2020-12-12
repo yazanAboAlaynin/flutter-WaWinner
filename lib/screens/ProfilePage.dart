@@ -83,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
           statusTextEditingController.text = user.status;
 
           return Scaffold(
-            appBar: myAppBar('Profile', null),
+            appBar: myAppBar(getTranslated(context, 'Profile'), null),
             body: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.all(12),
@@ -147,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Application Settings',
+                          getTranslated(context, 'Application Settings'),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -202,9 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   changeLanguage(value);
                                 },
                                 hint: Text(
-                                  'Language',
-                                  // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
-                                  style: TextStyle(fontFamily: 'GeSS'),
+                                  getTranslated(context, 'Language'),
                                 ),
                               ),
                             ),
@@ -245,7 +243,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   CURRENCY = value;
                                 },
                                 hint: Text(
-                                  'Currency',
+                                  getTranslated(context, 'Currency'),
                                 ),
                               ),
                             ),
@@ -255,7 +253,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: sizeAware.height * 0.03,
                         ),
                         Text(
-                          'Account Settings',
+                          getTranslated(context, 'Account Settings'),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -297,7 +295,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Email:  ',
+                                          ' ${getTranslated(context, 'Email')}:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -381,7 +379,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Phone:  ',
+                                          ' ${getTranslated(context, 'Phone')}:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -395,7 +393,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 phoneTextEditingController,
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: 'test@test.c',
+                                              hintText: '09999999',
                                             ),
                                           ),
                                         ),
@@ -435,7 +433,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: sizeAware.height * 0.03,
                         ),
                         Text(
-                          'Personal Settings',
+                          getTranslated(context, 'Personal Settings'),
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
@@ -474,7 +472,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' First Name:  ',
+                                          ' ${getTranslated(context, 'First Name')}:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -488,7 +486,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 f_nameTextEditingController,
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: 'test@test.c',
+                                              hintText: 'First Name',
                                             ),
                                           ),
                                         ),
@@ -556,7 +554,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Last Name:  ',
+                                          ' ${getTranslated(context, 'Last Name')}:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -570,7 +568,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 l_nameTextEditingController,
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: 'test@test.c',
+                                              hintText: 'Last Name',
                                             ),
                                           ),
                                         ),
@@ -638,7 +636,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Address:  ',
+                                          ' ${getTranslated(context, 'Address')}:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -652,7 +650,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 addressTextEditingController,
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: 'test@test.c',
+                                              hintText: 'Address',
                                             ),
                                           ),
                                         ),
@@ -720,7 +718,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Nationality:  ',
+                                          ' ${getTranslated(context, 'Nationality')}:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -734,7 +732,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 nationalityTextEditingController,
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: 'test@test.c',
+                                              hintText: 'Nationality',
                                             ),
                                           ),
                                         ),
@@ -802,7 +800,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          ' Country of residence:  ',
+                                          ' ${getTranslated(context, 'Country of residence')}:  ',
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -816,7 +814,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 corTextEditingController,
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: 'test@test.c',
+                                              hintText: 'Country of residence',
                                             ),
                                           ),
                                         ),
@@ -880,13 +878,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                         DropdownMenuItem<String>(
                                           value: "Single",
                                           child: Text(
-                                            "Single",
+                                            getTranslated(context, "Single"),
                                           ),
                                         ),
                                         DropdownMenuItem<String>(
                                           value: "Married",
                                           child: Text(
-                                            "Married",
+                                            getTranslated(context, "Married"),
                                           ),
                                         ),
                                       ],
@@ -897,7 +895,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         });
                                       },
                                       hint: Text(
-                                        'Status',
+                                        getTranslated(context, 'Status'),
                                         style: TextStyle(
                                           color: Colors.white,
                                         ),
@@ -937,7 +935,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         DropdownMenuItem<String>(
                                           value: "1",
                                           child: Text(
-                                            "Male",
+                                            getTranslated(context, "Male"),
                                             style:
                                                 TextStyle(color: Colors.white),
                                           ),
@@ -945,7 +943,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         DropdownMenuItem<String>(
                                           value: "0",
                                           child: Text(
-                                            "Female",
+                                            getTranslated(context, "Female"),
                                             style:
                                                 TextStyle(color: Colors.white),
                                           ),
@@ -959,7 +957,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         });
                                       },
                                       hint: Text(
-                                        'Gender',
+                                        getTranslated(context, 'Gender'),
                                         style: TextStyle(
                                           color: Colors.white,
                                         ),
@@ -994,7 +992,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Change Password',
+                                      getTranslated(context, 'Change Password'),
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: Colors.white,
@@ -1046,7 +1044,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Save',
+                                      getTranslated(context, 'Save'),
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: Colors.white,

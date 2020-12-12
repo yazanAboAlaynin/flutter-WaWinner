@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/order.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/OrderCard.dart';
@@ -12,7 +13,7 @@ class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar('My Orders', null),
+      appBar: myAppBar(getTranslated(context, 'My Orders'), null),
       body: SingleChildScrollView(
         child: Column(
           children: getOrders(),

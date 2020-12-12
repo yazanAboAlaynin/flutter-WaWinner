@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_event.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_state.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/repositories/wishlist_api.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
@@ -45,7 +46,7 @@ class _WishListPageState extends State<WishListPage> {
           items = state.items;
 
           return Scaffold(
-            appBar: myAppBar('Wish List', null),
+            appBar: myAppBar(getTranslated(context, 'Wish List'), null),
             body: CustomScrollView(
               slivers: [
                 SliverList(

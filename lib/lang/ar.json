@@ -18,7 +18,93 @@
  "Personal Details": "المعلومات الشخصية",
  "Contact us": "اتصل بنا",
  "About us": "حول",
- "Logout": "تسجيل الخروج"
+ "Logout": "تسجيل الخروج",
+ "Profile": "الملف الشخصي",
+ "Application Settings": "اعدادات التطبيق",
+ "Language": "اللغة",
+ "Currency": "العملة",
+ "Account Settings": "اعدادات الحساب",
+ "Email": "البريد الالكتروني",
+ "Phone": "الهاتف",
+ "Personal Settings": "الاعدادات الشخصية",
+ "First Name": "الاسم الاول",
+ "Last Name": "الاسم الاخير",
+ "Address": "العنوان",
+ "Nationality": "الجنسية",
+ "Country of residence": "مكان الاقامة",
+ "Single": "اعذب",
+ "Married": "متزوج",
+ "Status": "الحالة",
+ "Male": "ذكر",
+ "Female": "انثى",
+ "Gender": "الجنس",
+ "Change Password": "تغيير كلمة السر",
+ "Save": "حفظ",
+ "Coupon is not valid": "الرمز غير صحيح",
+ "Shopping Cart": "سلة التسوق",
+ "Total Products": "مجموع المنتجات",
+ "Total Coupons": "مجموع القسائم",
+ "Donate to recieve an additional Entry": "تبرع للحصول على المزيد من الاضافات",
+ "I agree to donate all purchased products to charity as per  the Draw Terms and Conditions": "أوافق على التبرع بجميع المنتجات المشتراة للجمعيات الخيرية وفقًا لشروط وأحكام السحب",
+ "Total": "المجموع",
+ "Price inclusive of VAT": "السعر شامل ضريبة القيمة المضافة",
+ "Check": "تحقق",
+ "Checkout": "تاكيد الطلب",
+ "Safe and secure payments. 100% Authentic products.": "مدفوعات آمنة ومأمونة. منتجات أصلية 100٪.",
+ "My Orders": "طلباتي",
+ "View": "عرض",
+ "product(s)": "المنتج",
+ "Quantity": "الكمية",
+ "Unit Price": "سعر القطعة",
+ "Amount Excluding tax": "المبلغ غير شامل الضريبة",
+ "Tax Rate %": "معدل الضريبة ٪",
+ "Tax Payable": "الضريبة المستحقة",
+ "Amount Including Tax": "المبلغ شامل الضريبة",
+ "Product Detailes": "تفاصيل الحملة",
+ "Offers": "العروض",
+ "ADD TO CART": "اضافة للسلة"
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
 
 
 

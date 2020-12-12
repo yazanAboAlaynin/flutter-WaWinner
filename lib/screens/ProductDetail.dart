@@ -5,6 +5,7 @@ import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_state.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:flutter_wawinner/models/wishlist.dart';
@@ -51,7 +52,7 @@ class _ProductDetailState extends State<ProductDetail> {
       listener: (context, state) {
         if (state is ItemAdded) {
           Fluttertoast.showToast(
-              msg: "Item added to Cart",
+              msg: getTranslated(context, "Item added to Cart"),
               toastLength: Toast.LENGTH_SHORT,
               timeInSecForIosWeb: 1,
               backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
@@ -61,7 +62,7 @@ class _ProductDetailState extends State<ProductDetail> {
       },
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: myAppBar('Product Detailes', null),
+        appBar: myAppBar(getTranslated(context, 'Product Detailes'), null),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,7 +74,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 children: [
                   SizedBox(width: sizeAware.width * 0.2),
                   Text(
-                    'Buy a',
+                    getTranslated(context, 'Buy a'),
                     style: TextStyle(
                       fontSize: 22,
                     ),
@@ -140,7 +141,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           ),
                         ),
                         Text(
-                          'Get a chance to win:',
+                          getTranslated(context, 'Get a chance to win:'),
                           style: TextStyle(fontSize: 20),
                         ),
                       ],
@@ -233,8 +234,10 @@ class _ProductDetailState extends State<ProductDetail> {
                               color: Color.fromRGBO(127, 25, 168, 1.0),
                             ),
                           ),
-                          Text('sold'),
-                          Text('out of'),
+                          Text(
+                            getTranslated(context, "sold"),
+                          ),
+                          Text(getTranslated(context, "out of")),
                           Text('${campaign.product_quantity}'),
                         ],
                       ),
@@ -246,7 +249,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 height: sizeAware.height * 0.03,
               ),
               Text(
-                'Offers',
+                getTranslated(context, "Offers"),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               offers(cartBloc, campaign),
@@ -284,7 +287,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'ADD TO CART',
+                              getTranslated(context, 'ADD TO CART'),
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,

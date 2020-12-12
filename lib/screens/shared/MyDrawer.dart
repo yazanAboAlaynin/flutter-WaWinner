@@ -229,7 +229,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  'My Order',
+                                  getTranslated(context, 'My Orders'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -238,6 +238,11 @@ class _MyDrawerState extends State<MyDrawer> {
                             ),
                           ),
                         ),
+                      ),
+                      Divider(
+                        height: sizeAware.height * 0.01,
+                        color: Colors.black26,
+                        thickness: 0.7,
                       ),
                       InkWell(
                         onTap: () {},

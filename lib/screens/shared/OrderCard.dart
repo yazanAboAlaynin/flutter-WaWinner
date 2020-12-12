@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/order.dart';
 
 class OrderCard extends StatefulWidget {
@@ -68,7 +69,7 @@ class _OrderCardState extends State<OrderCard> {
                           color: Color.fromRGBO(127, 25, 168, 1.0),
                           textColor: Colors.white,
                           child: Text(
-                            "View",
+                            getTranslated(context, "View"),
                           ),
                           splashColor: Color.fromRGBO(127, 25, 168, 1.0),
                         ),
