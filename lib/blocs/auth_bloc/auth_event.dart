@@ -63,7 +63,7 @@ class SendCode extends AuthEvent {
 }
 
 class ResendCode extends AuthEvent {
-  int id;
+  final int id;
 
   ResendCode({this.id});
   @override
@@ -71,10 +71,38 @@ class ResendCode extends AuthEvent {
 }
 
 class ChangePhone extends AuthEvent {
-  int id;
-  String phone;
+  final int id;
+  final String phone;
 
   ChangePhone({this.id, this.phone});
   @override
   List<Object> get props => [id, phone];
+}
+
+class SendPhoneNumber extends AuthEvent {
+  final String phone;
+
+  SendPhoneNumber({this.phone});
+  @override
+  List<Object> get props => [phone];
+}
+
+class SendVCode extends AuthEvent {
+  final String phone;
+  final String code;
+
+  SendVCode({this.phone, this.code});
+  @override
+  List<Object> get props => [phone, code];
+}
+
+class ResetPassword extends AuthEvent {
+  final String phone;
+  final String code;
+  final String password;
+  final String confirm_password;
+
+  ResetPassword({this.password, this.confirm_password, this.phone, this.code});
+  @override
+  List<Object> get props => [phone, code, password, confirm_password];
 }

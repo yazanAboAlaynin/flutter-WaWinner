@@ -3,7 +3,7 @@ import 'package:flutter_wawinner/models/campaign.dart';
 class CartItem {
   Campaign campaign;
   int qty;
-  int total_price;
+  double total_price;
 
   CartItem({this.campaign, this.qty, this.total_price});
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_wawinner/Constants.dart';
+import 'package:flutter_wawinner/models/currency.dart';
 import 'package:flutter_wawinner/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,6 +59,7 @@ class ProfileApi extends Api {
         .put(url, body: jsonEncode(data), headers: await getHeaders());
 
     var res = jsonDecode(response.body);
+    print(res);
 
     if (res['status']) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -125,5 +127,16 @@ class ProfileApi extends Api {
     var res = jsonDecode(response.body);
     String text = res['data'][0]['text'];
     return text;
+  }
+
+  Future<List<Currency>> currences() async {
+    final url = '${Api.baseUrl}/v1/front-end/currencie';
+
+    final response =
+        await this.httpClient.get(url, headers: await getHeaders());
+
+    var res = jsonDecode(response.body)['data'] as List;
+    List<Currency> c = res.map((e) => Currency.fromJson(e)).toList();
+    return c;
   }
 }

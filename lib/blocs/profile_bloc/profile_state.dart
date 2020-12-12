@@ -1,4 +1,5 @@
 import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/models/currency.dart';
 import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/models/user.dart';
 import 'package:meta/meta.dart';
@@ -25,9 +26,10 @@ class MessageFaield extends ProfileState {}
 
 class ProfileLoadSuccess extends ProfileState {
   final User user;
-  ProfileLoadSuccess({this.user});
+  final List<Currency> currencies;
+  ProfileLoadSuccess({this.user, this.currencies});
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [user, currencies];
 }
 
 class AboutUsLoadSuccess extends ProfileState {

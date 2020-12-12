@@ -12,7 +12,7 @@ class Campaign {
   final int donate_ticket_count;
   final int early_bird_count;
   final int early_bird_ticket_count;
-  final int price;
+  final double price;
   final String title;
   final String description;
   final Product product;
@@ -46,7 +46,7 @@ class Campaign {
       early_bird_count: json['early_bird_count'],
       early_bird_ticket_count: json['early_bird_ticket_count'],
       max_draw_date: json['max_draw_date'],
-      price: json['price'],
+      price: json['price'].toDouble(),
       prize: Product.fromJson(json['prize_id']),
       product: Product.fromJson(json['product_id']),
       product_quantity: json['product_quantity'],

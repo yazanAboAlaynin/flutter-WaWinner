@@ -5,12 +5,15 @@ import 'package:flutter_wawinner/blocs/profile_bloc/profile_bloc.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_event.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_state.dart';
 import 'package:flutter_wawinner/localization/localization_constants.dart';
+import 'package:flutter_wawinner/models/currency.dart';
 import 'package:flutter_wawinner/models/user.dart';
 import 'package:flutter_wawinner/repositories/profile_api.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/Loading.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Constants.dart';
 import '../main.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -23,6 +26,8 @@ class _ProfilePageState extends State<ProfilePage> {
   ProfileApi profileApi = ProfileApi(httpClient: http.Client());
   User user;
   String prefLang = "EN";
+  bool isEdited = false;
+  List<Currency> currences = [];
 
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController phoneTextEditingController = TextEditingController();
@@ -57,6 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
           );
         }
         if (state is ProfileLoadSuccess) {
+          currences = state.currencies;
           user = state.user;
           emailTextEditingController.text = user.email;
 
@@ -71,6 +77,10 @@ class _ProfilePageState extends State<ProfilePage> {
           corTextEditingController.text = user.country_of_residence;
 
           nationalityTextEditingController.text = user.nationality;
+
+          if (!isEdited) genderTextEditingController.text = user.gender;
+
+          statusTextEditingController.text = user.status;
 
           return Scaffold(
             appBar: myAppBar('Profile', null),
@@ -192,9 +202,50 @@ class _ProfilePageState extends State<ProfilePage> {
                                   changeLanguage(value);
                                 },
                                 hint: Text(
-                                  'pref lang',
+                                  'Language',
                                   // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
                                   style: TextStyle(fontFamily: 'GeSS'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: sizeAware.height * 0.01,
+                        ),
+                        Container(
+                          width: sizeAware.width,
+                          height: sizeAware.height * 0.08,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 22.0, vertical: 0),
+                              child: DropdownButton<String>(
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Color.fromRGBO(18, 161, 154, 1.0),
+                                ),
+                                isExpanded: true,
+                                underline: SizedBox(),
+                                items: currences.map((item) {
+                                  return DropdownMenuItem<String>(
+                                    value: item.value,
+                                    child: Text(
+                                      item.name,
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (value) async {
+                                  SharedPreferences preferences =
+                                      await SharedPreferences.getInstance();
+                                  preferences.setString('currency', value);
+                                  CURRENCY = value;
+                                },
+                                hint: Text(
+                                  'Currency',
                                 ),
                               ),
                             ),
@@ -236,10 +287,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                             ),
                                       boxShadow: [
                                         BoxShadow(
-                                            color: Colors.grey[400],
-                                            blurRadius: 5,
-                                            offset: Offset(1, 1),
-                                            spreadRadius: 2),
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(1, 1),
+                                          spreadRadius: 2,
+                                        ),
                                       ],
                                     ),
                                     child: Row(
@@ -718,6 +770,88 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
+                        Container(
+                          height: sizeAware.height * 0.09,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: sizeAware.height,
+                                    padding: const EdgeInsets.all(4.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: LANGUAGE == 'en'
+                                          ? BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              topLeft: Radius.circular(10),
+                                            )
+                                          : BorderRadius.only(
+                                              bottomRight: Radius.circular(10),
+                                              topRight: Radius.circular(10),
+                                            ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[400],
+                                            blurRadius: 5,
+                                            offset: Offset(1, 1),
+                                            spreadRadius: 2),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ' Country of residence:  ',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TextFormField(
+                                            controller:
+                                                corTextEditingController,
+                                            decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'test@test.c',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: sizeAware.height,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[400],
+                                          blurRadius: 5,
+                                          offset: Offset(2, 1),
+                                          spreadRadius: 2),
+                                    ],
+                                    borderRadius: LANGUAGE == 'ar'
+                                        ? BorderRadius.only(
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10),
+                                          )
+                                        : BorderRadius.only(
+                                            bottomRight: Radius.circular(10),
+                                            topRight: Radius.circular(10),
+                                          ),
+                                  ),
+                                  child: Icon(Icons.edit, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: sizeAware.height * 0.02,
                         ),
@@ -789,29 +923,37 @@ class _ProfilePageState extends State<ProfilePage> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 22.0, vertical: 4),
                                     child: DropdownButton<String>(
-                                      // value: statusTextEditingController.text,
+                                      value: genderTextEditingController.text ??
+                                          null,
                                       icon: Icon(
                                         Icons.keyboard_arrow_down,
                                         color: Colors.white,
                                       ),
                                       isExpanded: true,
                                       underline: SizedBox(),
+                                      dropdownColor:
+                                          Color.fromRGBO(127, 25, 168, 1.0),
                                       items: [
                                         DropdownMenuItem<String>(
-                                          value: "Male",
+                                          value: "1",
                                           child: Text(
                                             "Male",
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                         ),
                                         DropdownMenuItem<String>(
-                                          value: "Female",
+                                          value: "0",
                                           child: Text(
                                             "Female",
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                         ),
                                       ],
                                       onChanged: (value) {
                                         setState(() {
+                                          isEdited = true;
                                           genderTextEditingController.text =
                                               value;
                                         });
@@ -869,8 +1011,23 @@ class _ProfilePageState extends State<ProfilePage> {
                         GestureDetector(
                           onTap: () {
                             var data = {
-                              // '': ''
+                              'email': emailTextEditingController.text,
+                              'first_name:ar': f_nameTextEditingController.text,
+                              'first_name:en': f_nameTextEditingController,
+                              'last_name:ar': l_nameTextEditingController.text,
+                              'last_name:en': l_nameTextEditingController.text,
+                              'address': addressTextEditingController.text,
+                              'phone': phoneTextEditingController.text,
+                              'gender': genderTextEditingController.text,
+                              'status': statusTextEditingController.text,
+                              'nationality':
+                                  nationalityTextEditingController.text,
+                              'country_of_residence':
+                                  corTextEditingController.text,
                             };
+
+                            profileBloc.add(UpdateProfileRequested(
+                                data: data, id: user.id));
                           },
                           child: Center(
                             child: Container(

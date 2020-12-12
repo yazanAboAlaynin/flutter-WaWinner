@@ -31,3 +31,16 @@ class CodeSent extends AuthState {}
 class PhoneChanged extends AuthState {}
 
 class AuthLoadFailure extends AuthState {}
+
+//forgot password states
+class PhoneNumberSent extends AuthState {}
+
+class PhoneNumberNotExist extends AuthState {}
+
+class CodePVerified extends AuthState {}
+
+class CodePNotVerified extends AuthState {}
+
+class ResetPasswordSuccess extends AuthState {}
+
+class ResetPasswordFailed extends AuthState {}

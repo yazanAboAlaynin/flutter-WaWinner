@@ -5,11 +5,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
 import 'package:flutter_wawinner/repositories/cart_api.dart';
+import 'package:flutter_wawinner/repositories/profile_api.dart';
 import 'package:flutter_wawinner/screens/AboutUsPage.dart';
 import 'package:flutter_wawinner/screens/CampaignsPage.dart';
 import 'package:flutter_wawinner/screens/CartPage.dart';
 import 'package:flutter_wawinner/screens/ChangePasswordPage.dart';
 import 'package:flutter_wawinner/screens/ContactUsPage.dart';
+import 'package:flutter_wawinner/screens/ForgotPasswordPage.dart';
 import 'package:flutter_wawinner/screens/ProductDetail.dart';
 import 'package:flutter_wawinner/screens/ProfilePage.dart';
 import 'package:flutter_wawinner/screens/WishListPage.dart';
@@ -53,12 +55,10 @@ class _MyAppState extends State<MyApp> {
     if (preferences.containsKey('IsLoggedIn') &&
         preferences.getBool('IsLoggedIn')) {
       IsLoggedIn = true;
-      EMAIL = preferences.getString('email');
-      FIRST_NAME = preferences.getString('first_name');
-      LAST_NAME = preferences.getString('last_name');
-      ADDRESS = preferences.getString('address');
-      IMAGE = preferences.getString('image');
+      if (preferences.containsKey('currency'))
+        CURRENCY = preferences.getString('currency');
       TOKEN = preferences.getString('token');
+      ProfileApi(httpClient: http.Client()).profile();
     } else {}
   }
 
@@ -125,6 +125,7 @@ class _MyAppState extends State<MyApp> {
           'Login': (context) => LoginPage(),
           'Register': (context) => RegisterPage(),
           'Profile': (context) => ProfilePage(),
+          'Forgot Password': (context) => ForgotPasswordPage(),
           'Cart': (context) => BlocProvider(
               create: (context) => CartBloc(cartApi: widget.cartApi),
               child: CartPage()),

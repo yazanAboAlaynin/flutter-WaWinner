@@ -10,7 +10,6 @@ import 'package:flutter_wawinner/repositories/cart_api.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/CartItemCard.dart';
 import 'package:flutter_wawinner/screens/shared/Loading.dart';
-import 'package:flutter_wawinner/screens/shared/MyDrawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,7 +24,7 @@ class _CartPageState extends State<CartPage> {
   CartBloc cartBloc;
   bool is_donated = false;
   bool is_valid = false;
-  int total_price = 0;
+  double total_price = 0;
   int total_tickets = 0;
 
   TextEditingController codeTextEditingController = TextEditingController();
@@ -48,7 +47,6 @@ class _CartPageState extends State<CartPage> {
           Fluttertoast.showToast(
               msg: "Coupon is valid",
               toastLength: Toast.LENGTH_SHORT,
-              timeInSecForIosWeb: 1,
               backgroundColor: Color.fromRGBO(127, 25, 168, 1.0),
               textColor: Colors.white,
               fontSize: 16.0);

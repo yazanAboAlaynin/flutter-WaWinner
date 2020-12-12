@@ -6,3 +6,4 @@ String LAST_NAME;
 String ADDRESS;
 String IMAGE;
 int ID;
+String CURRENCY = 'aed';

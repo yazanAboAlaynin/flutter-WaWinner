@@ -90,6 +90,58 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } catch (_) {
         yield AuthLoadFailure();
       }
+    } else if (event is SendPhoneNumber) {
+      yield AuthLoadInProgress();
+      try {
+        var data = {
+          'phone': event.phone,
+        };
+        bool t = await authApi.passwordResetRequest(data);
+
+        if (t) {
+          yield PhoneNumberSent();
+        } else {
+          yield PhoneNumberNotExist();
+        }
+      } catch (_) {
+        yield AuthLoadFailure();
+      }
+    } else if (event is SendVCode) {
+      yield AuthLoadInProgress();
+      try {
+        var data = {
+          'phone': event.phone,
+          'reset_password_code': event.code,
+        };
+        bool t = await authApi.checkPasswordResetCode(data);
+
+        if (t) {
+          yield CodePVerified();
+        } else {
+          yield CodePNotVerified();
+        }
+      } catch (_) {
+        yield AuthLoadFailure();
+      }
+    } else if (event is ResetPassword) {
+      yield AuthLoadInProgress();
+      try {
+        var data = {
+          'phone': event.phone,
+          'reset_password_code': event.code,
+          'password': event.password,
+          'password_confirmation': event.confirm_password,
+        };
+        bool t = await authApi.passwordReset(data);
+
+        if (t) {
+          yield ResetPasswordSuccess();
+        } else {
+          yield ResetPasswordFailed();
+        }
+      } catch (_) {
+        yield AuthLoadFailure();
+      }
     }
   }
 }

@@ -90,7 +90,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   width: sizeAware.width * 0.04,
                                 ),
                                 Text(
-                                  getTranslated(context, 'Settings'),
+                                  getTranslated(context, 'Login'),
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),

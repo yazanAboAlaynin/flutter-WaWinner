@@ -1,4 +1,5 @@
 import 'package:flutter_wawinner/models/campaign.dart';
+import 'package:flutter_wawinner/models/currency.dart';
 import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/models/user.dart';
 import 'package:flutter_wawinner/repositories/profile_api.dart';
@@ -19,13 +20,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
     if (event is ProfileRequested) {
       yield ProfileLoadInProgress();
-      try {
-        User user = await profileApi.profile();
+      // try {
+      User user = await profileApi.profile();
+      List<Currency> c = await profileApi.currences();
 
-        yield ProfileLoadSuccess(user: user);
-      } catch (_) {
-        yield ProfileLoadFailure();
-      }
+      yield ProfileLoadSuccess(user: user, currencies: c);
+      // } catch (_) {
+      // yield ProfileLoadFailure();
+      // }
     } else if (event is UpdateProfileRequested) {
       yield ProfileLoadInProgress();
       try {

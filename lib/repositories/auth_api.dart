@@ -141,4 +141,49 @@ class AuthApi extends Api {
       return false;
     }
   }
+
+  Future<bool> passwordResetRequest(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/password-reset-request';
+
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: setHeaders());
+
+    var res = jsonDecode(response.body);
+    if (res['status']) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> checkPasswordResetCode(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/check-password-reset-code';
+
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: setHeaders());
+
+    var res = jsonDecode(response.body);
+    if (res['status']) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> passwordReset(data) async {
+    final url = '${Api.baseUrl}/v1/front-end/password-reset';
+
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: setHeaders());
+
+    var res = jsonDecode(response.body);
+    if (res['status']) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
