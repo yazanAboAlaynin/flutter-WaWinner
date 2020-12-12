@@ -14,7 +14,7 @@ class CartApi extends Api {
     @required this.httpClient,
   }) : assert(httpClient != null);
 
-  Future checkOut(List<CartItem> items, is_donated) async {
+  Future checkOut(List<CartItem> items, is_donated, coupon) async {
     final url = '${Api.baseUrl}/v1/user/take-order';
     List ids = [];
     List qtys = [];
@@ -25,7 +25,8 @@ class CartApi extends Api {
     var data = {
       'array_campaign_id': ids,
       'array_quantity_id': qtys,
-      'is_donated': is_donated
+      'is_donated': is_donated,
+      'coupon': coupon
     };
     final response = await this
         .httpClient

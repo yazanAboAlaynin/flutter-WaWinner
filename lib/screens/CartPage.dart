@@ -332,7 +332,9 @@ class _CartPageState extends State<CartPage> {
                             onTap: () {
                               if (items.length > 0)
                                 cartBloc.add(Checkout(
-                                    items: items, is_donate: is_donated));
+                                    items: items,
+                                    is_donate: is_donated,
+                                    coupon: codeTextEditingController.text));
                             },
                             child: Center(
                               child: Container(
