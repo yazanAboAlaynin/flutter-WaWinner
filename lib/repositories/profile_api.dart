@@ -6,8 +6,9 @@ import 'package:flutter_wawinner/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'api.dart';
 import 'package:meta/meta.dart';
+
+import 'api.dart';
 
 class ProfileApi extends Api {
   final http.Client httpClient;

@@ -64,23 +64,26 @@ class _ProfilePageState extends State<ProfilePage> {
         if (state is ProfileLoadSuccess) {
           currences = state.currencies;
           user = state.user;
-          emailTextEditingController.text = user.email;
 
-          phoneTextEditingController.text = user.phone;
+          if (!isEdited) {
+            emailTextEditingController.text = user.email;
 
-          f_nameTextEditingController.text = user.first_name;
+            phoneTextEditingController.text = user.phone;
 
-          l_nameTextEditingController.text = user.last_name;
+            f_nameTextEditingController.text = user.first_name;
 
-          addressTextEditingController.text = user.address;
+            l_nameTextEditingController.text = user.last_name;
 
-          corTextEditingController.text = user.country_of_residence;
+            addressTextEditingController.text = user.address;
 
-          nationalityTextEditingController.text = user.nationality;
+            corTextEditingController.text = user.country_of_residence;
 
-          if (!isEdited) genderTextEditingController.text = user.gender;
+            nationalityTextEditingController.text = user.nationality;
+            genderTextEditingController.text = user.gender;
 
-          statusTextEditingController.text = user.status;
+            statusTextEditingController.text = user.status;
+            isEdited = true;
+          }
 
           return Scaffold(
             appBar: myAppBar(getTranslated(context, 'Profile'), null),
@@ -1011,7 +1014,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             var data = {
                               'email': emailTextEditingController.text,
                               'first_name:ar': f_nameTextEditingController.text,
-                              'first_name:en': f_nameTextEditingController,
+                              'first_name:en': f_nameTextEditingController.text,
                               'last_name:ar': l_nameTextEditingController.text,
                               'last_name:en': l_nameTextEditingController.text,
                               'address': addressTextEditingController.text,
