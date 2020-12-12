@@ -12,8 +12,10 @@ import 'package:flutter_wawinner/screens/CartPage.dart';
 import 'package:flutter_wawinner/screens/ChangePasswordPage.dart';
 import 'package:flutter_wawinner/screens/ContactUsPage.dart';
 import 'package:flutter_wawinner/screens/ForgotPasswordPage.dart';
+import 'package:flutter_wawinner/screens/OrdersPage.dart';
 import 'package:flutter_wawinner/screens/ProductDetail.dart';
 import 'package:flutter_wawinner/screens/ProfilePage.dart';
+import 'package:flutter_wawinner/screens/ViewOrder.dart';
 import 'package:flutter_wawinner/screens/WishListPage.dart';
 import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
 import 'package:flutter_wawinner/screens/auth/RegisterPage.dart';
@@ -126,6 +128,8 @@ class _MyAppState extends State<MyApp> {
           'Register': (context) => RegisterPage(),
           'Profile': (context) => ProfilePage(),
           'Forgot Password': (context) => ForgotPasswordPage(),
+          'Orders': (context) => OrdersPage(),
+          'View Order': (context) => ViewOrder(),
           'Cart': (context) => BlocProvider(
               create: (context) => CartBloc(cartApi: widget.cartApi),
               child: CartPage()),

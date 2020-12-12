@@ -39,6 +39,7 @@ class _CampaignState extends State<CampaignsPage> {
   List<Product> products = [];
   List<Charity> charities = [];
   List<String> images = [];
+  String currency = CURRENCY;
 
   @override
   void initState() {
@@ -84,6 +85,7 @@ class _CampaignState extends State<CampaignsPage> {
             products = state.products;
             images = state.images;
             charities = state.charities;
+
             return Scaffold(
                 appBar: myAppBar(getTranslated(context, 'Campaigns'), null),
                 drawer: Drawer(
@@ -137,23 +139,12 @@ class _CampaignState extends State<CampaignsPage> {
                                 SizedBox(
                                   height: sizeAware.height * 0.07,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        getTranslated(context, 'Products'),
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromRGBO(127, 25, 168, 1.0),
-                                        ),
-                                      ),
-                                    ],
+                                Text(
+                                  getTranslated(context, 'Products'),
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
                                   ),
                                 ),
                                 SingleChildScrollView(

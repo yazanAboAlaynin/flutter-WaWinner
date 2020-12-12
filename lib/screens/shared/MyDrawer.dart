@@ -212,6 +212,34 @@ class _MyDrawerState extends State<MyDrawer> {
                         thickness: 0.7,
                       ),
                       InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'Orders');
+                        },
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child: SvgPicture.asset('assets/coupon.svg'),
+                                ),
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Text(
+                                  'My Order',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
                         onTap: () {},
                         child: Container(
                           height: sizeAware.height * 0.08,
