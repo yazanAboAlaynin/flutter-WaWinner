@@ -20,20 +20,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
     if (event is ProfileRequested) {
       yield ProfileLoadInProgress();
-      // try {
+      try {
       User user = await profileApi.profile();
       List<Currency> c = await profileApi.currences();
 
       yield ProfileLoadSuccess(user: user, currencies: c);
-      // } catch (_) {
-      // yield ProfileLoadFailure();
-      // }
+      } catch (_) {
+      yield ProfileLoadFailure();
+      }
     } else if (event is UpdateProfileRequested) {
       yield ProfileLoadInProgress();
       try {
         User user = await profileApi.updateProfile(event.id, event.data);
 
-        yield ProfileLoadSuccess(user: user);
+        yield ProfileLoadSuccess(user: user,currencies: null);
       } catch (_) {
         yield ProfileLoadFailure();
       }

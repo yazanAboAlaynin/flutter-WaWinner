@@ -62,7 +62,10 @@ class _ProfilePageState extends State<ProfilePage> {
           );
         }
         if (state is ProfileLoadSuccess) {
-          currences = state.currencies;
+          if (state.currencies != null) {
+            currences = state.currencies;
+          }
+
           user = state.user;
 
           if (!isEdited) {
@@ -181,7 +184,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     value: "ar",
                                     child: Text(
                                       "العربية",
-                                      style: TextStyle(fontFamily: 'GeSS'),
                                     ),
                                   ),
                                   DropdownMenuItem<String>(
@@ -203,6 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   }
 
                                   changeLanguage(value);
+                                  profileBloc.add(ProfileRequested());
                                 },
                                 hint: Text(
                                   getTranslated(context, 'Language'),
@@ -1017,7 +1020,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               'first_name:en': f_nameTextEditingController.text,
                               'last_name:ar': l_nameTextEditingController.text,
                               'last_name:en': l_nameTextEditingController.text,
-                              'address': addressTextEditingController.text,
+                              'address:ar': addressTextEditingController.text,
+                              'address:en': addressTextEditingController.text,
                               'phone': phoneTextEditingController.text,
                               'gender': genderTextEditingController.text,
                               'status': statusTextEditingController.text,

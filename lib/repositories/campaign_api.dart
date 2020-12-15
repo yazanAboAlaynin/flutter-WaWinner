@@ -24,7 +24,6 @@ class CampaignApi extends Api {
         await this.httpClient.get(url, headers: await getHeaders());
 
     var res = jsonDecode(response.body)["data"] as List;
-
     List<Campaign> campaigns =
         res.map((dynamic i) => Campaign.fromJson(i)).toList();
 

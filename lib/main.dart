@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
       if (preferences.containsKey('currency'))
         CURRENCY = preferences.getString('currency');
       TOKEN = preferences.getString('token');
-      ProfileApi(httpClient: http.Client()).profile();
+      await ProfileApi(httpClient: http.Client()).profile();
     } else {}
   }
 

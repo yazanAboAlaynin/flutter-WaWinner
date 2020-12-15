@@ -157,32 +157,32 @@ class _CampaignState extends State<CampaignsPage> {
                         ]),
                       ),
                       //charities
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: sizeAware.height * 0.07,
-                                ),
-                                Text(
-                                  getTranslated(context, 'Charities'),
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(127, 25, 168, 1.0),
-                                  ),
-                                ),
-                                SingleChildScrollView(
-                                  child: charitiesList(),
-                                )
-                              ],
-                            ),
-                          ),
-                        ]),
-                      ),
+                      //   SliverList(
+                      //     delegate: SliverChildListDelegate([
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(8.0),
+                      //         child: Column(
+                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                      //           children: [
+                      //             SizedBox(
+                      //               height: sizeAware.height * 0.07,
+                      //             ),
+                      //             Text(
+                      //               getTranslated(context, 'Charities'),
+                      //               style: TextStyle(
+                      //                 fontSize: 19,
+                      //                 fontWeight: FontWeight.bold,
+                      //                 color: Color.fromRGBO(127, 25, 168, 1.0),
+                      //               ),
+                      //             ),
+                      //             SingleChildScrollView(
+                      //               child: charitiesList(),
+                      //             )
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ]),
+                      //   ),
                     ],
                   ),
                 ));
