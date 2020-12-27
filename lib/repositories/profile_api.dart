@@ -52,12 +52,12 @@ class ProfileApi extends Api {
     }
   }
 
-  Future updateProfile(id, data) async {
-    final url = '${Api.baseUrl}/v1/user/user/$id';
+  Future updateProfile(data) async {
+    final url = '${Api.baseUrl}/v1/user/updateProfile';
 
     final response = await this
         .httpClient
-        .put(url, body: jsonEncode(data), headers: await getHeaders());
+        .post(url, body: jsonEncode(data), headers: await getHeaders());
 
     var res = jsonDecode(response.body);
     print(res);

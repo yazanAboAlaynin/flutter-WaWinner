@@ -12,9 +12,8 @@ class ProfileRequested extends ProfileEvent {
 }
 
 class UpdateProfileRequested extends ProfileEvent {
-  final int id;
   final Map data;
-  UpdateProfileRequested({this.data, this.id});
+  UpdateProfileRequested({this.data});
   @override
   List<Object> get props => [data];
 }

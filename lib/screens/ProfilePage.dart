@@ -1032,7 +1032,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             };
 
                             profileBloc.add(UpdateProfileRequested(
-                                data: data, id: user.id));
+                              data: data,
+                            ));
                           },
                           child: Center(
                             child: Container(

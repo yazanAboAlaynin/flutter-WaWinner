@@ -52,7 +52,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               IMAGE,
                             )
                           : AssetImage(
-                              'assets/shopping.jpg',
+                              'assets/waw.png',
                             ),
                     ),
                     SizedBox(width: sizeAware.width * 0.04),
@@ -532,7 +532,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                 changeLanguage(value);
                               },
                               hint: Text(
-                                'pref lang',
+                                'Preferred language',
                                 // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
                                 style: TextStyle(fontFamily: 'GeSS'),
                               ),

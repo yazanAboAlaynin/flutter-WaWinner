@@ -21,19 +21,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     if (event is ProfileRequested) {
       yield ProfileLoadInProgress();
       try {
-      User user = await profileApi.profile();
-      List<Currency> c = await profileApi.currences();
+        User user = await profileApi.profile();
+        List<Currency> c = await profileApi.currences();
 
-      yield ProfileLoadSuccess(user: user, currencies: c);
+        yield ProfileLoadSuccess(user: user, currencies: c);
       } catch (_) {
-      yield ProfileLoadFailure();
+        yield ProfileLoadFailure();
       }
     } else if (event is UpdateProfileRequested) {
       yield ProfileLoadInProgress();
       try {
-        User user = await profileApi.updateProfile(event.id, event.data);
+        User user = await profileApi.updateProfile(event.data);
 
-        yield ProfileLoadSuccess(user: user,currencies: null);
+        yield ProfileLoadSuccess(user: user, currencies: null);
       } catch (_) {
         yield ProfileLoadFailure();
       }
