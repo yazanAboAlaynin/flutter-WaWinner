@@ -10,6 +10,7 @@ import 'package:flutter_wawinner/repositories/cart_api.dart';
 import 'package:flutter_wawinner/widgets/AppBar.dart';
 import 'package:flutter_wawinner/widgets/CartItemCard.dart';
 import 'package:flutter_wawinner/widgets/Loading.dart';
+import 'package:flutter_wawinner/widgets/error.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -61,8 +62,9 @@ class _CartPageState extends State<CartPage> {
             return Loading();
           }
           if (state is CartLoadFailure) {
-            return Center(
-              child: CircularProgressIndicator(),
+            return CError(
+              bloc: cartBloc,
+              event: CartRequested(),
             );
           }
           if (state is CartLoadSuccess ||

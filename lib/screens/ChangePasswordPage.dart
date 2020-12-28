@@ -35,7 +35,40 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         cubit: profileBloc,
         builder: (context, state) {
           if (state is ChangePasswordFaield) {
-            return Container();
+            return Scaffold(
+              body: SafeArea(
+                child: Container(
+                  width: sizeAware.width,
+                  height: sizeAware.height,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Connection Error',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 20),
+                      FlatButton(
+                        color: Color.fromRGBO(127, 25, 168, 1.0),
+                        onPressed: () {
+                          setState(() {
+                            profileBloc = ProfileBloc(profileApi: profileApi);
+                          });
+                        },
+                        child: Text(
+                          'Refresh',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
           }
           if (state is ProfileInitial || state is ChangePasswordSccess) {
             return Scaffold(

@@ -6,6 +6,7 @@ import 'package:flutter_wawinner/blocs/profile_bloc/profile_state.dart';
 import 'package:flutter_wawinner/repositories/profile_api.dart';
 import 'package:flutter_wawinner/widgets/AppBar.dart';
 import 'package:flutter_wawinner/widgets/Loading.dart';
+import 'package:flutter_wawinner/widgets/error.dart';
 import 'package:http/http.dart' as http;
 
 class AboutUsPage extends StatefulWidget {
@@ -33,7 +34,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
           return Loading();
         }
         if (state is ProfileLoadFailure) {
-          return Loading();
+          return CError(
+            bloc: profileBloc,
+            event: AboutUsRequested(),
+          );
         }
         if (state is AboutUsLoadSuccess) {
           text = state.text;

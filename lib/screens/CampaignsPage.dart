@@ -20,6 +20,7 @@ import 'package:flutter_wawinner/widgets/CampaignCard.dart';
 import 'package:flutter_wawinner/widgets/CharityCard.dart';
 import 'package:flutter_wawinner/widgets/Loading.dart';
 import 'package:flutter_wawinner/widgets/MyDrawer.dart';
+import 'package:flutter_wawinner/widgets/error.dart';
 import 'package:flutter_wawinner/widgets/image_carusel.dart';
 import 'package:flutter_wawinner/widgets/productCard.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -188,7 +189,10 @@ class _CampaignState extends State<CampaignsPage> {
                 ));
           }
           if (state is CampaignsLoadFailure) {
-            return Container();
+            return CError(
+              bloc: wlBloc,
+              event: CampaignsRequested(),
+            );
           }
           return Loading();
         },

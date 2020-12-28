@@ -8,6 +8,7 @@ import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/repositories/wishlist_api.dart';
 import 'package:flutter_wawinner/widgets/AppBar.dart';
 import 'package:flutter_wawinner/widgets/Loading.dart';
+import 'package:flutter_wawinner/widgets/error.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_wawinner/widgets/WLCard.dart';
 
@@ -36,9 +37,10 @@ class _WishListPageState extends State<WishListPage> {
           return Loading();
         }
         if (state is WlLoadFailure) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+           return CError(
+             bloc: wlBloc,
+             event: WlRequested(),
+            );
         }
         if (state is WlLoadSuccess ||
             state is ItemDeleted ||

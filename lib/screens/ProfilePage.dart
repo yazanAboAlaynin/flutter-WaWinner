@@ -12,6 +12,7 @@ import 'package:flutter_wawinner/models/user.dart';
 import 'package:flutter_wawinner/repositories/profile_api.dart';
 import 'package:flutter_wawinner/widgets/AppBar.dart';
 import 'package:flutter_wawinner/widgets/Loading.dart';
+import 'package:flutter_wawinner/widgets/error.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -96,8 +97,9 @@ class _ProfilePageState extends State<ProfilePage> {
           return Loading();
         }
         if (state is ProfileLoadFailure) {
-          return Center(
-            child: CircularProgressIndicator(),
+          return CError(
+            bloc: profileBloc,
+            event: ProfileRequested(),
           );
         }
         if (state is ProfileLoadSuccess) {

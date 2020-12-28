@@ -75,7 +75,40 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               return Loading();
             }
             if (state is AuthLoadFailure) {
-              return Loading();
+              return Scaffold(
+                body: SafeArea(
+                  child: Container(
+                    width: sizeAware.width,
+                    height: sizeAware.height,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Connection Error',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 20),
+                        FlatButton(
+                          color: Color.fromRGBO(127, 25, 168, 1.0),
+                          onPressed: () {
+                            setState(() {
+                              authBloc = AuthBloc(authApi: authApi);
+                            });
+                          },
+                          child: Text(
+                            'Refresh',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              );
             }
             if (state is AuthInitial || state is PhoneNumberNotExist) {
               return Scaffold(

@@ -4,6 +4,7 @@ import 'package:flutter_wawinner/blocs/auth_bloc/auth_bloc.dart';
 import 'package:flutter_wawinner/blocs/auth_bloc/auth_event.dart';
 import 'package:flutter_wawinner/blocs/auth_bloc/auth_state.dart';
 import 'package:flutter_wawinner/repositories/auth_api.dart';
+import 'package:flutter_wawinner/widgets/Loading.dart';
 import 'package:http/http.dart' as http;
 
 import 'VerificationPage.dart';
@@ -240,13 +241,42 @@ class _RegisterPageState extends State<RegisterPage> {
               );
             }
             if (state is AuthLoadInProgress) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return Loading();
             }
             if (state is AuthLoadFailure) {
-              return Center(
-                child: CircularProgressIndicator(),
+              return Scaffold(
+                body: SafeArea(
+                  child: Container(
+                    width: sizeAware.width,
+                    height: sizeAware.height,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Connection Error',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 20),
+                        FlatButton(
+                          color: Color.fromRGBO(127, 25, 168, 1.0),
+                          onPressed: () {
+                            setState(() {
+                              authBloc = AuthBloc(authApi: authApi);
+                            });
+                          },
+                          child: Text(
+                            'Refresh',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               );
             }
           }),
