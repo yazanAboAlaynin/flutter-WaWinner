@@ -15,6 +15,7 @@ import 'package:flutter_wawinner/screens/ForgotPasswordPage.dart';
 import 'package:flutter_wawinner/screens/OrdersPage.dart';
 import 'package:flutter_wawinner/screens/ProductDetail.dart';
 import 'package:flutter_wawinner/screens/ProfilePage.dart';
+import 'package:flutter_wawinner/screens/SingleCharity.dart';
 import 'package:flutter_wawinner/screens/ViewOrder.dart';
 import 'package:flutter_wawinner/screens/WishListPage.dart';
 import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
@@ -96,6 +97,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'WaWinner',
         theme: ThemeData(
+          fontFamily: 'Cairo',
           primarySwatch: MaterialColor(
             0xFF181861,
             <int, Color>{
@@ -130,6 +132,7 @@ class _MyAppState extends State<MyApp> {
           'Forgot Password': (context) => ForgotPasswordPage(),
           'Orders': (context) => OrdersPage(),
           'View Order': (context) => ViewOrder(),
+          'Single Charity': (context) => SingleCharity(),
           'Cart': (context) => BlocProvider(
               create: (context) => CartBloc(cartApi: widget.cartApi),
               child: CartPage()),

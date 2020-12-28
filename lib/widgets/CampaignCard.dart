@@ -180,7 +180,8 @@ class _CampaignCardState extends State<CampaignCard> {
                                       Text(
                                         '${widget.campaign.quantity_sold}',
                                         style: TextStyle(
-                                          fontSize: sizeAware.width * 0.05,
+                                          fontSize: 18,
+                                          height: 2,
                                           fontWeight: FontWeight.bold,
                                           color:
                                               Color.fromRGBO(127, 25, 168, 1.0),
@@ -188,10 +189,22 @@ class _CampaignCardState extends State<CampaignCard> {
                                       ),
                                       Text(
                                         getTranslated(context, "sold"),
+                                        style: TextStyle(
+                                          height: 1.2,
+                                        ),
                                       ),
-                                      Text(getTranslated(context, "out of")),
                                       Text(
-                                          '${widget.campaign.product_quantity}'),
+                                        getTranslated(context, "out of"),
+                                        style: TextStyle(
+                                          height: 1.2,
+                                        ),
+                                      ),
+                                      Text(
+                                        '${widget.campaign.product_quantity}',
+                                        style: TextStyle(
+                                          height: 1.2,
+                                        ),
+                                      ),
                                     ],
                                   )),
                                 ),

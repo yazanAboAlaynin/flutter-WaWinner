@@ -9,14 +9,21 @@ class CharityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
 
-    return Container(
-      width: sizeAware.width,
-      height: sizeAware.height * 0.3,
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      child: Image.network(
-        charity.image,
-        fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'Single Charity', arguments: {
+          'charity': charity,
+        });
+      },
+      child: Container(
+        width: sizeAware.width,
         height: sizeAware.height * 0.3,
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        child: Image.network(
+          charity.image,
+          fit: BoxFit.cover,
+          height: sizeAware.height * 0.3,
+        ),
       ),
     );
   }
