@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
@@ -16,6 +18,14 @@ class UpdateProfileRequested extends ProfileEvent {
   UpdateProfileRequested({this.data});
   @override
   List<Object> get props => [data];
+}
+
+class UpdateProfileImageRequested extends ProfileEvent {
+  final Map data;
+  final File image;
+  UpdateProfileImageRequested({this.data, this.image});
+  @override
+  List<Object> get props => [data, image];
 }
 
 class ChangePasswordRequested extends ProfileEvent {

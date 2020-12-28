@@ -89,6 +89,48 @@ class ProfileApi extends Api {
     }
   }
 
+  Future updateProfileImage(data, image) async {
+    final url = '${Api.baseUrl}/v1/user/updateProfile';
+
+    Uri uri = Uri.parse(url);
+
+    http.MultipartRequest request = http.MultipartRequest("POST", uri);
+
+    var base64Image = base64Encode(image.readAsBytesSync());
+
+    request.fields.addAll(data);
+    request.fields['image'] = base64Image;
+
+    var res = await request.send();
+    var response = await http.Response.fromStream(res);
+    var resp = jsonDecode(response.body);
+    if (resp['status']) {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      User user = User.fromJson(resp['data']);
+
+      preferences.setInt('id', user.id);
+
+      preferences.setString('email', user.email);
+      preferences.setString('first_name', user.first_name);
+      preferences.setString('last_name', user.last_name);
+      preferences.setString('image', user.image);
+      preferences.setString('address', user.address);
+      preferences.setString('created_at', user.created_at);
+      preferences.setString('updated_at', user.updated_at);
+
+      EMAIL = user.email;
+      FIRST_NAME = user.first_name;
+      LAST_NAME = user.last_name;
+      ADDRESS = user.address;
+      IMAGE = user.image;
+
+      ID = user.id;
+      return user;
+    } else {
+      return null;
+    }
+  }
+
   Future<bool> changePassword(data) async {
     final url = '${Api.baseUrl}/v1/front-end/change-password';
 

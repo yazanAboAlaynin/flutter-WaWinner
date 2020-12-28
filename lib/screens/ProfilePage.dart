@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,6 +13,7 @@ import 'package:flutter_wawinner/repositories/profile_api.dart';
 import 'package:flutter_wawinner/screens/shared/AppBar.dart';
 import 'package:flutter_wawinner/screens/shared/Loading.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Constants.dart';
@@ -45,6 +48,42 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     profileBloc = ProfileBloc(profileApi: profileApi);
     profileBloc.add(ProfileRequested());
+  }
+
+  File _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+    if (_image != null) {
+      var data = {
+        'email': emailTextEditingController.text,
+        'first_name:ar': f_nameTextEditingController.text,
+        'first_name:en': f_nameTextEditingController.text,
+        'last_name:ar': l_nameTextEditingController.text,
+        'last_name:en': l_nameTextEditingController.text,
+        'address:ar': addressTextEditingController.text,
+        'address:en': addressTextEditingController.text,
+        'phone': phoneTextEditingController.text,
+        'gender': genderTextEditingController.text,
+        'status': statusTextEditingController.text,
+        'nationality': nationalityTextEditingController.text,
+        'country_of_residence': corTextEditingController.text,
+      };
+
+      profileBloc.add(UpdateProfileImageRequested(
+        data: data,
+        image: _image,
+      ));
+    }
   }
 
   @override
@@ -112,7 +151,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           bottom: 0,
                           right: 0,
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              getImage();
+                            },
                             child: Container(
                               width: sizeAware.height * 0.05,
                               height: sizeAware.height * 0.05,
@@ -269,10 +310,11 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: sizeAware.height * 0.01,
                         ),
                         Container(
-                          height: sizeAware.height * 0.09,
+                          height: sizeAware.height * 0.11,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Expanded(
                                   child: Container(
@@ -299,6 +341,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ],
                                     ),
                                     child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Text(
                                           ' ${getTranslated(context, 'Email')}:  ',
@@ -310,14 +354,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                           ),
                                         ),
                                         Expanded(
-                                          child: TextFormField(
-                                            controller:
-                                                emailTextEditingController,
-                                            decoration: InputDecoration(
-                                              hintText: 'test@test.c',
-                                              // disabledBorder: InputBorder.none,
-                                              // enabledBorder: InputBorder.none,
-                                              border: InputBorder.none,
+                                          child: Center(
+                                            child: TextFormField(
+                                              controller:
+                                                  emailTextEditingController,
+                                              decoration: InputDecoration(
+                                                hintText: 'test@test.c',
+                                                // disabledBorder: InputBorder.none,
+                                                // enabledBorder: InputBorder.none,
+                                                border: InputBorder.none,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -347,14 +393,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                             topRight: Radius.circular(10),
                                           ),
                                   ),
-                                  child: Icon(Icons.edit, color: Colors.white),
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                         ),
                         Container(
-                          height: sizeAware.height * 0.09,
+                          height: sizeAware.height * 0.11,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -447,7 +496,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: sizeAware.height * 0.01,
                         ),
                         Container(
-                          height: sizeAware.height * 0.09,
+                          height: sizeAware.height * 0.11,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -529,7 +578,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          height: sizeAware.height * 0.09,
+                          height: sizeAware.height * 0.11,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -611,7 +660,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          height: sizeAware.height * 0.09,
+                          height: sizeAware.height * 0.11,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -693,7 +742,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          height: sizeAware.height * 0.09,
+                          height: sizeAware.height * 0.11,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -775,7 +824,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          height: sizeAware.height * 0.09,
+                          height: sizeAware.height * 0.11,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
