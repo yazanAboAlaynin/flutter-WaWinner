@@ -6,10 +6,10 @@ import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_state.dart';
 import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/repositories/wishlist_api.dart';
-import 'package:flutter_wawinner/screens/shared/AppBar.dart';
-import 'package:flutter_wawinner/screens/shared/Loading.dart';
+import 'package:flutter_wawinner/widgets/AppBar.dart';
+import 'package:flutter_wawinner/widgets/Loading.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_wawinner/screens/shared/WLCard.dart';
+import 'package:flutter_wawinner/widgets/WLCard.dart';
 
 class WishListPage extends StatefulWidget {
   @override

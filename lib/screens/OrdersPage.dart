@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/order.dart';
-import 'package:flutter_wawinner/screens/shared/AppBar.dart';
-import 'package:flutter_wawinner/screens/shared/OrderCard.dart';
+import 'package:flutter_wawinner/widgets/AppBar.dart';
+import 'package:flutter_wawinner/widgets/OrderCard.dart';
 
 class OrdersPage extends StatefulWidget {
   @override

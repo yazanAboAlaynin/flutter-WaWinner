@@ -4,8 +4,8 @@ import 'package:flutter_wawinner/blocs/profile_bloc/profile_bloc.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_event.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_state.dart';
 import 'package:flutter_wawinner/repositories/profile_api.dart';
-import 'package:flutter_wawinner/screens/shared/AppBar.dart';
-import 'package:flutter_wawinner/screens/shared/Loading.dart';
+import 'package:flutter_wawinner/widgets/AppBar.dart';
+import 'package:flutter_wawinner/widgets/Loading.dart';
 
 import 'package:http/http.dart';
 

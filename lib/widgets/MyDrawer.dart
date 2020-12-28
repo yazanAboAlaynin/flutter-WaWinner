@@ -7,7 +7,7 @@ import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_wawinner/Constants.dart';
 
-import '../../main.dart';
+import '../main.dart';
 
 class MyDrawer extends StatefulWidget {
   @override

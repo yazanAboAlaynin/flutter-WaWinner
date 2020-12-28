@@ -14,7 +14,7 @@ import 'package:flutter_wawinner/screens/ViewImage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-import '../../Constants.dart';
+import '../Constants.dart';
 
 class CampaignCard extends StatefulWidget {
   final animation;

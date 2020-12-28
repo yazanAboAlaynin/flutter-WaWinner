@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wawinner/screens/shared/AppBar.dart';
-import 'package:flutter_wawinner/screens/shared/DetailCard.dart';
-import 'package:flutter_wawinner/screens/shared/TicketCard.dart';
+import 'package:flutter_wawinner/widgets/AppBar.dart';
+import 'package:flutter_wawinner/widgets/DetailCard.dart';
+import 'package:flutter_wawinner/widgets/TicketCard.dart';
 
 class ViewOrder extends StatelessWidget {
   @override

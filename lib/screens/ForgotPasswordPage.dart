@@ -5,8 +5,8 @@ import 'package:flutter_wawinner/blocs/auth_bloc/auth_event.dart';
 import 'package:flutter_wawinner/blocs/auth_bloc/auth_state.dart';
 import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/repositories/auth_api.dart';
-import 'package:flutter_wawinner/screens/shared/AppBar.dart';
-import 'package:flutter_wawinner/screens/shared/Loading.dart';
+import 'package:flutter_wawinner/widgets/AppBar.dart';
+import 'package:flutter_wawinner/widgets/Loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 

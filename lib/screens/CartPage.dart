@@ -7,9 +7,9 @@ import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:flutter_wawinner/repositories/cart_api.dart';
 
-import 'package:flutter_wawinner/screens/shared/AppBar.dart';
-import 'package:flutter_wawinner/screens/shared/CartItemCard.dart';
-import 'package:flutter_wawinner/screens/shared/Loading.dart';
+import 'package:flutter_wawinner/widgets/AppBar.dart';
+import 'package:flutter_wawinner/widgets/CartItemCard.dart';
+import 'package:flutter_wawinner/widgets/Loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
