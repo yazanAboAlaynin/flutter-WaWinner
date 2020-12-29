@@ -206,13 +206,13 @@ class _CampaignCardState extends State<CampaignCard> {
                                         Text(
                                           getTranslated(context, "out of"),
                                           style: TextStyle(
-                                            height: 1,
+                                            height: 1.2,
                                           ),
                                         ),
                                         Text(
                                           '${widget.campaign.product_quantity}',
                                           style: TextStyle(
-                                            height: 1,
+                                            height: 1.2,
                                           ),
                                         ),
                                       ],

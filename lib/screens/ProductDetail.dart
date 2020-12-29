@@ -383,13 +383,21 @@ class _ProductDetailState extends State<ProductDetail> {
               color: Color.fromRGBO(127, 25, 168, 1.0),
             ),
             child: Center(
-              child: Text(
-                'buy ${campaign.offers[i].product_limit} and win ${campaign.offers[i].extra_ticket_count} coupones',
-                style: TextStyle(
-                  color: Colors.white,
-                  height: 1,
-                ),
-              ),
+              child: LANGUAGE == 'en'
+                  ? Text(
+                      'buy ${campaign.offers[i].product_limit} and win ${campaign.offers[i].extra_ticket_count} coupones',
+                      style: TextStyle(
+                        color: Colors.white,
+                        height: 1,
+                      ),
+                    )
+                  : Text(
+                      ' اشتري ${campaign.offers[i].product_limit} واربح ${campaign.offers[i].extra_ticket_count} قسيمة',
+                      style: TextStyle(
+                        color: Colors.white,
+                        height: 1.3,
+                      ),
+                    ),
             ),
           ),
         ),
