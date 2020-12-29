@@ -133,15 +133,24 @@ class _CampaignCardState extends State<CampaignCard> {
                                 width: 40,
                                 height: 40,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[300],
+                                      blurRadius: 5,
+                                      offset: Offset(1, 1),
+                                      spreadRadius: 5,
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(100),
-                                  color: Color.fromRGBO(127, 25, 168, 1.0),
+                                  color: Colors.white,
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(4.0),
                                   child: Icon(
-                                    Icons.favorite,
-                                    color:
-                                        isAddedToWL ? Colors.red : Colors.white,
+                                    isAddedToWL
+                                        ? Icons.favorite
+                                        : Icons.favorite_border_outlined,
+                                    color: Color.fromRGBO(127, 25, 168, 1.0),
                                   ),
                                 ),
                               ),
@@ -233,6 +242,14 @@ class _CampaignCardState extends State<CampaignCard> {
                                 width: 40,
                                 height: 40,
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[300],
+                                      blurRadius: 5,
+                                      offset: Offset(1, 1),
+                                      spreadRadius: 5,
+                                    ),
+                                  ],
                                   borderRadius: BorderRadius.circular(100),
                                   color: Color.fromRGBO(127, 25, 168, 1.0),
                                 ),
