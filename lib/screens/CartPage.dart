@@ -166,6 +166,7 @@ class _CartPageState extends State<CartPage> {
                                 'Donate to recieve an additional Entry'),
                             style: TextStyle(
                               color: Color.fromRGBO(127, 25, 168, 1.0),
+                              fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
                           ),
@@ -242,6 +243,7 @@ class _CartPageState extends State<CartPage> {
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Expanded(
                                     child: Container(
@@ -267,7 +269,9 @@ class _CartPageState extends State<CartPage> {
                                         enabled: !is_valid,
                                         controller: codeTextEditingController,
                                         decoration: InputDecoration(
-                                          hintText: 'Enter Code',
+                                          hintText: getTranslated(
+                                              context, 'Enter Code'),
+                                          hintStyle: TextStyle(height: 1.5),
                                           border: InputBorder.none,
                                           disabledBorder: InputBorder.none,
                                           enabledBorder: InputBorder.none,
@@ -339,7 +343,7 @@ class _CartPageState extends State<CartPage> {
                             child: Center(
                               child: Container(
                                 width: sizeAware.width * 0.85,
-                                height: 45.0,
+                                height: 50.0,
                                 decoration: BoxDecoration(
                                   color: Color.fromRGBO(127, 25, 168, 1),
                                   borderRadius: BorderRadius.horizontal(

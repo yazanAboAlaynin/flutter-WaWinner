@@ -172,41 +172,43 @@ class _CampaignCardState extends State<CampaignCard> {
                                     borderRadius: BorderRadius.circular(100),
                                   ),
                                   child: Center(
-                                      child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '${widget.campaign.quantity_sold}',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          height: 2,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromRGBO(127, 25, 168, 1.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${widget.campaign.quantity_sold}',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            height: 1.2,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromRGBO(
+                                                127, 25, 168, 1.0),
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        getTranslated(context, "sold"),
-                                        style: TextStyle(
-                                          height: 1.2,
+                                        Text(
+                                          getTranslated(context, "sold"),
+                                          style: TextStyle(
+                                            height: 1.2,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        getTranslated(context, "out of"),
-                                        style: TextStyle(
-                                          height: 1.2,
+                                        Text(
+                                          getTranslated(context, "out of"),
+                                          style: TextStyle(
+                                            height: 1,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        '${widget.campaign.product_quantity}',
-                                        style: TextStyle(
-                                          height: 1.2,
+                                        Text(
+                                          '${widget.campaign.product_quantity}',
+                                          style: TextStyle(
+                                            height: 1,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

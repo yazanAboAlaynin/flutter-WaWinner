@@ -229,16 +229,30 @@ class _ProductDetailState extends State<ProductDetail> {
                           Text(
                             '${campaign.quantity_sold}',
                             style: TextStyle(
-                              fontSize: sizeAware.width * 0.05,
+                              fontSize: 18,
+                              height: 1.2,
                               fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(127, 25, 168, 1.0),
                             ),
                           ),
                           Text(
                             getTranslated(context, "sold"),
+                            style: TextStyle(
+                              height: 1.2,
+                            ),
                           ),
-                          Text(getTranslated(context, "out of")),
-                          Text('${campaign.product_quantity}'),
+                          Text(
+                            getTranslated(context, "out of"),
+                            style: TextStyle(
+                              height: 1.2,
+                            ),
+                          ),
+                          Text(
+                            '${campaign.product_quantity}',
+                            style: TextStyle(
+                              height: 1.2,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -290,6 +304,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               getTranslated(context, 'ADD TO CART'),
                               style: TextStyle(
                                 fontSize: 20,
+                                height: 1.5,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),

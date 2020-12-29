@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_bloc.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_event.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_state.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/repositories/profile_api.dart';
 import 'package:flutter_wawinner/widgets/AppBar.dart';
 import 'package:flutter_wawinner/widgets/Loading.dart';
@@ -45,7 +46,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Connection Error',
+                        getTranslated(context, 'Connection Error'),
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -58,7 +59,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           });
                         },
                         child: Text(
-                          'Refresh',
+                          getTranslated(context, 'Refresh'),
                           style: TextStyle(
                             color: Colors.white,
                           ),

@@ -20,7 +20,7 @@ class CError extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Connection Error',
+                getTranslated(context, 'Connection Error'),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
@@ -30,7 +30,7 @@ class CError extends StatelessWidget {
                   bloc.add(event);
                 },
                 child: Text(
-                  'Refresh',
+                  getTranslated(context, 'Refresh'),
                   style: TextStyle(
                     color: Colors.white,
                   ),

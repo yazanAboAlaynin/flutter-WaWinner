@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 
 class CartItemCard extends StatelessWidget {
@@ -61,17 +62,19 @@ class CartItemCard extends StatelessWidget {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Text(
-                                          'Product',
+                                          getTranslated(context, 'Product'),
                                           style: TextStyle(
                                             color: Color.fromRGBO(
                                                 127, 25, 168, 1.0),
                                             fontSize: 17,
+                                            height: 1.5,
                                           ),
                                         ),
                                         Text(
                                           cartItem.campaign.product.name,
                                           style: TextStyle(
                                             fontSize: 18,
+                                            height: 1.5,
                                           ),
                                         ),
                                         Text(
@@ -79,6 +82,7 @@ class CartItemCard extends StatelessWidget {
                                           style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 13,
+                                            height: 1.5,
                                           ),
                                         ),
                                       ],
@@ -96,6 +100,7 @@ class CartItemCard extends StatelessWidget {
                               'AED ${cartItem.total_price}',
                               style: TextStyle(
                                 fontSize: 20,
+                                height: 1.5,
                                 color: Color.fromRGBO(127, 25, 168, 1.0),
                                 fontWeight: FontWeight.bold,
                               ),
@@ -129,24 +134,27 @@ class CartItemCard extends StatelessWidget {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Text(
-                                          'Prize',
+                                          getTranslated(context, 'Prize'),
                                           style: TextStyle(
                                             color: Color.fromRGBO(
                                                 127, 25, 168, 1.0),
                                             fontSize: 17,
+                                            height: 1.5,
                                           ),
                                         ),
                                         Text(
-                                          'Nike Shoe',
+                                          cartItem.campaign.prize.name,
                                           style: TextStyle(
                                             fontSize: 18,
+                                            height: 1.5,
                                           ),
                                         ),
                                         Text(
-                                          'from boots category',
+                                          cartItem.campaign.prize.name,
                                           style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 13,
+                                            height: 1.5,
                                           ),
                                         ),
                                       ],

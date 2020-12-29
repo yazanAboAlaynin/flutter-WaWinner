@@ -4,6 +4,7 @@ import 'package:flutter_wawinner/Constants.dart';
 import 'package:flutter_wawinner/blocs/auth_bloc/auth_bloc.dart';
 import 'package:flutter_wawinner/blocs/auth_bloc/auth_event.dart';
 import 'package:flutter_wawinner/blocs/auth_bloc/auth_state.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/repositories/auth_api.dart';
 import 'package:flutter_wawinner/screens/auth/RegisterPage.dart';
 import 'package:flutter_wawinner/screens/auth/VerificationPage.dart';
@@ -263,7 +264,7 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Connection Error',
+                        getTranslated(context, 'Connection Error'),
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -276,7 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                           });
                         },
                         child: Text(
-                          'Refresh',
+                          getTranslated(context, 'Refresh'),
                           style: TextStyle(
                             color: Colors.white,
                           ),

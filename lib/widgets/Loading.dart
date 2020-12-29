@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 
 class Loading extends StatelessWidget {
   @override
@@ -30,7 +31,7 @@ class Loading extends StatelessWidget {
               height: sizeAware.height * 0.1,
             ),
             Text(
-              'Loading...',
+              getTranslated(context, 'Loading'),
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
           ],

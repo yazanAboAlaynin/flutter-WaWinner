@@ -62,7 +62,30 @@
  "Amount Including Tax": "المبلغ شامل الضريبة",
  "Product Detailes": "تفاصيل الحملة",
  "Offers": "العروض",
- "ADD TO CART": "اضافة للسلة"
+ "ADD TO CART": "اضافة للسلة",
+ "Loading": "جاري التحميل...",
+ "Connection Error": "خطأ بالاتصال",
+ "Refresh": "تحديث",
+ "Contact Us": "اتصل بنا",
+ "Contact": "اتصل",
+ "Please fill in the form below and a dedicated member of our team will be in touch within 24" : "يرجى ملء النموذج أدناه وسيتواصل معك أحد أعضاء فريقنا خلال 24 ساعة",
+ "Name": "الاسم",
+ "Message": "الرسالة",
+ "Send Message": "ارسل الرسالة",
+ "Enter Code": "ادخل الرمز",
+ "Product": "المنتج",
+ "Prize": "الجائزة"
+
+
+
+
+
+
+
+
+
+
+
  
 
 

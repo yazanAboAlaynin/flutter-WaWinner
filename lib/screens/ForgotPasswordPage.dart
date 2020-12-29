@@ -85,7 +85,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Connection Error',
+                          getTranslated(context, 'Connection Error'),
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -98,7 +98,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             });
                           },
                           child: Text(
-                            'Refresh',
+                            getTranslated(context, 'Refresh'),
                             style: TextStyle(
                               color: Colors.white,
                             ),

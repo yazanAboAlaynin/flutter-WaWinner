@@ -4,6 +4,7 @@ import 'package:flutter_wawinner/blocs/cart_bloc/cart_bloc.dart';
 import 'package:flutter_wawinner/blocs/cart_bloc/cart_event.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_bloc.dart';
 import 'package:flutter_wawinner/blocs/wishlist_bloc/wl_event.dart' as wl;
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/cartItem.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -66,17 +67,19 @@ class WLCard extends StatelessWidget {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Text(
-                                          'Product',
+                                          getTranslated(context, 'Product'),
                                           style: TextStyle(
                                             color: Color.fromRGBO(
                                                 127, 25, 168, 1.0),
                                             fontSize: 17,
+                                            height: 1.5,
                                           ),
                                         ),
                                         Text(
                                           campaign.product.name,
                                           style: TextStyle(
                                             fontSize: 18,
+                                            height: 1.5,
                                           ),
                                         ),
                                         Text(
@@ -84,6 +87,7 @@ class WLCard extends StatelessWidget {
                                           style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 13,
+                                            height: 1.5,
                                           ),
                                         ),
                                       ],
@@ -101,6 +105,7 @@ class WLCard extends StatelessWidget {
                               'AED ${campaign.price}',
                               style: TextStyle(
                                 fontSize: 20,
+                                height: 1.5,
                                 color: Color.fromRGBO(127, 25, 168, 1.0),
                                 fontWeight: FontWeight.bold,
                               ),
@@ -134,24 +139,27 @@ class WLCard extends StatelessWidget {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Text(
-                                          'Prize',
+                                          getTranslated(context, 'Prize'),
                                           style: TextStyle(
                                             color: Color.fromRGBO(
                                                 127, 25, 168, 1.0),
                                             fontSize: 17,
+                                            height: 1.5,
                                           ),
                                         ),
                                         Text(
                                           campaign.prize.name,
                                           style: TextStyle(
                                             fontSize: 18,
+                                            height: 1.5,
                                           ),
                                         ),
                                         Text(
-                                          'from boots category',
+                                          campaign.prize.name,
                                           style: TextStyle(
                                             color: Colors.grey,
                                             fontSize: 13,
+                                            height: 1.5,
                                           ),
                                         ),
                                       ],
@@ -244,7 +252,8 @@ class WLCard extends StatelessWidget {
                                 Text(
                                   '${campaign.quantity_sold}',
                                   style: TextStyle(
-                                    fontSize: sizeAware.width * 0.05,
+                                    height: 1,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                     color: Color.fromRGBO(127, 25, 168, 1.0),
                                   ),
@@ -252,16 +261,20 @@ class WLCard extends StatelessWidget {
                                 Text(
                                   'sold',
                                   style: TextStyle(
-                                      fontSize: sizeAware.width * 0.03),
+                                    fontSize: sizeAware.width * 0.03,
+                                    height: 1,
+                                  ),
                                 ),
                                 Text(
                                   'out of',
                                   style: TextStyle(
+                                      height: 1,
                                       fontSize: sizeAware.width * 0.03),
                                 ),
                                 Text(
                                   '${campaign.product_quantity}',
                                   style: TextStyle(
+                                      height: 1,
                                       fontSize: sizeAware.width * 0.03),
                                 ),
                               ],

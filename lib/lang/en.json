@@ -62,5 +62,17 @@
   "Amount Including Tax": "Amount Including Tax",
   "Product Detailes": "Campaign Detailes",
   "Offers": "Offers",
-  "ADD TO CART": "ADD TO CART"
+  "ADD TO CART": "ADD TO CART",
+  "Loading": "Loading...",
+  "Connection Error": "Connection Error",
+  "Refresh": "Refresh",
+  "Contact Us": "Contact Us",
+  "Contact": "Contact",
+  "Please fill in the form below and a dedicated member of our team will be in touch within 24" : "Please fill in the form below and a dedicated member of our team will be in touch within 24",
+  "Name": "Name",
+  "Message": "Message",
+  "Send Message": "Send Message",
+  "Enter Code": "Enter Code",
+  "Product": "Product",
+  "Prize": "Prize"
 }

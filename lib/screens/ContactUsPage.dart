@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_bloc.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_event.dart';
 import 'package:flutter_wawinner/blocs/profile_bloc/profile_state.dart';
+import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/repositories/profile_api.dart';
 import 'package:flutter_wawinner/widgets/AppBar.dart';
 import 'package:flutter_wawinner/widgets/Loading.dart';
@@ -49,7 +50,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Connection Error',
+                      getTranslated(context, 'Connection Error'),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -62,7 +63,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                         });
                       },
                       child: Text(
-                        'Refresh',
+                        getTranslated(context, 'Refresh'),
                         style: TextStyle(
                           color: Colors.white,
                         ),
@@ -82,7 +83,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
           emailTextEditingController.text = '';
           messageTextEditingController.text = '';
           return Scaffold(
-            appBar: myAppBar('Contact Us', null),
+            appBar: myAppBar(getTranslated(context, 'Contact Us'), null),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -90,26 +91,27 @@ class _ContactUsPageState extends State<ContactUsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Contact',
+                      getTranslated(context, 'Contact'),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: sizeAware.height * 0.01),
                     Text(
-                      'Please fill in the form below and a dedicated member of our team will be in touch within 24',
+                      getTranslated(context,
+                          'Please fill in the form below and a dedicated member of our team will be in touch within 24'),
                       style: TextStyle(fontSize: 15),
                     ),
                     SizedBox(height: sizeAware.height * 0.01),
                     TextFormField(
                       controller: nameTextEditingController,
                       decoration: InputDecoration(
-                        labelText: 'Name',
+                        labelText: getTranslated(context, 'Name'),
                       ),
                     ),
                     TextFormField(
                       controller: emailTextEditingController,
                       decoration: InputDecoration(
-                        labelText: 'Email',
+                        labelText: getTranslated(context, 'Email'),
                       ),
                     ),
                     Container(
@@ -118,7 +120,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                         controller: messageTextEditingController,
                         expands: true,
                         decoration: InputDecoration(
-                          labelText: 'Message',
+                          labelText: getTranslated(context, 'Message'),
                         ),
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
@@ -140,30 +142,32 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           profileBloc.add(ContactUsRequested(data: data));
                         }
                       },
-                      child: Container(
-                        width: sizeAware.width * 0.85,
-                        height: 45.0,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(127, 25, 168, 1),
-                          borderRadius: BorderRadius.horizontal(
-                            left: Radius.circular(40),
-                            right: Radius.circular(40),
+                      child: Center(
+                        child: Container(
+                          width: sizeAware.width * 0.85,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(127, 25, 168, 1),
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(40),
+                              right: Radius.circular(40),
+                            ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Send Message',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  getTranslated(context, 'Send Message'),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
