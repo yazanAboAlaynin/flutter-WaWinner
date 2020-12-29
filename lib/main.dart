@@ -16,6 +16,7 @@ import 'package:flutter_wawinner/screens/OrdersPage.dart';
 import 'package:flutter_wawinner/screens/ProductDetail.dart';
 import 'package:flutter_wawinner/screens/ProfilePage.dart';
 import 'package:flutter_wawinner/screens/SingleCharity.dart';
+import 'package:flutter_wawinner/screens/TicketsPage.dart';
 import 'package:flutter_wawinner/screens/ViewOrder.dart';
 import 'package:flutter_wawinner/screens/WishListPage.dart';
 import 'package:flutter_wawinner/screens/auth/LoginPage.dart';
@@ -133,6 +134,7 @@ class _MyAppState extends State<MyApp> {
           'Orders': (context) => OrdersPage(),
           'View Order': (context) => ViewOrder(),
           'Single Charity': (context) => SingleCharity(),
+          'Tickets': (context) => ActiveTickets(),
           'Cart': (context) => BlocProvider(
               create: (context) => CartBloc(cartApi: widget.cartApi),
               child: CartPage()),

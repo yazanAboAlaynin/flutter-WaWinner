@@ -4,6 +4,7 @@ import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/charity.dart';
 import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/models/wishlist.dart';
+import 'package:flutter_wawinner/models/ticket.dart';
 import 'package:http/http.dart' as http;
 
 import '../Constants.dart';
@@ -50,6 +51,22 @@ class CampaignApi extends Api {
         res.map((dynamic i) => Product.fromJson(i)).toList();
 
     return products;
+  }
+
+  Future<List<Ticket>> getActiveTickets() async {
+    final url = '${Api.baseUrl}/v1/user/active-ticket';
+
+    final response =
+        await this.httpClient.get(url, headers: await getHeaders());
+    if (jsonDecode(response.body)["data"] != null) {
+      var res = jsonDecode(response.body)["data"] as List;
+
+      List<Ticket> products =
+          res.map((dynamic i) => Ticket.fromJson(i)).toList();
+
+      return products;
+    }
+    return [];
   }
 
   Future<List<Charity>> getCharities() async {

@@ -245,7 +245,9 @@ class _MyDrawerState extends State<MyDrawer> {
                         thickness: 0.7,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, 'Tickets');
+                        },
                         child: Container(
                           height: sizeAware.height * 0.08,
                           child: Center(

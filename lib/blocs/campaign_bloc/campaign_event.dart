@@ -11,12 +11,10 @@ class CampaignsRequested extends CampaignEvent {
   List<Object> get props => [];
 }
 
-// class SeeMore extends CampaignEvent {
-//   final int cnt;
-//   SeeMore({this.cnt});
-//   @override
-//   List<Object> get props => [];
-// }
+class ActiveTicketsRequested extends CampaignEvent {
+  @override
+  List<Object> get props => [];
+}
 
 class ViewProduct extends CampaignEvent {
   final String id;
@@ -24,11 +22,3 @@ class ViewProduct extends CampaignEvent {
   @override
   List<Object> get props => [id];
 }
-
-// class AddToCart extends CampaignEvent {
-//   final Map data;
-//   final Medicine medicine;
-//   AddToCart({this.data, this.medicine});
-//   @override
-//   List<Object> get props => [data, medicine];
-// }

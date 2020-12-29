@@ -1,6 +1,7 @@
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/charity.dart';
 import 'package:flutter_wawinner/models/product.dart';
+import 'package:flutter_wawinner/models/ticket.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
@@ -25,6 +26,14 @@ class CampaignsLoadSuccess extends CampaignState {
       {this.campaigns, this.products, this.images, this.charities});
   @override
   List<Object> get props => [campaigns, products, images];
+}
+
+class TicketsLoadSuccess extends CampaignState {
+  List<Ticket> tickets;
+
+  TicketsLoadSuccess({this.tickets});
+  @override
+  List<Object> get props => [tickets];
 }
 
 class CampaignsLoadFailure extends CampaignState {}

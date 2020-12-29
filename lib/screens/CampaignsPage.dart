@@ -184,7 +184,7 @@ class _CampaignState extends State<CampaignsPage> {
           }
           if (state is CampaignsLoadFailure) {
             return CError(
-              bloc: wlBloc,
+              bloc: campaignsBloc,
               event: CampaignsRequested(),
             );
           }
