@@ -236,7 +236,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ),
                                 ],
-                                onChanged: (value) {
+                                onChanged: (value) async {
                                   if (value == "en") {
                                     setState(() {
                                       prefLang = "english";
@@ -247,8 +247,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                     });
                                   }
 
-                                  changeLanguage(value);
-                                  profileBloc.add(ProfileRequested());
+                                  await changeLanguage(value);
+                                  Navigator.popUntil(
+                                      context, (route) => route.isFirst);
+                                  Navigator.pushReplacementNamed(
+                                      context, 'Campaignes');
                                 },
                                 hint: Text(
                                   getTranslated(context, 'Language'),
@@ -290,6 +293,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                       await SharedPreferences.getInstance();
                                   preferences.setString('currency', value);
                                   CURRENCY = value;
+                                  await changeLanguage(value);
+                                  Navigator.popUntil(
+                                      context, (route) => route.isFirst);
+                                  Navigator.pushReplacementNamed(
+                                      context, 'Campaignes');
                                 },
                                 hint: Text(
                                   getTranslated(context, 'Currency'),
@@ -1035,7 +1043,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Center(
                             child: Container(
                               width: sizeAware.width * 0.85,
-                              height: 45.0,
+                              height: 50.0,
                               decoration: BoxDecoration(
                                 color: Color.fromRGBO(127, 25, 168, 1),
                                 borderRadius: BorderRadius.horizontal(
@@ -1089,7 +1097,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Center(
                             child: Container(
                               width: sizeAware.width * 0.85,
-                              height: 45.0,
+                              height: 50.0,
                               decoration: BoxDecoration(
                                 color: Color.fromRGBO(127, 25, 168, 1),
                                 borderRadius: BorderRadius.horizontal(
