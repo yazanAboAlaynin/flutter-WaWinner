@@ -8,6 +8,7 @@ import 'package:flutter_wawinner/localization/localization_constants.dart';
 import 'package:flutter_wawinner/repositories/auth_api.dart';
 import 'package:flutter_wawinner/screens/auth/RegisterPage.dart';
 import 'package:flutter_wawinner/screens/auth/VerificationPage.dart';
+import 'package:flutter_wawinner/widgets/Loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -121,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: Container(
                                 width: sizeAware.width * 0.85,
-                                height: 45.0,
+                                height: 50.0,
                                 decoration: BoxDecoration(
                                   color: Color.fromRGBO(127, 25, 168, 1),
                                   borderRadius: BorderRadius.horizontal(
@@ -163,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Container(
                               width: sizeAware.width * 0.85,
-                              height: 45.0,
+                              height: 50.0,
                               decoration: BoxDecoration(
                                 border: Border.all(),
                                 borderRadius: BorderRadius.horizontal(
@@ -290,9 +291,7 @@ class _LoginPageState extends State<LoginPage> {
             );
           }
           if (state is AuthLoadInProgress) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Loading();
           }
           if (state is LoginSuccess) {
             return Container();

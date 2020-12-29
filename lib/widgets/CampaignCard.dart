@@ -273,7 +273,8 @@ class _CampaignCardState extends State<CampaignCard> {
                                       getTranslated(
                                           context, 'Get a chance to win:'),
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 16,
+                                        height: 1.5,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),

@@ -109,80 +109,74 @@ class _CampaignState extends State<CampaignsPage> {
                           ),
                         ),
                       ),
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          Container(
-                            width: sizeAware.width,
-                            child: LiveList.options(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: campaigns.length,
-                              options: options,
-                              itemBuilder: (context, index, animation) {
-                                return CampaignCard(
-                                  animation: animation,
-                                  campaign: campaigns[index],
-                                  wlBloc: wlBloc,
-                                );
-                              },
-                            ),
+                      SliverToBoxAdapter(
+                        child: Container(
+                          width: sizeAware.width,
+                          child: LiveList.options(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: campaigns.length,
+                            options: options,
+                            itemBuilder: (context, index, animation) {
+                              return CampaignCard(
+                                animation: animation,
+                                campaign: campaigns[index],
+                                wlBloc: wlBloc,
+                              );
+                            },
                           ),
-                        ]),
+                        ),
                       ),
                       //products
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: sizeAware.height * 0.07,
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: sizeAware.height * 0.07,
+                              ),
+                              Text(
+                                getTranslated(context, 'Products'),
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromRGBO(127, 25, 168, 1.0),
                                 ),
-                                Text(
-                                  getTranslated(context, 'Products'),
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(127, 25, 168, 1.0),
-                                  ),
-                                ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: productsList(),
-                                )
-                              ],
-                            ),
+                              ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: productsList(),
+                              )
+                            ],
                           ),
-                        ]),
+                        ),
                       ),
                       // charities
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: sizeAware.height * 0.07,
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: sizeAware.height * 0.07,
+                              ),
+                              Text(
+                                getTranslated(context, 'Charities'),
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromRGBO(127, 25, 168, 1.0),
                                 ),
-                                Text(
-                                  getTranslated(context, 'Charities'),
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(127, 25, 168, 1.0),
-                                  ),
-                                ),
-                                SingleChildScrollView(
-                                  child: charitiesList(),
-                                )
-                              ],
-                            ),
+                              ),
+                              SingleChildScrollView(
+                                child: charitiesList(),
+                              )
+                            ],
                           ),
-                        ]),
+                        ),
                       ),
                     ],
                   ),

@@ -308,7 +308,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

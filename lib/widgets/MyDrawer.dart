@@ -499,7 +499,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             child: DropdownButton<String>(
                               icon: Icon(
                                 Icons.keyboard_arrow_down,
-                                color: Color.fromRGBO(18, 161, 154, 1.0),
+                                color: Color.fromRGBO(127, 25, 168, 1.0),
                               ),
                               isExpanded: true,
                               underline: SizedBox(),

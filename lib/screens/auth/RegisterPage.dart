@@ -175,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 },
                                 child: Container(
                                   width: sizeAware.width * 0.85,
-                                  height: 45.0,
+                                  height: 50.0,
                                   decoration: BoxDecoration(
                                     color: Color.fromRGBO(127, 25, 168, 1),
                                     borderRadius: BorderRadius.horizontal(
@@ -196,7 +196,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -246,40 +246,40 @@ class _RegisterPageState extends State<RegisterPage> {
             }
             if (state is AuthLoadFailure) {
               return Scaffold(
-            body: SafeArea(
-              child: Container(
-                width: sizeAware.width,
-                height: sizeAware.height,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      getTranslated(context, 'Connection Error'),
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 20),
-                    FlatButton(
-                      color: Color.fromRGBO(127, 25, 168, 1.0),
-                      onPressed: () {
-                       setState(() {
+                body: SafeArea(
+                  child: Container(
+                    width: sizeAware.width,
+                    height: sizeAware.height,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          getTranslated(context, 'Connection Error'),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 20),
+                        FlatButton(
+                          color: Color.fromRGBO(127, 25, 168, 1.0),
+                          onPressed: () {
+                            setState(() {
                               authBloc = AuthBloc(authApi: authApi);
                             });
-                      },
-                      child: Text(
-                        getTranslated(context, 'Refresh'),
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
+                          },
+                          child: Text(
+                            getTranslated(context, 'Refresh'),
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
-             }
+              );
+            }
           }),
     );
   }
