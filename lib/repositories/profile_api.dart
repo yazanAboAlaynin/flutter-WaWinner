@@ -4,11 +4,13 @@ import 'package:flutter_wawinner/Constants.dart';
 import 'package:flutter_wawinner/models/currency.dart';
 import 'package:flutter_wawinner/models/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:meta/meta.dart';
 
 import 'api.dart';
+import 'dart:io' as Io;
 
 class ProfileApi extends Api {
   final http.Client httpClient;
@@ -60,7 +62,6 @@ class ProfileApi extends Api {
         .post(url, body: jsonEncode(data), headers: await getHeaders());
 
     var res = jsonDecode(response.body);
-    print(res);
 
     if (res['status']) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -96,13 +97,17 @@ class ProfileApi extends Api {
 
     http.MultipartRequest request = http.MultipartRequest("POST", uri);
 
-    var base64Image = base64Encode(image.readAsBytesSync());
-
+    var base64Image = base64Encode(await image.readAsBytesSync());
     request.fields.addAll(data);
-    request.fields['image'] = base64Image;
+    List list = image.path.split('.');
+    request.fields.addAll({
+      'image': 'data:image/${list.last};base64,$base64Image',
+    });
 
+    request.headers.addAll(await getHeaders());
     var res = await request.send();
     var response = await http.Response.fromStream(res);
+    print(response.body);
     var resp = jsonDecode(response.body);
     if (resp['status']) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
