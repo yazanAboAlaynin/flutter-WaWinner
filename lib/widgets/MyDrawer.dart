@@ -488,56 +488,77 @@ class _MyDrawerState extends State<MyDrawer> {
                         color: Colors.black26,
                         thickness: 0.7,
                       ),
-                      Container(
-                        width: sizeAware.width,
-                        height: sizeAware.height * 0.08,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        child: Card(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 22.0, vertical: 0),
-                            child: DropdownButton<String>(
-                              icon: Icon(
-                                Icons.keyboard_arrow_down,
-                                color: Color.fromRGBO(127, 25, 168, 1.0),
-                              ),
-                              isExpanded: true,
-                              underline: SizedBox(),
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: "ar",
-                                  child: Text(
-                                    "العربية",
-                                    style: TextStyle(fontFamily: 'GeSS'),
-                                  ),
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: sizeAware.height * 0.08,
+                          child: Center(
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: sizeAware.height * 0.04,
+                                  width: sizeAware.width * 0.1,
+                                  child:
+                                      SvgPicture.asset('assets/language.svg'),
                                 ),
-                                DropdownMenuItem<String>(
-                                  value: "en",
-                                  child: Text(
-                                    "english",
+                                SizedBox(
+                                  width: sizeAware.width * 0.04,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    width: sizeAware.width,
+                                    height: sizeAware.height * 0.08,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    child: DropdownButton<String>(
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down,
+                                        color:
+                                            Color.fromRGBO(127, 25, 168, 1.0),
+                                      ),
+                                      isExpanded: true,
+                                      underline: SizedBox(),
+                                      items: [
+                                        DropdownMenuItem<String>(
+                                          value: "ar",
+                                          child: Text(
+                                            "العربية",
+                                            style:
+                                                TextStyle(fontFamily: 'GeSS'),
+                                          ),
+                                        ),
+                                        DropdownMenuItem<String>(
+                                          value: "en",
+                                          child: Text(
+                                            "English",
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) async {
+                                        if (value == "en") {
+                                          setState(() {
+                                            prefLang = "English";
+                                          });
+                                        } else {
+                                          setState(() {
+                                            prefLang = value;
+                                          });
+                                        }
+
+                                        await changeLanguage(value);
+                                        Navigator.popUntil(
+                                            context, (route) => route.isFirst);
+                                        Navigator.pushReplacementNamed(
+                                            context, 'Campaignes');
+                                      },
+                                      hint: Text(
+                                        "${getTranslated(context, "Preferred Language")}",
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
-                              onChanged: (value) {
-                                if (value == "en") {
-                                  setState(() {
-                                    prefLang = "english";
-                                  });
-                                } else {
-                                  setState(() {
-                                    prefLang = value;
-                                  });
-                                }
-
-                                changeLanguage(value);
-                              },
-                              hint: Text(
-                                'Preferred language',
-                                // "${getTranslated(context, "Preferred Language")}:     ${pharmacy.pref_lang}",
-                                style: TextStyle(fontFamily: 'GeSS'),
-                              ),
                             ),
                           ),
                         ),

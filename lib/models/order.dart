@@ -1,13 +1,17 @@
 class Order {
+  final int id;
   final int order_no;
-  final int invoice_no;
+  final int transaction_no;
+  final String status;
 
-  Order({this.order_no, this.invoice_no});
+  Order({this.id, this.order_no, this.transaction_no, this.status});
 
   static Order fromJson(dynamic json) {
     return Order(
-      invoice_no: json['invoice_no'],
+      transaction_no: json['transaction_no'],
       order_no: json['order_no'],
+      id: json['id'],
+      status: json['status'],
     );
   }
 }

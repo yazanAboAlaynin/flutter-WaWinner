@@ -16,6 +16,11 @@ class ActiveTicketsRequested extends CampaignEvent {
   List<Object> get props => [];
 }
 
+class OrdersRequested extends CampaignEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class ViewProduct extends CampaignEvent {
   final String id;
   ViewProduct({this.id});

@@ -1,5 +1,6 @@
 import 'package:flutter_wawinner/models/campaign.dart';
 import 'package:flutter_wawinner/models/charity.dart';
+import 'package:flutter_wawinner/models/order.dart';
 import 'package:flutter_wawinner/models/product.dart';
 import 'package:flutter_wawinner/models/ticket.dart';
 import 'package:flutter_wawinner/repositories/campaign_api.dart';
@@ -40,6 +41,18 @@ class CampaignsBloc extends Bloc<CampaignEvent, CampaignState> {
 
         yield TicketsLoadSuccess(
           tickets: tickets,
+        );
+      } catch (_) {
+        yield CampaignsLoadFailure();
+      }
+    }else if (event is OrdersRequested) {
+      yield CampaignsLoadInProgress();
+      try {
+        List<Order> orders = await campaignApi.getOrders();
+
+        yield OrdersLoadSuccess
+        (
+         orders: orders,
         );
       } catch (_) {
         yield CampaignsLoadFailure();

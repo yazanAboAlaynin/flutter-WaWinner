@@ -18,67 +18,79 @@ class _OrderCardState extends State<OrderCard> {
     return Padding(
       padding: const EdgeInsets.all(14.0),
       child: Container(
-        height: 150,
+        height: 200,
         child: Card(
-            shape: ContinuousRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            semanticContainer: true,
-            elevation: 1,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          children: [
-                            Text(
-                              'Order no: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          semanticContainer: true,
+          elevation: 1,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          Text(
+                            'Order no: ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
                             ),
-                            Text('${widget.order.order_no}'),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Invoice no: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ),
+                          Text('${widget.order.order_no}'),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Invoice no: ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
                             ),
-                            Text('${widget.order.invoice_no}'),
-                          ],
-                        ),
-                        MaterialButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'View Order');
-                          },
-                          height: 50,
-                          minWidth: sizeAware.width * 0.4,
-                          shape: ContinuousRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
                           ),
-                          color: Color.fromRGBO(127, 25, 168, 1.0),
-                          textColor: Colors.white,
-                          child: Text(
-                            getTranslated(context, "View"),
+                          Text('${widget.order.transaction_no}'),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Status: ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          splashColor: Color.fromRGBO(127, 25, 168, 1.0),
+                          Text('${widget.order.status}'),
+                        ],
+                      ),
+                      MaterialButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'View Order');
+                        },
+                        height: 50,
+                        minWidth: sizeAware.width * 0.4,
+                        shape: ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                      ],
-                    ),
+                        color: Color.fromRGBO(127, 25, 168, 1.0),
+                        textColor: Colors.white,
+                        child: Text(
+                          getTranslated(context, "View"),
+                        ),
+                        splashColor: Color.fromRGBO(127, 25, 168, 1.0),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
