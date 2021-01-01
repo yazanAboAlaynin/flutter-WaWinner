@@ -40,13 +40,15 @@ class Campaign {
 
   static Campaign fromJson(dynamic json) {
     var offers = json['offers'].map((dynamic i) => Offer.fromJson(i)).toList();
+
     return Campaign(
       id: json['id'],
       donate_ticket_count: json['donate_ticket_count'],
       early_bird_count: json['early_bird_count'],
       early_bird_ticket_count: json['early_bird_ticket_count'],
       max_draw_date: json['max_draw_date'],
-      price: json['price'].toDouble(),
+      price:
+          json['product_price'] != null ? json['product_price'].toDouble() : 0,
       prize: Product.fromJson(json['prize_id']),
       product: Product.fromJson(json['product_id']),
       product_quantity: json['product_quantity'],

@@ -21,19 +21,19 @@ class CampaignsBloc extends Bloc<CampaignEvent, CampaignState> {
   Stream<CampaignState> mapEventToState(CampaignEvent event) async* {
     if (event is CampaignsRequested) {
       yield CampaignsLoadInProgress();
-      try {
-        List<Campaign> campaigns = await campaignApi.getCampaigns();
-        List<Product> products = await campaignApi.getProducts();
-        List<Charity> charities = await campaignApi.getCharities();
-        List<String> images = await campaignApi.getImages();
-        yield CampaignsLoadSuccess(
-            campaigns: campaigns,
-            products: products,
-            images: images,
-            charities: charities);
-      } catch (_) {
-        yield CampaignsLoadFailure();
-      }
+      // try {
+      List<Campaign> campaigns = await campaignApi.getCampaigns();
+      List<Product> products = await campaignApi.getProducts();
+      List<Charity> charities = await campaignApi.getCharities();
+      List<String> images = await campaignApi.getImages();
+      yield CampaignsLoadSuccess(
+          campaigns: campaigns,
+          products: products,
+          images: images,
+          charities: charities);
+      // } catch (_) {
+      // yield CampaignsLoadFailure();
+      // }
     } else if (event is ActiveTicketsRequested) {
       yield CampaignsLoadInProgress();
       try {
@@ -45,14 +45,13 @@ class CampaignsBloc extends Bloc<CampaignEvent, CampaignState> {
       } catch (_) {
         yield CampaignsLoadFailure();
       }
-    }else if (event is OrdersRequested) {
+    } else if (event is OrdersRequested) {
       yield CampaignsLoadInProgress();
       try {
         List<Order> orders = await campaignApi.getOrders();
 
-        yield OrdersLoadSuccess
-        (
-         orders: orders,
+        yield OrdersLoadSuccess(
+          orders: orders,
         );
       } catch (_) {
         yield CampaignsLoadFailure();
